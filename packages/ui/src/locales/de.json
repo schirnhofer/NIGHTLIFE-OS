@@ -1,0 +1,113 @@
+{
+  "common": {
+    "welcome": "Willkommen",
+    "hello": "Hallo",
+    "loading": "Lade...",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "close": "Schließen",
+    "confirm": "Bestätigen",
+    "yes": "Ja",
+    "no": "Nein",
+    "error": "Fehler",
+    "success": "Erfolg"
+  },
+  "auth": {
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "signup": "Registrieren",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "forgotPassword": "Passwort vergessen?",
+    "noAccount": "Noch kein Konto?",
+    "hasAccount": "Bereits ein Konto?",
+    "loginSuccess": "Erfolgreich angemeldet",
+    "loginError": "Anmeldung fehlgeschlagen",
+    "signupSuccess": "Registrierung erfolgreich",
+    "signupError": "Registrierung fehlgeschlagen"
+  },
+  "home": {
+    "title": "Startseite",
+    "checkedIn": "Eingecheckt",
+    "checkedOut": "Ausgecheckt",
+    "checkIn": "Einchecken",
+    "checkOut": "Auschecken",
+    "friendCode": "Freunde-Code",
+    "scanQR": "QR-Code scannen"
+  },
+  "chat": {
+    "title": "Chats",
+    "newChat": "Neuer Chat",
+    "newGroup": "Neue Gruppe",
+    "addFriend": "Freund hinzufügen",
+    "typeMessage": "Nachricht schreiben...",
+    "sendMessage": "Senden",
+    "noMessages": "Noch keine Nachrichten",
+    "ephemeral": "Selbstzerstörend"
+  },
+  "friends": {
+    "title": "Freunde",
+    "addFriend": "Freund hinzufügen",
+    "friendCode": "Freunde-Code",
+    "enterCode": "Code eingeben",
+    "requests": "Anfragen",
+    "noFriends": "Noch keine Freunde",
+    "accept": "Annehmen",
+    "reject": "Ablehnen"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "language": "Sprache",
+    "theme": "Theme",
+    "notifications": "Benachrichtigungen",
+    "privacy": "Privatsphäre",
+    "account": "Konto"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "analytics": "Statistiken",
+    "staff": "Personal",
+    "settings": "Einstellungen",
+    "subscription": "Abo"
+  },
+  "dj": {
+    "console": "DJ-Konsole",
+    "lightshow": "Lichtshow",
+    "effects": "Effekte",
+    "audioSync": "Audio-Sync",
+    "lottery": "Gewinnspiel",
+    "broadcast": "Nachricht senden",
+    "guestList": "Gästeliste"
+  },
+  "staff": {
+    "door": {
+      "title": "Türsteher",
+      "scanQR": "QR-Code scannen",
+      "verify": "Verifizieren",
+      "trustLevel": "Trust-Level",
+      "blacklist": "Blacklist"
+    },
+    "waiter": {
+      "title": "Kellner",
+      "orders": "Bestellungen",
+      "newOrder": "Neue Bestellung",
+      "table": "Tisch",
+      "payment": "Bezahlung"
+    },
+    "cloakroom": {
+      "title": "Garderobe",
+      "checkIn": "Einlagern",
+      "checkOut": "Ausgeben",
+      "ticket": "Ticket",
+      "item": "Gegenstand"
+    }
+  },
+  "errors": {
+    "notFound": "Nicht gefunden",
+    "unauthorized": "Keine Berechtigung",
+    "serverError": "Serverfehler",
+    "networkError": "Netzwerkfehler"
+  }
+}

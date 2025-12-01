@@ -1,0 +1,123 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "send": "Send",
+    "back": "Back"
+  },
+  "login": {
+    "title": "CLUB APP",
+    "email": "Email (or 'admin')",
+    "password": "Password",
+    "loginButton": "LOGIN",
+    "registerButton": "REGISTER",
+    "forgotPassword": "Forgot password?",
+    "switchToRegister": "No account? Register",
+    "switchToLogin": "Already have an account? Login",
+    "resetPasswordTitle": "Reset Password",
+    "resetPasswordButton": "Send Email",
+    "resetPasswordSuccess": "Email sent!",
+    "adminPassword": "Access Code",
+    "unlock": "UNLOCK"
+  },
+  "home": {
+    "statusLabel": "Your Status",
+    "statusInClub": "IN CLUB 🎵",
+    "statusOutside": "OUTSIDE",
+    "checkIn": "CHECK IN NOW",
+    "checkOut": "CHECK OUT",
+    "newRequest": "New Request! 👋",
+    "acceptRequest": "ACCEPT",
+    "qrCodeTitle": "Your Friend Code",
+    "tapToShow": "Tap to show"
+  },
+  "chat": {
+    "title": "Crew",
+    "addFriend": "ADD FRIEND",
+    "createGroup": "GROUP",
+    "crews": "Crews",
+    "friends": "Friends",
+    "noFriends": "No friends yet",
+    "noGroups": "No crews yet",
+    "scanQR": "SCAN",
+    "stopScan": "STOP",
+    "enterCode": "Enter code",
+    "submit": "Submit",
+    "requestTo": "Request to...",
+    "chooseMessage": "Choose message:",
+    "defaultMessages": {
+      "hi": "Hi! 👋",
+      "cheers": "Let's cheers! 🥂",
+      "outfit": "Cool outfit! 🔥"
+    },
+    "newGroup": "New Crew",
+    "groupName": "Crew Name",
+    "selectMembers": "Who should join?",
+    "createButton": "CREATE",
+    "manageGroup": "Manage Crew",
+    "members": "Members:",
+    "you": "You",
+    "leaveGroup": "LEAVE",
+    "deleteGroup": "DELETE",
+    "typeMessage": "Message...",
+    "viewTimer": "View ({timer}s)",
+    "imageDeleted": "♻️ Image deleted."
+  },
+  "admin": {
+    "title": "DJ CONSOLE",
+    "guestCount": "Guests in Club",
+    "lightControl": "Light Control",
+    "colors": {
+      "red": "Red",
+      "green": "Green",
+      "blue": "Blue",
+      "yellow": "Yellow",
+      "magenta": "Magenta",
+      "cyan": "Cyan",
+      "white": "White",
+      "off": "Off"
+    },
+    "effects": {
+      "psychedelic": "🌈 PSYCHEDELIC",
+      "strobe": "⚡ STROBE"
+    },
+    "audioSync": "MIC SYNC",
+    "audioSyncOn": "LIVE SYNC ON",
+    "lottery": "Lottery",
+    "winnerCount": "Winner Count",
+    "prizeCode": "Prize Code",
+    "startLottery": "START",
+    "broadcast": "Messages",
+    "targetInClub": "IN CLUB",
+    "targetOutside": "OUTSIDE",
+    "targetAll": "ALL",
+    "messagePlaceholder": "Message...",
+    "sendBroadcast": "SEND",
+    "guestList": "Guest List (In Club)",
+    "noGuests": "Nobody checked in.",
+    "stopAll": "🛑 STOP / RESET",
+    "logout": "LOGOUT"
+  },
+  "overlay": {
+    "lottery": "LOTTERY",
+    "winner": "WINNER!",
+    "notWinner": "NOT THIS TIME"
+  },
+  "errors": {
+    "configMissing": "Firebase configuration not found",
+    "authFailed": "Authentication failed",
+    "wrongPassword": "Wrong password",
+    "userNotFound": "User not found",
+    "cameraError": "Camera error",
+    "codeNotFound": "Code not found",
+    "codeTooShort": "Code too short",
+    "selfScan": "You cannot scan yourself",
+    "alreadyFriends": "Already friends"
+  }
+}

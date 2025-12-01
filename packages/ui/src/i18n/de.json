@@ -1,0 +1,123 @@
+{
+  "common": {
+    "loading": "Laden...",
+    "error": "Fehler",
+    "success": "Erfolgreich",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "save": "Speichern",
+    "send": "Senden",
+    "back": "Zurück"
+  },
+  "login": {
+    "title": "CLUB APP",
+    "email": "E-Mail (oder 'admin')",
+    "password": "Passwort",
+    "loginButton": "LOGIN",
+    "registerButton": "REGISTRIEREN",
+    "forgotPassword": "Passwort vergessen?",
+    "switchToRegister": "Noch kein Konto? Registrieren",
+    "switchToLogin": "Schon ein Konto? Einloggen",
+    "resetPasswordTitle": "Passwort zurücksetzen",
+    "resetPasswordButton": "E-Mail senden",
+    "resetPasswordSuccess": "E-Mail gesendet!",
+    "adminPassword": "Zugangscode",
+    "unlock": "UNLOCK"
+  },
+  "home": {
+    "statusLabel": "Dein Status",
+    "statusInClub": "IM CLUB 🎵",
+    "statusOutside": "DRAUSSEN",
+    "checkIn": "JETZT EINCHECKEN",
+    "checkOut": "AUSCHECKEN",
+    "newRequest": "Neue Anfrage! 👋",
+    "acceptRequest": "ANNEHMEN",
+    "qrCodeTitle": "Dein Freundschaftscode",
+    "tapToShow": "Tippen zum Zeigen"
+  },
+  "chat": {
+    "title": "Crew",
+    "addFriend": "ADD FRIEND",
+    "createGroup": "GRUPPE",
+    "crews": "Crews",
+    "friends": "Freunde",
+    "noFriends": "Noch keine Freunde",
+    "noGroups": "Noch keine Crews",
+    "scanQR": "SCAN",
+    "stopScan": "STOP",
+    "enterCode": "Code eingeben",
+    "submit": "Senden",
+    "requestTo": "Anfrage an...",
+    "chooseMessage": "Nachricht wählen:",
+    "defaultMessages": {
+      "hi": "Hi! 👋",
+      "cheers": "Lass anstoßen! 🥂",
+      "outfit": "Cooles Outfit! 🔥"
+    },
+    "newGroup": "Neue Crew",
+    "groupName": "Crew-Name",
+    "selectMembers": "Wer soll rein?",
+    "createButton": "ERSTELLEN",
+    "manageGroup": "Crew verwalten",
+    "members": "Mitglieder:",
+    "you": "Du",
+    "leaveGroup": "VERLASSEN",
+    "deleteGroup": "LÖSCHEN",
+    "typeMessage": "Nachricht...",
+    "viewTimer": "Ansehen ({timer}s)",
+    "imageDeleted": "♻️ Bild gelöscht."
+  },
+  "admin": {
+    "title": "DJ CONSOLE",
+    "guestCount": "Gäste im Club",
+    "lightControl": "Lichtsteuerung",
+    "colors": {
+      "red": "Rot",
+      "green": "Grün",
+      "blue": "Blau",
+      "yellow": "Gelb",
+      "magenta": "Magenta",
+      "cyan": "Cyan",
+      "white": "Weiß",
+      "off": "Aus"
+    },
+    "effects": {
+      "psychedelic": "🌈 PSYCHEDELIC",
+      "strobe": "⚡ STROBO"
+    },
+    "audioSync": "MIC SYNC",
+    "audioSyncOn": "LIVE SYNC ON",
+    "lottery": "Gewinnspiel",
+    "winnerCount": "Anzahl Gewinner",
+    "prizeCode": "Gewinn-Code",
+    "startLottery": "STARTEN",
+    "broadcast": "Nachrichten",
+    "targetInClub": "IM CLUB",
+    "targetOutside": "DRAUSSEN",
+    "targetAll": "ALLE",
+    "messagePlaceholder": "Nachricht...",
+    "sendBroadcast": "SEND",
+    "guestList": "Gästeliste (Im Club)",
+    "noGuests": "Niemand eingecheckt.",
+    "stopAll": "🛑 STOP / RESET",
+    "logout": "LOGOUT"
+  },
+  "overlay": {
+    "lottery": "VERLOSUNG",
+    "winner": "WINNER!",
+    "notWinner": "LEIDER NEIN"
+  },
+  "errors": {
+    "configMissing": "Firebase-Konfiguration nicht gefunden",
+    "authFailed": "Anmeldung fehlgeschlagen",
+    "wrongPassword": "Falsches Passwort",
+    "userNotFound": "Benutzer nicht gefunden",
+    "cameraError": "Kamera-Fehler",
+    "codeNotFound": "Code nicht gefunden",
+    "codeTooShort": "Code zu kurz",
+    "selfScan": "Du kannst dich nicht selbst scannen",
+    "alreadyFriends": "Bereits befreundet"
+  }
+}

@@ -1,0 +1,2 @@
+# Platzhalter - Ersetze dies mit echten PNG-Icons (512x512)
+# Verwende ein Tool wie https://realfavicongenerator.net/

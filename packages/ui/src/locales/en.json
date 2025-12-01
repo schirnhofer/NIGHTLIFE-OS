@@ -1,0 +1,113 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "hello": "Hello",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "error": "Error",
+    "success": "Success"
+  },
+  "auth": {
+    "login": "Log In",
+    "logout": "Log Out",
+    "signup": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "loginSuccess": "Successfully logged in",
+    "loginError": "Login failed",
+    "signupSuccess": "Registration successful",
+    "signupError": "Registration failed"
+  },
+  "home": {
+    "title": "Home",
+    "checkedIn": "Checked In",
+    "checkedOut": "Checked Out",
+    "checkIn": "Check In",
+    "checkOut": "Check Out",
+    "friendCode": "Friend Code",
+    "scanQR": "Scan QR Code"
+  },
+  "chat": {
+    "title": "Chats",
+    "newChat": "New Chat",
+    "newGroup": "New Group",
+    "addFriend": "Add Friend",
+    "typeMessage": "Type a message...",
+    "sendMessage": "Send",
+    "noMessages": "No messages yet",
+    "ephemeral": "Self-Destructing"
+  },
+  "friends": {
+    "title": "Friends",
+    "addFriend": "Add Friend",
+    "friendCode": "Friend Code",
+    "enterCode": "Enter Code",
+    "requests": "Requests",
+    "noFriends": "No friends yet",
+    "accept": "Accept",
+    "reject": "Reject"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "notifications": "Notifications",
+    "privacy": "Privacy",
+    "account": "Account"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "analytics": "Analytics",
+    "staff": "Staff",
+    "settings": "Settings",
+    "subscription": "Subscription"
+  },
+  "dj": {
+    "console": "DJ Console",
+    "lightshow": "Light Show",
+    "effects": "Effects",
+    "audioSync": "Audio Sync",
+    "lottery": "Lottery",
+    "broadcast": "Broadcast Message",
+    "guestList": "Guest List"
+  },
+  "staff": {
+    "door": {
+      "title": "Door Security",
+      "scanQR": "Scan QR Code",
+      "verify": "Verify",
+      "trustLevel": "Trust Level",
+      "blacklist": "Blacklist"
+    },
+    "waiter": {
+      "title": "Waiter",
+      "orders": "Orders",
+      "newOrder": "New Order",
+      "table": "Table",
+      "payment": "Payment"
+    },
+    "cloakroom": {
+      "title": "Cloakroom",
+      "checkIn": "Check In",
+      "checkOut": "Check Out",
+      "ticket": "Ticket",
+      "item": "Item"
+    }
+  },
+  "errors": {
+    "notFound": "Not Found",
+    "unauthorized": "Unauthorized",
+    "serverError": "Server Error",
+    "networkError": "Network Error"
+  }
+}
