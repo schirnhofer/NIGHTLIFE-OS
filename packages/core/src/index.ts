@@ -17,6 +17,7 @@ export * from './hooks/use-club-state';
 export * from './hooks/use-friends';
 export * from './hooks/use-chats';
 export * from './hooks/use-i18n';
+export * from './hooks/use-check-in';
 
 // Utils
 export * from './utils/friend-code';

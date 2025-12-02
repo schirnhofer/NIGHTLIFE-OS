@@ -17,6 +17,7 @@ export interface PlatformUser {
   email: string;
   displayName: string | null;
   photoURL: string | null;
+  friendCode?: string; // 7-stelliger Code (z.B. "ABXY489")
   createdAt: number; // Unix-Timestamp (ms)
   lastSeenAt: number;
   isPlatformAdmin: boolean; // Super-Admin?

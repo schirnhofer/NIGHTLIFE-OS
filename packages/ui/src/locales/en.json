@@ -20,6 +20,7 @@
     "signup": "Sign Up",
     "email": "Email",
     "password": "Password",
+    "displayName": "Display Name",
     "forgotPassword": "Forgot Password?",
     "noAccount": "Don't have an account?",
     "hasAccount": "Already have an account?",
@@ -27,6 +28,34 @@
     "loginError": "Login failed",
     "signupSuccess": "Registration successful",
     "signupError": "Registration failed"
+  },
+  "profile": {
+    "title": "Profile",
+    "displayName": "Display Name",
+    "friendCode": "Friend Code",
+    "generateFriendCode": "Generate Code",
+    "myProfile": "My Profile",
+    "editProfile": "Edit Profile",
+    "noFriendCode": "No friend code generated yet"
+  },
+  "checkin": {
+    "status": {
+      "checkedIn": "Checked In",
+      "checkedOut": "Checked Out",
+      "loading": "Loading status..."
+    },
+    "button": {
+      "checkIn": "Check In",
+      "checkOut": "Check Out"
+    },
+    "success": {
+      "checkIn": "Successfully checked in",
+      "checkOut": "Successfully checked out"
+    },
+    "error": {
+      "checkIn": "Check-in failed",
+      "checkOut": "Check-out failed"
+    }
   },
   "home": {
     "title": "Home",

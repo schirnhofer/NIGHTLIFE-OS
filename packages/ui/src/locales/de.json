@@ -20,6 +20,7 @@
     "signup": "Registrieren",
     "email": "E-Mail",
     "password": "Passwort",
+    "displayName": "Anzeigename",
     "forgotPassword": "Passwort vergessen?",
     "noAccount": "Noch kein Konto?",
     "hasAccount": "Bereits ein Konto?",
@@ -27,6 +28,34 @@
     "loginError": "Anmeldung fehlgeschlagen",
     "signupSuccess": "Registrierung erfolgreich",
     "signupError": "Registrierung fehlgeschlagen"
+  },
+  "profile": {
+    "title": "Profil",
+    "displayName": "Anzeigename",
+    "friendCode": "Freunde-Code",
+    "generateFriendCode": "Code generieren",
+    "myProfile": "Mein Profil",
+    "editProfile": "Profil bearbeiten",
+    "noFriendCode": "Noch kein Freunde-Code generiert"
+  },
+  "checkin": {
+    "status": {
+      "checkedIn": "Eingecheckt",
+      "checkedOut": "Ausgecheckt",
+      "loading": "Lade Status..."
+    },
+    "button": {
+      "checkIn": "Einchecken",
+      "checkOut": "Auschecken"
+    },
+    "success": {
+      "checkIn": "Erfolgreich eingecheckt",
+      "checkOut": "Erfolgreich ausgecheckt"
+    },
+    "error": {
+      "checkIn": "Check-In fehlgeschlagen",
+      "checkOut": "Check-Out fehlgeschlagen"
+    }
   },
   "home": {
     "title": "Startseite",

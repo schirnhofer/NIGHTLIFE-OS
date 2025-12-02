@@ -24,3 +24,6 @@ export * from './roles';
 
 // API-Responses
 export * from './api';
+
+// Check-In/Check-Out-Typen
+export * from './checkin';
