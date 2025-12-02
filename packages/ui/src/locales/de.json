@@ -194,6 +194,19 @@
     "networkError": "Netzwerkfehler",
     "invalidCode": "Ungültiger Code",
     "userNotFound": "Benutzer nicht gefunden",
-    "alreadyFriends": "Bereits befreundet"
+    "alreadyFriends": "Bereits befreundet",
+    "cannotAddSelf": "Du kannst dich nicht selbst hinzufügen",
+    "alreadyRequested": "Anfrage bereits gesendet"
+  },
+  "friendModal": {
+    "title": "Anfrage an...",
+    "selectMessage": "Nachricht wählen:",
+    "customMessage": "Eigene Nachricht...",
+    "cancel": "Abbruch",
+    "send": "Senden"
+  },
+  "friendSuccess": {
+    "requestSent": "Anfrage gesendet!",
+    "accepted": "Freund hinzugefügt!"
   }
 }

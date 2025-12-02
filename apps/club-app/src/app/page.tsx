@@ -47,11 +47,13 @@ export default function HomePage() {
 
   const handleAcceptRequest = async (requestId: string) => {
     try {
-      await acceptFriendRequest(requestId);
-      // Nach Akzeptieren öffne Chat
-      // TODO: Navigate to chat
+      const chatId = await acceptFriendRequest(requestId);
+      alert(t('friendSuccess.accepted'));
+      // Navigiere direkt zum Chat
+      router.push(`/crew/chat/${chatId}`);
     } catch (err) {
       console.error('Error accepting request:', err);
+      alert(t('common.error'));
     }
   };
 

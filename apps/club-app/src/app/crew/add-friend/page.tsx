@@ -39,16 +39,9 @@ export default function AddFriendPage() {
 
     setLoading(true);
     try {
-      // TODO: Suche User via Friend-Code in Firestore
-      // Platzhalter: Simuliere gefundenen User
+      // Zeige Modal direkt mit Friend-Code
+      // Die eigentliche Validierung erfolgt beim Senden
       const foundUser = { code: friendCode.toUpperCase() };
-      
-      if (!foundUser) {
-        alert(t('errors.userNotFound'));
-        return;
-      }
-
-      // Zeige Modal
       setTargetUser(foundUser);
       setShowModal(true);
     } catch (err) {
@@ -67,12 +60,37 @@ export default function AddFriendPage() {
     setLoading(true);
     try {
       await sendFriendRequest(targetUser.code, message);
-      alert(t('friend.requestSent'));
+      alert(t('friendSuccess.requestSent'));
       setShowModal(false);
+      setFriendCode('');
+      setTargetUser(null);
+      setSelectedMessage(null);
+      setCustomMessage('');
       router.push('/crew');
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error sending request:', err);
-      alert(t('common.error'));
+      
+      // Zeige spezifische Fehlermeldungen
+      const errorMessage = err?.message || 'error';
+      switch (errorMessage) {
+        case 'invalidCode':
+          alert(t('errors.invalidCode'));
+          break;
+        case 'userNotFound':
+          alert(t('errors.userNotFound'));
+          break;
+        case 'cannotAddSelf':
+          alert(t('errors.cannotAddSelf'));
+          break;
+        case 'alreadyFriends':
+          alert(t('errors.alreadyFriends'));
+          break;
+        case 'alreadyRequested':
+          alert(t('errors.alreadyRequested'));
+          break;
+        default:
+          alert(t('common.error'));
+      }
     } finally {
       setLoading(false);
     }
@@ -143,7 +161,7 @@ export default function AddFriendPage() {
         <Modal
           open={showModal}
           onClose={() => setShowModal(false)}
-          title={t('friend.requestTo')}
+          title={t('friendModal.title')}
         >
           <div className="space-y-4">
             {/* Ziel-User */}
@@ -159,7 +177,7 @@ export default function AddFriendPage() {
             {/* Nachricht wählen */}
             <div>
               <p className="text-sm text-slate-400 mb-2">
-                {t('friend.chooseMessage')}
+                {t('friendModal.selectMessage')}
               </p>
               <div className="space-y-2">
                 {FRIEND_REQUEST_MESSAGES.map((msg) => (
@@ -182,10 +200,10 @@ export default function AddFriendPage() {
             {/* Eigene Nachricht */}
             <div>
               <p className="text-sm text-slate-400 mb-2">
-                {t('friend.customMessage')}
+                {t('friendModal.customMessage')}
               </p>
               <Input
-                placeholder="Eigene Nachricht..."
+                placeholder={t('friendModal.customMessage')}
                 value={customMessage}
                 onChange={(e) => {
                   setCustomMessage(e.target.value);
@@ -201,7 +219,7 @@ export default function AddFriendPage() {
                 fullWidth
                 onClick={() => setShowModal(false)}
               >
-                {t('common.cancel')}
+                {t('friendModal.cancel')}
               </Button>
               <Button
                 variant="success"
@@ -209,7 +227,7 @@ export default function AddFriendPage() {
                 onClick={handleSendRequest}
                 disabled={loading}
               >
-                {t('common.send')}
+                {t('friendModal.send')}
               </Button>
             </div>
           </div>

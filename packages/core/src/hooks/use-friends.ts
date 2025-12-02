@@ -9,14 +9,15 @@
 
 import { useState, useEffect } from 'react';
 import { Friend, FriendRequest, PlatformUser } from '@nightlife-os/shared-types';
-import { onCollectionSnapshot, setDocument, updateDocument, deleteDocument, getDocument } from '../firebase/firestore';
+import { onCollectionSnapshot, setDocument, updateDocument, deleteDocument, getDocument, getCollection, where } from '../firebase/firestore';
+import { validateFriendCode } from '../utils/friend-code';
 
 export interface UseFriendsReturn {
   friends: Friend[];
   requests: FriendRequest[];
   loading: boolean;
   sendFriendRequest: (targetCode: string, message?: string) => Promise<void>;
-  acceptFriendRequest: (requestId: string) => Promise<void>;
+  acceptFriendRequest: (requestId: string) => Promise<string>;
   removeFriend: (friendId: string) => Promise<void>;
   rejectFriendRequest: (requestId: string) => Promise<void>;
 }
@@ -70,19 +71,46 @@ export function useFriends(
     if (!uid) throw new Error('Not authenticated');
 
     try {
-      // 1. Finde Ziel-User via Friend-Code
-      // TODO: Implementiere Friend-Code-Suche in Firestore
-      // Für jetzt: Platzhalter - simuliere Mock-User
-      // In der Praxis: Query users where friendCode == targetCode
-      
-      // Platzhalter: Mock-User für Demo
-      const mockTargetUserId = `mock_user_${targetCode}`;
-      
+      // 1. Validiere Friend-Code Format
+      const normalizedCode = targetCode.toUpperCase().trim();
+      if (!validateFriendCode(normalizedCode)) {
+        throw new Error('invalidCode');
+      }
+
       // 2. Hole eigene User-Daten
       const myUserDoc = await getDocument<PlatformUser>(`users/${uid}`);
       if (!myUserDoc) throw new Error('User data not found');
 
-      // 3. Erstelle Freundschaftsanfrage beim Ziel-User
+      // 3. Suche Ziel-User via Friend-Code in Firestore
+      const usersWithCode = await getCollection<PlatformUser>(
+        'users',
+        [where('friendCode', '==', normalizedCode)]
+      );
+
+      if (!usersWithCode || usersWithCode.length === 0) {
+        throw new Error('userNotFound');
+      }
+
+      const targetUser = usersWithCode[0];
+
+      // 4. Prüfe, ob User sich selbst hinzufügen möchte
+      if (targetUser.uid === uid) {
+        throw new Error('cannotAddSelf');
+      }
+
+      // 5. Prüfe, ob bereits Freunde
+      const existingFriend = await getDocument<Friend>(`users/${uid}/friends/${targetUser.uid}`);
+      if (existingFriend) {
+        throw new Error('alreadyFriends');
+      }
+
+      // 6. Prüfe, ob bereits eine ausstehende Anfrage existiert
+      const existingRequest = await getDocument<FriendRequest>(`users/${targetUser.uid}/requests/${uid}`);
+      if (existingRequest) {
+        throw new Error('alreadyRequested');
+      }
+
+      // 7. Erstelle Freundschaftsanfrage beim Ziel-User
       const request: FriendRequest = {
         requesterId: uid,
         email: myUserDoc.email,
@@ -94,7 +122,7 @@ export function useFriends(
         createdAt: Date.now()
       };
 
-      await setDocument(`users/${mockTargetUserId}/requests/${uid}`, request);
+      await setDocument(`users/${targetUser.uid}/requests/${uid}`, request);
     } catch (error) {
       console.error('Error sending friend request:', error);
       throw error;
@@ -103,8 +131,9 @@ export function useFriends(
 
   /**
    * Akzeptiere Freundschaftsanfrage
+   * @returns chatId für privaten Chat mit neuem Freund
    */
-  const acceptFriendRequest = async (requestId: string): Promise<void> => {
+  const acceptFriendRequest = async (requestId: string): Promise<string> => {
     if (!uid) throw new Error('Not authenticated');
 
     try {
@@ -141,19 +170,13 @@ export function useFriends(
         setDocument(`users/${request.requesterId}/friends/${uid}`, theirFriend)
       ]);
 
-      // 4. Aktualisiere Request-Status und lösche ihn
-      await updateDocument(`users/${uid}/requests/${requestId}`, {
-        status: 'accepted'
-      });
+      // 4. Lösche Request-Dokument
+      await deleteDocument(`users/${uid}/requests/${requestId}`);
 
-      // Optional: Lösche Request nach kurzer Zeit
-      setTimeout(async () => {
-        try {
-          await deleteDocument(`users/${uid}/requests/${requestId}`);
-        } catch (err) {
-          console.error('Error deleting request:', err);
-        }
-      }, 2000);
+      // 5. Generiere Chat-ID für privaten Chat (alphabetisch sortiert)
+      const chatId = [uid, request.requesterId].sort().join('_');
+
+      return chatId;
     } catch (error) {
       console.error('Error accepting friend request:', error);
       throw error;
