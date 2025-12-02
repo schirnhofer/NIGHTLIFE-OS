@@ -3,18 +3,25 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Card, CardHeader, CardTitle, CardContent, Loader } from '@nightlife-os/ui';
-import { useAuth, useCheckIn, useI18n } from '@nightlife-os/core';
-import { Home, MessageCircle, Users, Music, LogIn, LogOut, UserCircle, Loader2, CheckCircle, XCircle } from 'lucide-react';
+import { useAuth, useCheckIn, useI18n, usePlatformUserData, useFriends, generateUserQR } from '@nightlife-os/core';
+import { Home, MessageCircle, Users, Music, LogIn, LogOut, UserCircle, Loader2, CheckCircle, XCircle, QrCode, EyeOff, MapPin, Eye } from 'lucide-react';
 
 export default function HomePage() {
   const router = useRouter();
   const { user, loading: authLoading, isAuthenticated } = useAuth();
   const { t, locale, setLocale } = useI18n();
   
+  // User-Daten
+  const { userData: platformUser, loading: userDataLoading } = usePlatformUserData(user?.uid);
+  
   // Check-In für Demo-Club
   const { checkIn, checkOut, currentStatus, loading: checkInLoading } = useCheckIn('demo-club-1', user?.uid);
   
+  // Friends & Requests
+  const { requests, acceptFriendRequest } = useFriends(user?.uid);
+  
   const [actionLoading, setActionLoading] = useState(false);
+  const [qrVisible, setQrVisible] = useState(false);
 
   const handleCheckIn = async () => {
     setActionLoading(true);
@@ -38,112 +45,176 @@ export default function HomePage() {
     }
   };
 
+  const handleAcceptRequest = async (requestId: string) => {
+    try {
+      await acceptFriendRequest(requestId);
+      // Nach Akzeptieren öffne Chat
+      // TODO: Navigate to chat
+    } catch (err) {
+      console.error('Error accepting request:', err);
+    }
+  };
+
   return (
-    <main className=\"min-h-screen bg-slate-900 p-8\">
-      <div className=\"max-w-4xl mx-auto\">
+    <main className="min-h-screen bg-slate-900 p-4 md:p-8">
+      <div className="max-w-2xl mx-auto">
         {/* Header */}
-        <div className=\"text-center mb-12\">
-          <h1 className=\"text-4xl font-bold text-cyan-400 mb-2\">
+        <div className="text-center mb-6">
+          <h1 className="text-3xl font-bold text-cyan-400 mb-1">
             Nightlife OS
           </h1>
-          <p className=\"text-xl text-slate-300\">
-            🎵 Club App - Besucher-PWA
+          <p className="text-sm text-slate-400">
+            Club App
           </p>
         </div>
 
         {/* Auth Status & Check-In */}
         {authLoading ? (
-          <Card className=\"mb-8\">
-            <CardContent className=\"py-8\">
-              <div className=\"flex items-center justify-center gap-3\">
-                <Loader size=\"md\" />
-                <p className=\"text-slate-300\">{t('common.loading')}</p>
+          <Card className="mb-6">
+            <CardContent className="py-8">
+              <div className="flex items-center justify-center gap-3">
+                <Loader size="md" />
+                <p className="text-slate-300">{t('common.loading')}</p>
               </div>
             </CardContent>
           </Card>
         ) : isAuthenticated ? (
-          // Eingeloggt - Check-In/Out
-          <Card className=\"mb-8\">
-            <CardHeader>
-              <div className=\"flex items-center justify-between\">
-                <div className=\"flex items-center gap-3\">
-                  <UserCircle className=\"h-6 w-6 text-cyan-400\" />
-                  <CardTitle>{t('common.welcome')}, {user?.displayName || user?.email?.split('@')[0]}</CardTitle>
-                </div>
-                <Button
-                  size=\"sm\"
-                  variant=\"ghost\"
-                  onClick={() => router.push('/auth/profile')}
-                >
-                  <UserCircle className=\"h-4 w-4 mr-2\" />
-                  {t('profile.title')}
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent>
-              {/* Check-In Status */}
-              <div className=\"space-y-4\">
-                <div className=\"flex items-center justify-between p-4 bg-slate-800 rounded-lg border border-slate-700\">
-                  <div className=\"flex items-center gap-3\">
-                    {currentStatus === 'loading' ? (
-                      <Loader2 className=\"h-5 w-5 animate-spin text-slate-400\" />
-                    ) : currentStatus === 'checked_in' ? (
-                      <CheckCircle className=\"h-5 w-5 text-green-400\" />
-                    ) : (
-                      <XCircle className=\"h-5 w-5 text-slate-400\" />
-                    )}
-                    <div>
-                      <p className=\"text-sm text-slate-400\">Status</p>
-                      <p className=\"text-lg font-semibold text-slate-200\">
-                        {currentStatus === 'loading' 
-                          ? t('checkin.status.loading')
-                          : currentStatus === 'checked_in'
-                          ? t('checkin.status.checkedIn')
-                          : t('checkin.status.checkedOut')
-                        }
+          // Eingeloggt
+          <div className="space-y-4">
+            {/* Status-Leiste */}
+            <div className={`p-4 rounded-lg text-center font-bold text-lg ${
+              currentStatus === 'checked_in' 
+                ? 'bg-gradient-to-r from-green-600 to-green-500 text-white' 
+                : 'bg-slate-800 text-slate-400'
+            }`}>
+              {currentStatus === 'checked_in' ? t('status.inClub') : t('status.outside')}
+            </div>
+
+            {/* Freundschaftsanfragen */}
+            {requests && requests.length > 0 && requests.filter(r => r.status === 'pending').map(request => (
+              <Card key={request.requesterId} className="border-cyan-500/30">
+                <CardContent className="py-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex-1">
+                      <p className="text-lg font-semibold text-cyan-400 mb-1">
+                        {t('friend.newRequest')}
                       </p>
-                    </div>
-                  </div>
-                  
-                  {currentStatus !== 'loading' && (
-                    <Button
-                      variant={currentStatus === 'checked_in' ? 'danger' : 'success'}
-                      onClick={currentStatus === 'checked_in' ? handleCheckOut : handleCheckIn}
-                      disabled={actionLoading || checkInLoading}
-                    >
-                      {actionLoading ? (
-                        <Loader2 className=\"h-4 w-4 animate-spin\" />
-                      ) : currentStatus === 'checked_in' ? (
-                        t('checkin.button.checkOut')
-                      ) : (
-                        t('checkin.button.checkIn')
+                      <p className="text-sm text-slate-300 mb-1">
+                        {request.displayName || request.email}
+                      </p>
+                      {request.message && (
+                        <p className="text-xs text-slate-400 italic">
+                          "{request.message}"
+                        </p>
                       )}
+                    </div>
+                    <Button
+                      variant="success"
+                      size="sm"
+                      onClick={() => handleAcceptRequest(request.requesterId)}
+                    >
+                      {t('friend.accept')}
                     </Button>
-                  )}
-                </div>
-                
-                <p className=\"text-xs text-slate-400 text-center\">
-                  Demo-Club: demo-club-1
-                </p>
-              </div>
-            </CardContent>
-          </Card>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+
+            {/* QR-Code */}
+            {platformUser?.friendCode && (
+              <Card className="relative overflow-hidden">
+                <CardContent className="py-8">
+                  <div 
+                    className="flex flex-col items-center justify-center cursor-pointer"
+                    onClick={() => setQrVisible(!qrVisible)}
+                  >
+                    {/* QR-Code (Platzhalter) */}
+                    <div className={`w-48 h-48 bg-white rounded-lg flex items-center justify-center transition-all duration-300 ${
+                      !qrVisible ? 'blur-xl opacity-40' : ''
+                    }`}>
+                      <QrCode className="h-32 w-32 text-slate-900" />
+                    </div>
+                    
+                    {/* Overlay */}
+                    {!qrVisible && (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-900/50">
+                        <EyeOff className="h-8 w-8 text-white mb-2" />
+                        <p className="text-white font-semibold">{t('qr.tapToShow')}</p>
+                      </div>
+                    )}
+                    
+                    {/* Friend-Code */}
+                    <p className="text-3xl font-bold text-cyan-400 mt-4 tracking-widest">
+                      {platformUser.friendCode}
+                    </p>
+                    <p className="text-xs text-slate-400 mt-1">
+                      {t('qr.yourCode')}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Check-In/Out Button (groß) */}
+            <Button
+              variant={currentStatus === 'checked_in' ? 'default' : 'default'}
+              fullWidth
+              size="lg"
+              onClick={currentStatus === 'checked_in' ? handleCheckOut : handleCheckIn}
+              disabled={actionLoading || checkInLoading}
+              className={`py-6 text-lg font-bold ${
+                currentStatus === 'checked_in'
+                  ? 'bg-slate-700 hover:bg-slate-600'
+                  : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
+              }`}
+            >
+              {actionLoading ? (
+                <Loader2 className="h-5 w-5 animate-spin mr-2" />
+              ) : (
+                <MapPin className="h-5 w-5 mr-2" />
+              )}
+              {currentStatus === 'checked_in' 
+                ? t('checkin.button.checkOut')
+                : t('checkin.button.checkIn')
+              }
+            </Button>
+
+            {/* Navigation */}
+            <div className="flex gap-2 mt-6">
+              <Button
+                variant="ghost"
+                fullWidth
+                onClick={() => router.push('/crew')}
+              >
+                <Users className="h-4 w-4 mr-2" />
+                {t('crew.title')}
+              </Button>
+              <Button
+                variant="ghost"
+                fullWidth
+                onClick={() => router.push('/auth/profile')}
+              >
+                <UserCircle className="h-4 w-4 mr-2" />
+                {t('profile.title')}
+              </Button>
+            </div>
+          </div>
         ) : (
           // Nicht eingeloggt - Login/Signup
-          <Card className=\"mb-8\">
+          <Card className="mb-8">
             <CardHeader>
               <CardTitle>{t('common.welcome')}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className=\"text-slate-300 mb-6\">
+              <p className="text-slate-300 mb-6">
                 Melde dich an oder registriere dich, um alle Features zu nutzen.
               </p>
-              <div className=\"flex gap-4\">
-                <Button variant=\"default\" fullWidth onClick={() => router.push('/auth/login')}>
-                  <LogIn className=\"h-4 w-4 mr-2\" />
+              <div className="flex gap-4">
+                <Button variant="default" fullWidth onClick={() => router.push('/auth/login')}>
+                  <LogIn className="h-4 w-4 mr-2" />
                   {t('auth.login')}
                 </Button>
-                <Button variant=\"ghost\" fullWidth onClick={() => router.push('/auth/signup')}>
+                <Button variant="ghost" fullWidth onClick={() => router.push('/auth/signup')}>
                   {t('auth.signup')}
                 </Button>
               </div>
@@ -151,73 +222,14 @@ export default function HomePage() {
           </Card>
         )}
 
-        {/* Features */}
-        <div className=\"grid grid-cols-1 md:grid-cols-2 gap-6 mb-8\">
-          <Card hover>
-            <CardHeader>
-              <div className=\"flex items-center gap-3\">
-                <Home className=\"h-6 w-6 text-cyan-400\" />
-                <CardTitle className=\"text-lg\">{t('home.title')}</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p className=\"text-sm text-slate-400\">
-                Check-In/Out, QR-Code, Status
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card hover>
-            <CardHeader>
-              <div className=\"flex items-center gap-3\">
-                <MessageCircle className=\"h-6 w-6 text-cyan-400\" />
-                <CardTitle className=\"text-lg\">{t('chat.title')}</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p className=\"text-sm text-slate-400\">
-                1:1 und Gruppen-Chats, Ephemeral Images
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card hover>
-            <CardHeader>
-              <div className=\"flex items-center gap-3\">
-                <Users className=\"h-6 w-6 text-cyan-400\" />
-                <CardTitle className=\"text-lg\">{t('friends.title')}</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p className=\"text-sm text-slate-400\">
-                Freunde hinzufügen via Friend-Code
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card hover>
-            <CardHeader>
-              <div className=\"flex items-center gap-3\">
-                <Music className=\"h-6 w-6 text-cyan-400\" />
-                <CardTitle className=\"text-lg\">Lichtshow</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p className=\"text-sm text-slate-400\">
-                Overlays, Countdown, Gewinnspiele
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-
         {/* Language Switcher */}
-        <div className=\"mt-8 text-center\">
-          <p className=\"text-sm text-slate-400 mb-2\">Sprache wechseln:</p>
-          <div className=\"flex gap-2 justify-center\">
-            <Button size=\"sm\" variant=\"ghost\" onClick={() => setLocale('de')}>
+        <div className="mt-8 text-center">
+          <p className="text-xs text-slate-500 mb-2">Sprache:</p>
+          <div className="flex gap-2 justify-center">
+            <Button size="sm" variant="ghost" onClick={() => setLocale('de')}>
               🇩🇪 DE
             </Button>
-            <Button size=\"sm\" variant=\"ghost\" onClick={() => setLocale('en')}>
+            <Button size="sm" variant="ghost" onClick={() => setLocale('en')}>
               🇬🇧 EN
             </Button>
           </div>

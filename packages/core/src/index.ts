@@ -16,6 +16,7 @@ export * from './hooks/use-user-data';
 export * from './hooks/use-club-state';
 export * from './hooks/use-friends';
 export * from './hooks/use-chats';
+export * from './hooks/use-chat-messages';
 export * from './hooks/use-i18n';
 export * from './hooks/use-check-in';
 
@@ -24,6 +25,7 @@ export * from './utils/friend-code';
 export * from './utils/trust-score';
 export * from './utils/validation';
 export * from './utils/date-time';
+export * from './utils/qr';
 
 // Constants
 export * from './constants/roles';

@@ -12,7 +12,10 @@
     "yes": "Yes",
     "no": "No",
     "error": "Error",
-    "success": "Success"
+    "success": "Success",
+    "back": "Back",
+    "send": "Send",
+    "create": "Create"
   },
   "auth": {
     "login": "Log In",
@@ -38,6 +41,16 @@
     "editProfile": "Edit Profile",
     "noFriendCode": "No friend code generated yet"
   },
+  "status": {
+    "inClub": "IN CLUB 🎵",
+    "outside": "OUTSIDE"
+  },
+  "qr": {
+    "tapToShow": "Tap to Show",
+    "yourCode": "Your Code",
+    "scanCode": "Scan Code",
+    "showQR": "Show QR Code"
+  },
   "checkin": {
     "status": {
       "checkedIn": "Checked In",
@@ -45,8 +58,8 @@
       "loading": "Loading status..."
     },
     "button": {
-      "checkIn": "Check In",
-      "checkOut": "Check Out"
+      "checkIn": "CHECK IN NOW",
+      "checkOut": "CHECK OUT"
     },
     "success": {
       "checkIn": "Successfully checked in",
@@ -66,6 +79,30 @@
     "friendCode": "Friend Code",
     "scanQR": "Scan QR Code"
   },
+  "crew": {
+    "title": "Crew",
+    "addFriend": "ADD FRIEND",
+    "createGroup": "GROUP",
+    "crews": "Crews",
+    "friends": "Friends",
+    "noFriends": "No friends yet",
+    "noGroups": "No groups yet"
+  },
+  "friend": {
+    "newRequest": "New Request! 👋",
+    "accept": "ACCEPT",
+    "reject": "Reject",
+    "remove": "Remove",
+    "sendRequest": "Send Request",
+    "requestSent": "Request Sent",
+    "addToGroup": "Add to Group",
+    "unfriend": "Unfriend",
+    "scanQR": "SCAN",
+    "enterCode": "Enter Code",
+    "requestTo": "Request to...",
+    "chooseMessage": "Choose message:",
+    "customMessage": "Custom message"
+  },
   "chat": {
     "title": "Chats",
     "newChat": "New Chat",
@@ -74,7 +111,24 @@
     "typeMessage": "Type a message...",
     "sendMessage": "Send",
     "noMessages": "No messages yet",
-    "ephemeral": "Self-Destructing"
+    "ephemeral": "Self-Destructing",
+    "newMessage": "New Message",
+    "deleteMessage": "Delete",
+    "imageDeleted": "Image Deleted",
+    "viewImage": "View Image"
+  },
+  "group": {
+    "create": "Create Group",
+    "manage": "Manage",
+    "delete": "Delete Group",
+    "leave": "Leave Group",
+    "addMember": "Add Member",
+    "removeMember": "Remove",
+    "members": "Members",
+    "name": "Group Name",
+    "selectFriends": "Select Friends",
+    "settings": "Settings",
+    "creator": "Creator"
   },
   "friends": {
     "title": "Friends",
@@ -137,6 +191,9 @@
     "notFound": "Not Found",
     "unauthorized": "Unauthorized",
     "serverError": "Server Error",
-    "networkError": "Network Error"
+    "networkError": "Network Error",
+    "invalidCode": "Invalid Code",
+    "userNotFound": "User Not Found",
+    "alreadyFriends": "Already Friends"
   }
 }

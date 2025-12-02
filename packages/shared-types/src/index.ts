@@ -7,6 +7,9 @@
 // User-Typen
 export * from './user';
 
+// Friendship-Typen
+export * from './friendship';
+
 // Club-Typen
 export * from './club';
 

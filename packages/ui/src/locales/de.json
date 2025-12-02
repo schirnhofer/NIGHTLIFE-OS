@@ -12,7 +12,10 @@
     "yes": "Ja",
     "no": "Nein",
     "error": "Fehler",
-    "success": "Erfolg"
+    "success": "Erfolg",
+    "back": "Zurück",
+    "send": "Senden",
+    "create": "Erstellen"
   },
   "auth": {
     "login": "Anmelden",
@@ -38,6 +41,16 @@
     "editProfile": "Profil bearbeiten",
     "noFriendCode": "Noch kein Freunde-Code generiert"
   },
+  "status": {
+    "inClub": "IM CLUB 🎵",
+    "outside": "DRAUSSEN"
+  },
+  "qr": {
+    "tapToShow": "Tippen zum Zeigen",
+    "yourCode": "Dein Code",
+    "scanCode": "Code scannen",
+    "showQR": "QR-Code anzeigen"
+  },
   "checkin": {
     "status": {
       "checkedIn": "Eingecheckt",
@@ -45,8 +58,8 @@
       "loading": "Lade Status..."
     },
     "button": {
-      "checkIn": "Einchecken",
-      "checkOut": "Auschecken"
+      "checkIn": "JETZT EINCHECKEN",
+      "checkOut": "AUSCHECKEN"
     },
     "success": {
       "checkIn": "Erfolgreich eingecheckt",
@@ -66,6 +79,30 @@
     "friendCode": "Freunde-Code",
     "scanQR": "QR-Code scannen"
   },
+  "crew": {
+    "title": "Crew",
+    "addFriend": "ADD FRIEND",
+    "createGroup": "GRUPPE",
+    "crews": "Crews",
+    "friends": "Freunde",
+    "noFriends": "Noch keine Freunde",
+    "noGroups": "Noch keine Gruppen"
+  },
+  "friend": {
+    "newRequest": "Neue Anfrage! 👋",
+    "accept": "ANNEHMEN",
+    "reject": "Ablehnen",
+    "remove": "Entfernen",
+    "sendRequest": "Anfrage senden",
+    "requestSent": "Anfrage gesendet",
+    "addToGroup": "Zu Gruppe hinzufügen",
+    "unfriend": "Entfreunden",
+    "scanQR": "SCAN",
+    "enterCode": "Code eingeben",
+    "requestTo": "Anfrage an...",
+    "chooseMessage": "Nachricht wählen:",
+    "customMessage": "Eigene Nachricht"
+  },
   "chat": {
     "title": "Chats",
     "newChat": "Neuer Chat",
@@ -74,7 +111,24 @@
     "typeMessage": "Nachricht schreiben...",
     "sendMessage": "Senden",
     "noMessages": "Noch keine Nachrichten",
-    "ephemeral": "Selbstzerstörend"
+    "ephemeral": "Selbstzerstörend",
+    "newMessage": "Neue Nachricht",
+    "deleteMessage": "Löschen",
+    "imageDeleted": "Bild gelöscht",
+    "viewImage": "Bild anzeigen"
+  },
+  "group": {
+    "create": "Gruppe erstellen",
+    "manage": "Verwalten",
+    "delete": "Gruppe löschen",
+    "leave": "Gruppe verlassen",
+    "addMember": "Mitglied hinzufügen",
+    "removeMember": "Entfernen",
+    "members": "Mitglieder",
+    "name": "Gruppenname",
+    "selectFriends": "Freunde auswählen",
+    "settings": "Einstellungen",
+    "creator": "Ersteller"
   },
   "friends": {
     "title": "Freunde",
@@ -137,6 +191,9 @@
     "notFound": "Nicht gefunden",
     "unauthorized": "Keine Berechtigung",
     "serverError": "Serverfehler",
-    "networkError": "Netzwerkfehler"
+    "networkError": "Netzwerkfehler",
+    "invalidCode": "Ungültiger Code",
+    "userNotFound": "Benutzer nicht gefunden",
+    "alreadyFriends": "Bereits befreundet"
   }
 }

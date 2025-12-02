@@ -23,7 +23,6 @@ export interface UseClubStateReturn {
 export function useClubState(clubId: string | null): UseClubStateReturn {
   const [clubState, setClubState] = useState<ClubState | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     if (!clubId) {

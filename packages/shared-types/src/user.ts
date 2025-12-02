@@ -77,24 +77,3 @@ export interface UserProfile {
   photoURL: string | null;
   checkedIn?: boolean;
 }
-
-/**
- * Freundschaft (clubs/{clubId}/users/{uid}/friends/{friendId})
- */
-export interface Friendship {
-  friendId: string;
-  friendName: string;
-  friendPhotoURL: string | null;
-  createdAt: number;
-}
-
-/**
- * Freundschaftsanfrage (clubs/{clubId}/users/{uid}/requests/{requesterId})
- */
-export interface FriendRequest {
-  requesterId: string;
-  requesterName: string;
-  requesterPhotoURL: string | null;
-  createdAt: number;
-  status: 'pending' | 'accepted' | 'rejected';
-}
