@@ -26,6 +26,7 @@ export * from './utils/trust-score';
 export * from './utils/validation';
 export * from './utils/date-time';
 export * from './utils/qr';
+export * from './utils/storage';
 
 // Constants
 export * from './constants/roles';

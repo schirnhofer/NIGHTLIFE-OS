@@ -4,7 +4,9 @@
  * Umfasst:
  * - Chat-Metadaten (1:1 und Gruppen)
  * - Nachrichten
- * - Ephemeral Images
+ * - Ephemeral Images & Media
+ * - Voice Messages
+ * Phase 5: Erweitert um MessageType und mediaUrl
  */
 
 // ===== CHAT-METADATEN =====
@@ -38,16 +40,33 @@ export interface Chat {
 // ===== NACHRICHTEN =====
 
 /**
+ * Message-Typ
+ * Phase 5: Generisch für zukünftige Erweiterungen (Video)
+ */
+export type MessageType = 'text' | 'image' | 'audio' | 'video' | 'system';
+
+/**
  * Nachricht (clubs/{clubId}/chats/{chatId}/messages/{messageId})
+ * Phase 5: Erweitert um type, mediaUrl, mediaType, durationSeconds
  */
 export interface Message {
   messageId: string;
-  text: string;
+  type: MessageType;
+  
+  // Text (optional bei Medien)
+  text?: string;
+  
+  // Media (neu in Phase 5)
+  mediaUrl?: string; // Firebase Storage URL
+  mediaType?: 'image' | 'audio' | 'video';
+  durationSeconds?: number; // Für Audio/Video
+  
+  // Backwards compatibility (deprecated, use mediaUrl)
+  image?: string; // Base64 oder Storage-URL
+  
+  // Sender
   sender: string; // UID
   senderName: string;
-  
-  // Optional: Bild
-  image?: string; // Base64 oder Storage-URL
   
   // Ephemeral (selbstzerstörend)
   ephemeral?: number; // Sekunden bis Auto-Löschung (z.B. 5)

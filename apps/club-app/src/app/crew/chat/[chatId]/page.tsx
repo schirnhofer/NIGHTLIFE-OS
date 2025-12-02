@@ -2,9 +2,9 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { Button, Card, Input } from '@nightlife-os/ui';
+import { Button, Card, Input, Modal, VoiceRecorderButton, EphemeralImageBubble } from '@nightlife-os/ui';
 import { useAuth, useI18n, useChatMessages, useChatMessagesActions } from '@nightlife-os/core';
-import { ArrowLeft, Send, Settings, Camera, Trash2 } from 'lucide-react';
+import { ArrowLeft, Send, Settings, Camera, Trash2, Image as ImageIcon, Timer } from 'lucide-react';
 import { Message } from '@nightlife-os/shared-types';
 
 export default function ChatPage() {
@@ -16,10 +16,14 @@ export default function ChatPage() {
   
   // Messages
   const { messages, loading } = useChatMessages('demo-club-1', chatId);
-  const { sendMessage, deleteMessage, sending } = useChatMessagesActions();
+  const { sendMessage, deleteMessage, expireMedia, sending } = useChatMessagesActions();
   
   const [messageText, setMessageText] = useState('');
+  const [showImageUpload, setShowImageUpload] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [ephemeralSeconds, setEphemeralSeconds] = useState<number | undefined>(undefined);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Redirect if not authenticated
   if (!isAuthenticated) {
@@ -32,6 +36,32 @@ export default function ChatPage() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  // Timer für ephemeral messages (client-side)
+  useEffect(() => {
+    if (!messages || messages.length === 0) return;
+
+    const timers: ReturnType<typeof setTimeout>[] = [];
+
+    messages.forEach((msg: Message) => {
+      if (msg?.ephemeral && msg?.expiresAt && msg?.mediaUrl) {
+        const now = Date.now();
+        const remainingTime = msg.expiresAt - now;
+
+        if (remainingTime > 0) {
+          const timer = setTimeout(() => {
+            expireMedia('demo-club-1', chatId, msg.messageId)
+              .catch((err) => console.error('Error expiring media:', err));
+          }, remainingTime);
+          timers.push(timer);
+        }
+      }
+    });
+
+    return () => {
+      timers.forEach((timer) => clearTimeout(timer));
+    };
+  }, [messages, chatId, expireMedia]);
+
   const handleSendMessage = async () => {
     if (!messageText.trim() || !user?.uid) return;
 
@@ -41,7 +71,7 @@ export default function ChatPage() {
         chatId,
         user.uid,
         user.displayName || user.email || 'User',
-        messageText
+        { text: messageText }
       );
       setMessageText('');
     } catch (err) {
@@ -59,9 +89,53 @@ export default function ChatPage() {
     }
   };
 
-  const handleSendImage = () => {
-    // TODO: Implementiere Bild-Upload
-    alert('Bild-Upload: Platzhalter - In Entwicklung');
+  const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedImage(file);
+    }
+  };
+
+  const handleSendImage = async () => {
+    if (!selectedImage || !user?.uid) return;
+
+    try {
+      await sendMessage(
+        'demo-club-1',
+        chatId,
+        user.uid,
+        user.displayName || user.email || 'User',
+        {
+          text: messageText || undefined,
+          imageFile: selectedImage,
+          ephemeralSeconds
+        }
+      );
+      setMessageText('');
+      setSelectedImage(null);
+      setEphemeralSeconds(undefined);
+      setShowImageUpload(false);
+    } catch (err) {
+      console.error('Error sending image:', err);
+    }
+  };
+
+  const handleVoiceRecorded = async (file: File, durationSeconds: number) => {
+    if (!user?.uid) return;
+
+    try {
+      await sendMessage(
+        'demo-club-1',
+        chatId,
+        user.uid,
+        user.displayName || user.email || 'User',
+        {
+          audioFile: file
+        }
+      );
+    } catch (err) {
+      console.error('Error sending voice:', err);
+    }
   };
 
   // Prüfe, ob Chat eine Gruppe ist (chatId enthält kein '_' bei Gruppen)
@@ -106,12 +180,12 @@ export default function ChatPage() {
             </div>
           ) : messages && messages.length > 0 ? (
             messages.map((msg: Message) => {
-              const isOwnMessage = msg.sender === user?.uid;
-              const isDeleted = msg.deleted;
+              const isOwnMessage = msg?.sender === user?.uid;
+              const isDeleted = msg?.deleted;
 
               return (
                 <div
-                  key={msg.messageId}
+                  key={msg?.messageId}
                   className={`flex ${isOwnMessage ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
@@ -123,7 +197,7 @@ export default function ChatPage() {
                   >
                     {!isOwnMessage && (
                       <p className="text-xs text-slate-400 mb-1">
-                        {msg.senderName}
+                        {msg?.senderName}
                       </p>
                     )}
                     
@@ -133,17 +207,56 @@ export default function ChatPage() {
                       </p>
                     ) : (
                       <>
-                        {msg.text && <p className="text-sm">{msg.text}</p>}
-                        {msg.image && (
+                        {/* Text */}
+                        {msg?.text && <p className="text-sm">{msg.text}</p>}
+                        
+                        {/* Image */}
+                        {msg?.type === 'image' && msg?.mediaUrl && (
+                          <div className="mt-2">
+                            {msg?.ephemeral && msg?.expiresAt ? (
+                              <EphemeralImageBubble
+                                imageUrl={msg.mediaUrl}
+                                ephemeralSeconds={msg.ephemeral}
+                                onExpire={() => {
+                                  expireMedia('demo-club-1', chatId, msg.messageId)
+                                    .catch((err) => console.error('Error expiring:', err));
+                                }}
+                              />
+                            ) : (
+                              <img
+                                src={msg.mediaUrl}
+                                alt="Chat image"
+                                className="rounded max-w-full"
+                              />
+                            )}
+                          </div>
+                        )}
+                        
+                        {/* Audio */}
+                        {msg?.type === 'audio' && msg?.mediaUrl && (
+                          <div className="mt-2">
+                            <audio controls src={msg.mediaUrl} className="w-full" />
+                            {msg?.ephemeral && (
+                              <p className="text-xs text-slate-300 mt-1">
+                                <Timer className="inline h-3 w-3 mr-1" />
+                                {msg.ephemeral}s
+                              </p>
+                            )}
+                          </div>
+                        )}
+                        
+                        {/* Backwards compatibility: image field */}
+                        {msg?.image && !msg?.mediaUrl && (
                           <div className="mt-2">
                             <img
                               src={msg.image}
                               alt="Chat image"
                               className="rounded max-w-full"
                             />
-                            {msg.ephemeral && (
+                            {msg?.ephemeral && (
                               <p className="text-xs text-slate-300 mt-1">
-                                ⏱️ {msg.ephemeral}s
+                                <Timer className="inline h-3 w-3 mr-1" />
+                                {msg.ephemeral}s
                               </p>
                             )}
                           </div>
@@ -153,7 +266,7 @@ export default function ChatPage() {
 
                     <div className="flex items-center justify-between mt-1">
                       <p className="text-xs opacity-70">
-                        {new Date(msg.createdAt).toLocaleTimeString('de-DE', {
+                        {new Date(msg?.createdAt).toLocaleTimeString('de-DE', {
                           hour: '2-digit',
                           minute: '2-digit'
                         })}
@@ -161,7 +274,7 @@ export default function ChatPage() {
                       
                       {isOwnMessage && !isDeleted && (
                         <button
-                          onClick={() => handleDeleteMessage(msg.messageId)}
+                          onClick={() => handleDeleteMessage(msg?.messageId)}
                           className="text-xs opacity-70 hover:opacity-100 ml-2"
                         >
                           <Trash2 className="h-3 w-3" />
@@ -184,13 +297,26 @@ export default function ChatPage() {
       {/* Input */}
       <div className="bg-slate-800 border-t border-slate-700 p-4">
         <div className="max-w-4xl mx-auto flex gap-2">
+          {/* Image Upload Button */}
           <Button
             variant="ghost"
             size="sm"
-            onClick={handleSendImage}
+            onClick={() => setShowImageUpload(true)}
           >
             <Camera className="h-5 w-5" />
           </Button>
+          
+          {/* Voice Recorder */}
+          <VoiceRecorderButton
+            maxDurationSeconds={30}
+            onRecorded={handleVoiceRecorded}
+            onError={(err) => {
+              console.error('Voice recording error:', err);
+              alert('Mikrofon-Zugriff fehlgeschlagen');
+            }}
+          />
+          
+          {/* Text Input */}
           <Input
             placeholder={t('chat.typeMessage')}
             value={messageText}
@@ -198,6 +324,8 @@ export default function ChatPage() {
             onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
             className="flex-1"
           />
+          
+          {/* Send Button */}
           <Button
             variant="default"
             onClick={handleSendMessage}
@@ -207,6 +335,131 @@ export default function ChatPage() {
           </Button>
         </div>
       </div>
+
+      {/* Modal: Image Upload */}
+      <Modal
+        open={showImageUpload}
+        onClose={() => {
+          setShowImageUpload(false);
+          setSelectedImage(null);
+          setEphemeralSeconds(undefined);
+        }}
+        title={t('chat.sendImage')}
+      >
+        <div className="space-y-4">
+          {/* File Input */}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            onChange={handleImageSelect}
+            className="hidden"
+          />
+          
+          {!selectedImage ? (
+            <Button
+              variant="default"
+              fullWidth
+              onClick={() => fileInputRef.current?.click()}
+            >
+              <ImageIcon className="h-5 w-5 mr-2" />
+              Bild auswählen
+            </Button>
+          ) : (
+            <div className="space-y-2">
+              <div className="relative">
+                <img
+                  src={URL.createObjectURL(selectedImage)}
+                  alt="Preview"
+                  className="w-full rounded-lg"
+                />
+              </div>
+              <Button
+                variant="ghost"
+                fullWidth
+                size="sm"
+                onClick={() => {
+                  setSelectedImage(null);
+                  fileInputRef.current?.click();
+                }}
+              >
+                Anderes Bild wählen
+              </Button>
+            </div>
+          )}
+
+          {/* Optional: Text */}
+          <Input
+            placeholder="Nachricht (optional)..."
+            value={messageText}
+            onChange={(e) => setMessageText(e.target.value)}
+          />
+
+          {/* Ephemeral Options */}
+          <div>
+            <p className="text-sm text-slate-400 mb-2">
+              {t('chat.ephemeralOptions')}
+            </p>
+            <div className="flex gap-2">
+              <Button
+                variant={ephemeralSeconds === undefined ? 'default' : 'ghost'}
+                size="sm"
+                fullWidth
+                onClick={() => setEphemeralSeconds(undefined)}
+              >
+                Aus
+              </Button>
+              <Button
+                variant={ephemeralSeconds === 5 ? 'default' : 'ghost'}
+                size="sm"
+                fullWidth
+                onClick={() => setEphemeralSeconds(5)}
+              >
+                5s
+              </Button>
+              <Button
+                variant={ephemeralSeconds === 10 ? 'default' : 'ghost'}
+                size="sm"
+                fullWidth
+                onClick={() => setEphemeralSeconds(10)}
+              >
+                10s
+              </Button>
+              <Button
+                variant={ephemeralSeconds === 30 ? 'default' : 'ghost'}
+                size="sm"
+                fullWidth
+                onClick={() => setEphemeralSeconds(30)}
+              >
+                30s
+              </Button>
+            </div>
+          </div>
+
+          {/* Send Button */}
+          <div className="flex gap-2 pt-4">
+            <Button
+              variant="ghost"
+              fullWidth
+              onClick={() => {
+                setShowImageUpload(false);
+                setSelectedImage(null);
+                setEphemeralSeconds(undefined);
+              }}
+            >
+              {t('common.cancel')}
+            </Button>
+            <Button
+              variant="success"
+              fullWidth
+              onClick={handleSendImage}
+              disabled={!selectedImage || sending}
+            >
+              {t('common.send')}
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </main>
   );
 }

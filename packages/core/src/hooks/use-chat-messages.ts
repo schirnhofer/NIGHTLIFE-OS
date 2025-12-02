@@ -2,16 +2,26 @@
  * Chat-Messages-Hook
  * 
  * Aktionen für Chat-Nachrichten
- * Phase 3: Senden, Löschen, Ephemeral Images
+ * Phase 5: Erweitert um Media-Upload (Image, Audio, Video)
  */
 
 'use client';
 
 import { useState } from 'react';
-import { Message } from '@nightlife-os/shared-types';
+import { Message, MessageType } from '@nightlife-os/shared-types';
 import { setDocument, updateDocument, deleteDocument } from '../firebase/firestore';
 import { getFirestoreInstance } from '../firebase/init';
 import { collection, doc } from 'firebase/firestore';
+import { uploadChatMedia } from '../utils/storage';
+
+export interface SendMessageOptions {
+  text?: string;
+  imageFile?: File;
+  audioFile?: File;
+  videoFile?: File;
+  type?: MessageType;
+  ephemeralSeconds?: number;
+}
 
 export interface UseChatMessagesActionsReturn {
   sending: boolean;
@@ -20,12 +30,15 @@ export interface UseChatMessagesActionsReturn {
     chatId: string,
     senderId: string,
     senderName: string,
-    text?: string,
-    image?: string,
-    ephemeral?: number
+    options: SendMessageOptions
   ) => Promise<void>;
   deleteMessage: (clubId: string, chatId: string, messageId: string) => Promise<void>;
-  expireImage: (clubId: string, chatId: string, messageId: string) => Promise<void>;
+  expireMedia: (
+    clubId: string,
+    chatId: string,
+    messageId: string,
+    replacementText?: string
+  ) => Promise<void>;
 }
 
 /**
@@ -35,19 +48,20 @@ export function useChatMessagesActions(): UseChatMessagesActionsReturn {
   const [sending, setSending] = useState(false);
 
   /**
-   * Sende neue Nachricht
+   * Sende neue Nachricht (Phase 5: mit Media-Upload)
    */
   const sendMessage = async (
     clubId: string,
     chatId: string,
     senderId: string,
     senderName: string,
-    text?: string,
-    image?: string,
-    ephemeral?: number
+    options: SendMessageOptions
   ): Promise<void> => {
-    if (!text && !image) {
-      throw new Error('Message must have text or image');
+    const { text, imageFile, audioFile, videoFile, type, ephemeralSeconds } = options;
+
+    // Validierung
+    if (!text && !imageFile && !audioFile && !videoFile) {
+      throw new Error('Message must have text or media');
     }
 
     setSending(true);
@@ -61,15 +75,47 @@ export function useChatMessagesActions(): UseChatMessagesActionsReturn {
 
       const now = Date.now();
 
+      // Upload Media falls vorhanden
+      let mediaUrl: string | undefined;
+      let mediaType: 'image' | 'audio' | 'video' | undefined;
+      let durationSeconds: number | undefined;
+
+      if (imageFile) {
+        const result = await uploadChatMedia(clubId, chatId, imageFile, 'image');
+        mediaUrl = result.downloadUrl;
+        mediaType = 'image';
+      } else if (audioFile) {
+        const result = await uploadChatMedia(clubId, chatId, audioFile, 'audio');
+        mediaUrl = result.downloadUrl;
+        mediaType = 'audio';
+        // TODO: Extrahiere tatsächliche Audio-Dauer
+        durationSeconds = 0; // Platzhalter
+      } else if (videoFile) {
+        const result = await uploadChatMedia(clubId, chatId, videoFile, 'video');
+        mediaUrl = result.downloadUrl;
+        mediaType = 'video';
+        // TODO: Extrahiere tatsächliche Video-Dauer
+        durationSeconds = 0; // Platzhalter
+      }
+
+      // Bestimme Message-Type
+      let messageType: MessageType = type || 'text';
+      if (imageFile) messageType = 'image';
+      if (audioFile) messageType = 'audio';
+      if (videoFile) messageType = 'video';
+
       // Erstelle Message
       const newMessage: Message = {
         messageId,
-        text: text || '',
+        type: messageType,
+        text: text || undefined,
+        mediaUrl,
+        mediaType,
+        durationSeconds,
         sender: senderId,
         senderName,
-        image: image,
-        ephemeral: ephemeral,
-        expiresAt: ephemeral ? now + ephemeral * 1000 : undefined,
+        ephemeral: ephemeralSeconds,
+        expiresAt: ephemeralSeconds ? now + ephemeralSeconds * 1000 : undefined,
         viewedBy: [senderId], // Sender hat die Message bereits "gesehen"
         deleted: false,
         createdAt: now
@@ -82,20 +128,25 @@ export function useChatMessagesActions(): UseChatMessagesActionsReturn {
       );
 
       // Aktualisiere Chat lastMessage
+      let preview = text || '';
+      if (imageFile) preview = '🖼️ Bild';
+      if (audioFile) preview = '🎤 Sprachnachricht';
+      if (videoFile) preview = '🎥 Video';
+
       await updateDocument(`clubs/${clubId}/chats/${chatId}`, {
         lastMessageAt: now,
-        lastMessagePreview: text || (image ? '🖼️ Bild' : '')
+        lastMessagePreview: preview
       });
 
       // Wenn ephemeral: Plane Auto-Löschung
-      if (ephemeral) {
+      if (ephemeralSeconds) {
         setTimeout(async () => {
           try {
-            await expireImage(clubId, chatId, messageId);
+            await expireMedia(clubId, chatId, messageId);
           } catch (err) {
-            console.error('Error expiring message:', err);
+            console.error('Error expiring media:', err);
           }
-        }, ephemeral * 1000);
+        }, ephemeralSeconds * 1000);
       }
     } catch (error) {
       console.error('Error sending message:', error);
@@ -119,8 +170,8 @@ export function useChatMessagesActions(): UseChatMessagesActionsReturn {
         `clubs/${clubId}/chats/${chatId}/messages/${messageId}`,
         {
           deleted: true,
-          text: '',
-          image: undefined
+          text: undefined,
+          mediaUrl: undefined
         }
       );
     } catch (error) {
@@ -130,24 +181,27 @@ export function useChatMessagesActions(): UseChatMessagesActionsReturn {
   };
 
   /**
-   * Lösche Bild aus Ephemeral-Message
+   * Lösche Media aus Ephemeral-Message (Phase 5)
    */
-  const expireImage = async (
+  const expireMedia = async (
     clubId: string,
     chatId: string,
-    messageId: string
+    messageId: string,
+    replacementText?: string
   ): Promise<void> => {
     try {
-      // Lösche nur das Bild, nicht die komplette Message
+      // Lösche nur das Media, nicht die komplette Message
       await updateDocument(
         `clubs/${clubId}/chats/${chatId}/messages/${messageId}`,
         {
-          image: undefined,
-          text: '[Bild abgelaufen]'
+          mediaUrl: undefined,
+          text: replacementText || '♻️ Medium gelöscht.',
+          ephemeral: undefined,
+          expiresAt: undefined
         }
       );
     } catch (error) {
-      console.error('Error expiring image:', error);
+      console.error('Error expiring media:', error);
       throw error;
     }
   };
@@ -156,6 +210,6 @@ export function useChatMessagesActions(): UseChatMessagesActionsReturn {
     sending,
     sendMessage,
     deleteMessage,
-    expireImage
+    expireMedia
   };
 }

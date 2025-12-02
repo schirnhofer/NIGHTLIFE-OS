@@ -13,6 +13,9 @@ export * from './components/icon';
 export * from './components/loader';
 export * from './components/toast';
 export * from './components/qr-code-display';
+export * from './components/qr-scanner';
+export * from './components/voice-recorder-button';
+export * from './components/ephemeral-image-bubble';
 
 // Utils
 export * from './utils/cn';

@@ -49,7 +49,10 @@
     "tapToShow": "Tippen zum Zeigen",
     "yourCode": "Dein Code",
     "scanCode": "Code scannen",
-    "showQR": "QR-Code anzeigen"
+    "showQR": "QR-Code anzeigen",
+    "scanButton": "QR-Code scannen",
+    "scanning": "Scanne QR-Code...",
+    "cameraError": "Kamera-Zugriff fehlgeschlagen"
   },
   "checkin": {
     "status": {
@@ -115,7 +118,21 @@
     "newMessage": "Neue Nachricht",
     "deleteMessage": "Löschen",
     "imageDeleted": "Bild gelöscht",
-    "viewImage": "Bild anzeigen"
+    "viewImage": "Bild anzeigen",
+    "sendImage": "Bild senden",
+    "sendVoice": "Sprachnachricht",
+    "ephemeralOptions": "Selbstzerstörung"
+  },
+  "ephemeral": {
+    "tapToView": "Tippen zum Anzeigen",
+    "expiresIn": "Verschwindet in {seconds}s",
+    "expired": "♻️ Medium gelöscht."
+  },
+  "voice": {
+    "startRecording": "Aufnahme starten",
+    "recording": "Aufnahme läuft...",
+    "maxDuration": "Max. 30 Sekunden",
+    "stopRecording": "Aufnahme stoppen"
   },
   "group": {
     "create": "Gruppe erstellen",

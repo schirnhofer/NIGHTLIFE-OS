@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button, Card, CardContent, Input, Modal } from '@nightlife-os/ui';
+import { Button, Card, CardContent, Input, Modal, QrScanner } from '@nightlife-os/ui';
 import { useAuth, useI18n, useFriends } from '@nightlife-os/core';
 import { ArrowLeft, Camera, ArrowRight, X } from 'lucide-react';
 import { FRIEND_REQUEST_MESSAGES } from '@nightlife-os/shared-types';
@@ -16,6 +16,7 @@ export default function AddFriendPage() {
   const [friendCode, setFriendCode] = useState('');
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showQRScanner, setShowQRScanner] = useState(false);
   const [targetUser, setTargetUser] = useState<{ code: string } | null>(null);
   const [selectedMessage, setSelectedMessage] = useState<string | null>(null);
   const [customMessage, setCustomMessage] = useState('');
@@ -27,8 +28,18 @@ export default function AddFriendPage() {
   }
 
   const handleScanQR = () => {
-    // TODO: Implementiere QR-Scanner mit html5-qrcode
-    alert('QR-Scanner: Platzhalter - Integration mit html5-qrcode in Entwicklung');
+    setShowQRScanner(true);
+  };
+
+  const handleCodeScanned = (code: string) => {
+    // QR-Code erfolgreich gescannt
+    setFriendCode(code);
+    setShowQRScanner(false);
+    
+    // Starte Friend-Request-Flow
+    const foundUser = { code: code.toUpperCase() };
+    setTargetUser(foundUser);
+    setShowModal(true);
   };
 
   const handleSearchByCode = async () => {
@@ -127,7 +138,7 @@ export default function AddFriendPage() {
               className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700"
             >
               <Camera className="h-5 w-5 mr-2" />
-              {t('friend.scanQR')}
+              {t('qr.scanButton')}
             </Button>
           </CardContent>
         </Card>
@@ -156,6 +167,30 @@ export default function AddFriendPage() {
             </div>
           </CardContent>
         </Card>
+
+        {/* Modal: QR-Scanner */}
+        <Modal
+          open={showQRScanner}
+          onClose={() => setShowQRScanner(false)}
+          title={t('qr.scanButton')}
+        >
+          <div className="space-y-4">
+            <QrScanner
+              onCodeScanned={handleCodeScanned}
+              onError={(err) => {
+                console.error('QR Scanner error:', err);
+                alert(t('qr.cameraError'));
+              }}
+            />
+            <Button
+              variant="ghost"
+              fullWidth
+              onClick={() => setShowQRScanner(false)}
+            >
+              {t('common.cancel')}
+            </Button>
+          </div>
+        </Modal>
 
         {/* Modal: Anfrage senden */}
         <Modal
