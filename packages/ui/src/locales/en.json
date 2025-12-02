@@ -134,6 +134,31 @@
     "maxDuration": "Max. 30 seconds",
     "stopRecording": "Stop Recording"
   },
+  "video": {
+    "startRecording": "Record Video",
+    "recording": "Recording...",
+    "maxDuration": "Max. 30 seconds",
+    "stopRecording": "Stop Recording",
+    "cameraError": "Camera access failed"
+  },
+  "poll": {
+    "createPoll": "Create Poll",
+    "question": "Question",
+    "addOption": "Add Option",
+    "removeOption": "Remove",
+    "allowMultiple": "Allow Multiple Choices",
+    "expiresAt": "Expiration Date (optional)",
+    "send": "Send Poll",
+    "vote": "Vote",
+    "votes": "Votes",
+    "expired": "Poll expired",
+    "noOptions": "At least 2 options required"
+  },
+  "notifications": {
+    "newMessages": "You have {count} new messages",
+    "unreadChats": "{count} unread chats",
+    "goToChats": "Go to Chats"
+  },
   "group": {
     "create": "Create Group",
     "manage": "Manage",

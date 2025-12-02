@@ -16,6 +16,9 @@ export * from './club';
 // Chat-Typen
 export * from './chat';
 
+// Chat-Metadata-Typen (Phase 6)
+export * from './chatMetadata';
+
 // Order-Typen
 export * from './order';
 

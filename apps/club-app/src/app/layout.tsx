@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import '../styles/globals.css';
+import { NotificationWrapper } from '../components/notification-wrapper';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,7 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="de">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <NotificationWrapper />
+        {children}
+      </body>
     </html>
   );
 }

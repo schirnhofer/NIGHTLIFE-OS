@@ -2,9 +2,9 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { Button, Card, Input, Modal, VoiceRecorderButton, EphemeralImageBubble } from '@nightlife-os/ui';
-import { useAuth, useI18n, useChatMessages, useChatMessagesActions } from '@nightlife-os/core';
-import { ArrowLeft, Send, Settings, Camera, Trash2, Image as ImageIcon, Timer } from 'lucide-react';
+import { Button, Card, Input, Modal, VoiceRecorderButton, EphemeralImageBubble, VideoRecorderButton, PollBubble } from '@nightlife-os/ui';
+import { useAuth, useI18n, useChatMessages, useChatMessagesActions, useUnreadMessages } from '@nightlife-os/core';
+import { ArrowLeft, Send, Settings, Camera, Trash2, Image as ImageIcon, Timer, BarChart3, Plus, X } from 'lucide-react';
 import { Message } from '@nightlife-os/shared-types';
 
 export default function ChatPage() {
@@ -16,7 +16,8 @@ export default function ChatPage() {
   
   // Messages
   const { messages, loading } = useChatMessages('demo-club-1', chatId);
-  const { sendMessage, deleteMessage, expireMedia, sending } = useChatMessagesActions();
+  const { sendMessage, sendPoll, votePoll, deleteMessage, expireMedia, sending } = useChatMessagesActions();
+  const { markChatAsSeen } = useUnreadMessages(user?.uid);
   
   const [messageText, setMessageText] = useState('');
   const [showImageUpload, setShowImageUpload] = useState(false);
@@ -25,11 +26,24 @@ export default function ChatPage() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Poll state
+  const [showPollModal, setShowPollModal] = useState(false);
+  const [pollQuestion, setPollQuestion] = useState('');
+  const [pollOptions, setPollOptions] = useState<string[]>(['', '']);
+  const [pollAllowMultiple, setPollAllowMultiple] = useState(false);
+
   // Redirect if not authenticated
   if (!isAuthenticated) {
     router.push('/auth/login');
     return null;
   }
+
+  // Mark chat as seen on open
+  useEffect(() => {
+    if (user?.uid && chatId) {
+      markChatAsSeen(chatId);
+    }
+  }, [chatId, user?.uid, markChatAsSeen]);
 
   // Scroll to bottom on new messages
   useEffect(() => {
@@ -135,6 +149,72 @@ export default function ChatPage() {
       );
     } catch (err) {
       console.error('Error sending voice:', err);
+    }
+  };
+
+  const handleVideoRecorded = async (file: File, durationSeconds: number) => {
+    if (!user?.uid) return;
+
+    try {
+      await sendMessage(
+        'demo-club-1',
+        chatId,
+        user.uid,
+        user.displayName || user.email || 'User',
+        {
+          videoFile: file
+        }
+      );
+    } catch (err) {
+      console.error('Error sending video:', err);
+    }
+  };
+
+  const handleCreatePoll = async () => {
+    if (!user?.uid) return;
+    if (!pollQuestion.trim()) {
+      alert(t('poll.question') + ' erforderlich');
+      return;
+    }
+
+    const validOptions = pollOptions
+      .map((opt) => opt?.trim())
+      .filter((opt) => opt);
+
+    if (validOptions.length < 2) {
+      alert(t('poll.noOptions'));
+      return;
+    }
+
+    try {
+      await sendPoll(
+        'demo-club-1',
+        chatId,
+        user.uid,
+        user.displayName || user.email || 'User',
+        pollQuestion,
+        validOptions,
+        pollAllowMultiple
+      );
+
+      // Reset
+      setPollQuestion('');
+      setPollOptions(['', '']);
+      setPollAllowMultiple(false);
+      setShowPollModal(false);
+    } catch (err) {
+      console.error('Error creating poll:', err);
+      alert('Fehler beim Erstellen der Umfrage');
+    }
+  };
+
+  const handleVotePoll = async (messageId: string, optionIndex: number) => {
+    if (!user?.uid) return;
+
+    try {
+      await votePoll('demo-club-1', chatId, messageId, user.uid, optionIndex);
+    } catch (err) {
+      console.error('Error voting on poll:', err);
     }
   };
 
@@ -245,6 +325,35 @@ export default function ChatPage() {
                           </div>
                         )}
                         
+                        {/* Video */}
+                        {msg?.type === 'video' && msg?.mediaUrl && (
+                          <div className="mt-2">
+                            <video
+                              controls
+                              src={msg.mediaUrl}
+                              className="w-full rounded max-w-xs"
+                            />
+                            {msg?.durationSeconds && (
+                              <p className="text-xs text-slate-300 mt-1">
+                                Dauer: {msg.durationSeconds}s
+                              </p>
+                            )}
+                          </div>
+                        )}
+                        
+                        {/* Poll */}
+                        {msg?.type === 'poll' && msg?.poll && (
+                          <div className="mt-2">
+                            <PollBubble
+                              poll={msg.poll}
+                              currentUserId={user?.uid}
+                              onVote={(optionIndex) =>
+                                handleVotePoll(msg.messageId, optionIndex)
+                              }
+                            />
+                          </div>
+                        )}
+                        
                         {/* Backwards compatibility: image field */}
                         {msg?.image && !msg?.mediaUrl && (
                           <div className="mt-2">
@@ -315,6 +424,25 @@ export default function ChatPage() {
               alert('Mikrofon-Zugriff fehlgeschlagen');
             }}
           />
+          
+          {/* Video Recorder */}
+          <VideoRecorderButton
+            maxDurationSeconds={30}
+            onRecorded={handleVideoRecorded}
+            onError={(err) => {
+              console.error('Video recording error:', err);
+              alert(t('video.cameraError'));
+            }}
+          />
+          
+          {/* Poll Button */}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setShowPollModal(true)}
+          >
+            <BarChart3 className="h-5 w-5" />
+          </Button>
           
           {/* Text Input */}
           <Input
@@ -456,6 +584,117 @@ export default function ChatPage() {
               disabled={!selectedImage || sending}
             >
               {t('common.send')}
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
+      {/* Modal: Poll erstellen */}
+      <Modal
+        open={showPollModal}
+        onClose={() => {
+          setShowPollModal(false);
+          setPollQuestion('');
+          setPollOptions(['', '']);
+          setPollAllowMultiple(false);
+        }}
+        title={t('poll.createPoll')}
+      >
+        <div className="space-y-4">
+          {/* Frage */}
+          <div>
+            <label className="block text-sm text-slate-400 mb-1">
+              {t('poll.question')}
+            </label>
+            <Input
+              placeholder="Z.B. Welches Lied soll als nächstes kommen?"
+              value={pollQuestion}
+              onChange={(e) => setPollQuestion(e.target.value)}
+            />
+          </div>
+
+          {/* Optionen */}
+          <div>
+            <label className="block text-sm text-slate-400 mb-2">
+              Optionen
+            </label>
+            <div className="space-y-2">
+              {pollOptions.map((option, index) => (
+                <div key={index} className="flex gap-2">
+                  <Input
+                    placeholder={`Option ${index + 1}`}
+                    value={option}
+                    onChange={(e) => {
+                      const newOptions = [...pollOptions];
+                      newOptions[index] = e.target.value;
+                      setPollOptions(newOptions);
+                    }}
+                    className="flex-1"
+                  />
+                  {pollOptions.length > 2 && (
+                    <Button
+                      variant="danger"
+                      size="sm"
+                      onClick={() => {
+                        const newOptions = pollOptions.filter(
+                          (_, i) => i !== index
+                        );
+                        setPollOptions(newOptions);
+                      }}
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  )}
+                </div>
+              ))}
+            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              fullWidth
+              onClick={() => setPollOptions([...pollOptions, ''])}
+              className="mt-2"
+            >
+              <Plus className="h-4 w-4 mr-1" />
+              {t('poll.addOption')}
+            </Button>
+          </div>
+
+          {/* Mehrfachauswahl */}
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="allowMultiple"
+              checked={pollAllowMultiple}
+              onChange={(e) => setPollAllowMultiple(e.target.checked)}
+              className="w-4 h-4 rounded"
+            />
+            <label htmlFor="allowMultiple" className="text-sm text-slate-300">
+              {t('poll.allowMultiple')}
+            </label>
+          </div>
+
+          {/* Buttons */}
+          <div className="flex gap-2 pt-4">
+            <Button
+              variant="ghost"
+              fullWidth
+              onClick={() => {
+                setShowPollModal(false);
+                setPollQuestion('');
+                setPollOptions(['', '']);
+                setPollAllowMultiple(false);
+              }}
+            >
+              {t('common.cancel')}
+            </Button>
+            <Button
+              variant="success"
+              fullWidth
+              onClick={handleCreatePoll}
+              disabled={!pollQuestion.trim() || sending}
+            >
+              {t('poll.send')}
             </Button>
           </div>
         </div>

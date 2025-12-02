@@ -32,6 +32,23 @@ export interface UseChatMessagesActionsReturn {
     senderName: string,
     options: SendMessageOptions
   ) => Promise<void>;
+  sendPoll: (
+    clubId: string,
+    chatId: string,
+    senderId: string,
+    senderName: string,
+    question: string,
+    options: string[],
+    allowMultipleVotes?: boolean,
+    expiresAt?: number
+  ) => Promise<void>;
+  votePoll: (
+    clubId: string,
+    chatId: string,
+    messageId: string,
+    userId: string,
+    optionIndex: number
+  ) => Promise<void>;
   deleteMessage: (clubId: string, chatId: string, messageId: string) => Promise<void>;
   expireMedia: (
     clubId: string,
@@ -206,9 +223,146 @@ export function useChatMessagesActions(): UseChatMessagesActionsReturn {
     }
   };
 
+  /**
+   * Sende Poll (Phase 6)
+   */
+  const sendPoll = async (
+    clubId: string,
+    chatId: string,
+    senderId: string,
+    senderName: string,
+    question: string,
+    options: string[],
+    allowMultipleVotes?: boolean,
+    expiresAt?: number
+  ): Promise<void> => {
+    if (!question?.trim() || !options || options.length < 2) {
+      throw new Error('Poll must have a question and at least 2 options');
+    }
+
+    setSending(true);
+
+    try {
+      // Generiere Message-ID
+      const db = getFirestoreInstance();
+      const messagesRef = collection(db, `clubs/${clubId}/chats/${chatId}/messages`);
+      const newMessageRef = doc(messagesRef);
+      const messageId = newMessageRef.id;
+
+      const now = Date.now();
+
+      // Erstelle Poll-Message
+      const pollMessage: Message = {
+        messageId,
+        type: 'poll',
+        poll: {
+          question: question.trim(),
+          options: options.map((opt) => opt?.trim()).filter((opt) => opt),
+          votes: {}, // Initial leer
+          allowMultipleVotes: allowMultipleVotes || false,
+          expiresAt: expiresAt || undefined
+        },
+        sender: senderId,
+        senderName,
+        viewedBy: [senderId],
+        deleted: false,
+        createdAt: now
+      };
+
+      // Speichere Message
+      await setDocument(
+        `clubs/${clubId}/chats/${chatId}/messages/${messageId}`,
+        pollMessage
+      );
+
+      // Aktualisiere Chat lastMessage
+      await updateDocument(`clubs/${clubId}/chats/${chatId}`, {
+        lastMessageAt: now,
+        lastMessagePreview: `📊 ${question.substring(0, 30)}...`
+      });
+    } catch (error) {
+      console.error('Error sending poll:', error);
+      throw error;
+    } finally {
+      setSending(false);
+    }
+  };
+
+  /**
+   * Vote auf Poll (Phase 6)
+   */
+  const votePoll = async (
+    clubId: string,
+    chatId: string,
+    messageId: string,
+    userId: string,
+    optionIndex: number
+  ): Promise<void> => {
+    try {
+      const db = getFirestoreInstance();
+      const messageRef = doc(db, `clubs/${clubId}/chats/${chatId}/messages/${messageId}`);
+      
+      // Hole aktuelle Message
+      const { getDocument } = await import('../firebase/firestore');
+      const message = await getDocument<Message>(
+        `clubs/${clubId}/chats/${chatId}/messages/${messageId}`
+      );
+
+      if (!message || message.type !== 'poll' || !message.poll) {
+        throw new Error('Message is not a poll');
+      }
+
+      // Prüfe ob Poll abgelaufen
+      if (message.poll.expiresAt && Date.now() > message.poll.expiresAt) {
+        throw new Error('Poll has expired');
+      }
+
+      // Prüfe ob Option existiert
+      if (optionIndex < 0 || optionIndex >= message.poll.options.length) {
+        throw new Error('Invalid option index');
+      }
+
+      // Erstelle neues votes-Objekt
+      const newVotes = { ...message.poll.votes };
+
+      // Falls allowMultipleVotes = false: entferne User aus allen anderen Optionen
+      if (!message.poll.allowMultipleVotes) {
+        Object.keys(newVotes).forEach((key) => {
+          const idx = parseInt(key);
+          if (idx !== optionIndex) {
+            newVotes[idx] = (newVotes[idx] || []).filter((uid) => uid !== userId);
+          }
+        });
+      }
+
+      // Toggle Vote: falls User bereits voted, entferne; sonst füge hinzu
+      const currentVotes = newVotes[optionIndex] || [];
+      const hasVoted = currentVotes.includes(userId);
+
+      if (hasVoted) {
+        newVotes[optionIndex] = currentVotes.filter((uid) => uid !== userId);
+      } else {
+        newVotes[optionIndex] = [...currentVotes, userId];
+      }
+
+      // Update Poll
+      await updateDocument(
+        `clubs/${clubId}/chats/${chatId}/messages/${messageId}`,
+        {
+          'poll.votes': newVotes
+        }
+      );
+    } catch (error) {
+      console.error('Error voting on poll:', error);
+      throw error;
+    }
+  };
+
   return {
     sending,
     sendMessage,
+    sendPoll,
+    votePoll,
     deleteMessage,
     expireMedia
   };

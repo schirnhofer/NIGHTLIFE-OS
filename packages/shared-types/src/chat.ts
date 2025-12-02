@@ -6,7 +6,9 @@
  * - Nachrichten
  * - Ephemeral Images & Media
  * - Voice Messages
- * Phase 5: Erweitert um MessageType und mediaUrl
+ * - Video Messages (Phase 5)
+ * - Polls (Phase 6)
+ * Phase 6: Erweitert um MessageType 'poll', Message.poll, Chat.mode/allowedSenders/allowReactions
  */
 
 // ===== CHAT-METADATEN =====
@@ -35,6 +37,11 @@ export interface Chat {
   
   // Timestamps
   createdAt: number;
+  
+  // Phase 6: Chat-Rechte-Modell (Vorbereitung für Phase 7)
+  mode?: 'normal' | 'broadcast'; // normal = alle dürfen senden, broadcast = nur allowedSenders
+  allowedSenders?: string[]; // UIDs, die in broadcast-Chats senden dürfen
+  allowReactions?: boolean; // Dürfen Nutzer auf Nachrichten reagieren?
 }
 
 // ===== NACHRICHTEN =====
@@ -42,12 +49,14 @@ export interface Chat {
 /**
  * Message-Typ
  * Phase 5: Generisch für zukünftige Erweiterungen (Video)
+ * Phase 6: Erweitert um 'poll'
  */
-export type MessageType = 'text' | 'image' | 'audio' | 'video' | 'system';
+export type MessageType = 'text' | 'image' | 'audio' | 'video' | 'poll' | 'system';
 
 /**
  * Nachricht (clubs/{clubId}/chats/{chatId}/messages/{messageId})
  * Phase 5: Erweitert um type, mediaUrl, mediaType, durationSeconds
+ * Phase 6: Erweitert um poll
  */
 export interface Message {
   messageId: string;
@@ -60,6 +69,15 @@ export interface Message {
   mediaUrl?: string; // Firebase Storage URL
   mediaType?: 'image' | 'audio' | 'video';
   durationSeconds?: number; // Für Audio/Video
+  
+  // Poll (neu in Phase 6)
+  poll?: {
+    question: string;
+    options: string[]; // Array von Option-Texten
+    votes: Record<number, string[]>; // optionIndex -> Array von UIDs
+    allowMultipleVotes?: boolean; // Dürfen User mehrere Optionen wählen?
+    expiresAt?: number; // Unix-Timestamp (ms), optional
+  };
   
   // Backwards compatibility (deprecated, use mediaUrl)
   image?: string; // Base64 oder Storage-URL

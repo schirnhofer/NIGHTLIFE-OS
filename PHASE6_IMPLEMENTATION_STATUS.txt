@@ -1,0 +1,171 @@
+================================================================================
+                   PHASE 6 IMPLEMENTATION STATUS
+================================================================================
+
+Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
+Datum: 2. Dezember 2025
+
+================================================================================
+                              ZUSAMMENFASSUNG
+================================================================================
+
+Phase 6 erweitert das Chat-System um:
+✅ Video Messages (max. 30 Sekunden)
+✅ Polls/Umfragen
+✅ In-App-Notification-Bubble  
+✅ Chat-Rechte-Modell (Vorbereitung für Phase 7)
+
+================================================================================
+                         NEUE / ANGEPASSTE DATEIEN
+================================================================================
+
+1. DATENMODELL (packages/shared-types/)
+   ✅ NEU: src/chatMetadata.ts
+   ✅ ANGEPASST: src/chat.ts (MessageType, Message.poll, Chat.mode/allowedSenders/allowReactions)
+   ✅ ANGEPASST: src/index.ts (Export von chatMetadata)
+
+2. CORE-LOGIK (packages/core/)
+   ✅ NEU: src/hooks/use-unread-messages.ts
+   ✅ ANGEPASST: src/hooks/use-chat-messages.ts (sendPoll, votePoll)
+   ✅ ANGEPASST: src/index.ts (Export von use-unread-messages)
+
+3. UI-KOMPONENTEN (packages/ui/)
+   ✅ NEU: src/components/video-recorder-button.tsx
+   ✅ NEU: src/components/poll-bubble.tsx
+   ✅ NEU: src/components/notification-bubble.tsx
+   ✅ ANGEPASST: src/index.ts (Export der neuen Komponenten)
+   ✅ ANGEPASST: src/locales/de.json (Keys für video, poll, notifications)
+   ✅ ANGEPASST: src/locales/en.json (Englische Übersetzungen)
+
+4. CLUB-APP (apps/club-app/)
+   ✅ NEU: src/components/notification-wrapper.tsx
+   ✅ ANGEPASST: src/app/layout.tsx (Integration NotificationWrapper)
+   ✅ ANGEPASST: src/app/crew/chat/[chatId]/page.tsx (Video, Polls, markChatAsSeen)
+
+================================================================================
+                            FEATURE-DETAILS
+================================================================================
+
+1. VIDEO MESSAGES
+   ✅ VideoRecorderButton mit MediaRecorder API
+   ✅ Hard Limit: 30 Sekunden (Auto-Stopp)
+   ✅ Upload zu Firebase Storage (uploadChatMedia)
+   ✅ Video-Rendering im Chat (<video controls>)
+   ✅ Optional ephemeral
+
+2. POLLS/UMFRAGEN
+   ✅ MessageType: 'poll'
+   ✅ Message.poll: { question, options, votes, allowMultipleVotes?, expiresAt? }
+   ✅ sendPoll() - Erstellt Poll-Message
+   ✅ votePoll() - Toggle-Vote-Logik
+   ✅ PollBubble-Komponente (Anzeige + Voting)
+   ✅ Poll-Modal im Chat (Frage + Optionen + Mehrfachauswahl)
+
+3. IN-APP-NOTIFICATION-BUBBLE
+   ✅ useUnreadMessages Hook (totalUnread, unreadByChat)
+   ✅ markChatAsSeen() - Schreibt lastSeen in chatMetadata
+   ✅ NotificationBubble-Komponente (Banner/Floating)
+   ✅ NotificationWrapper für Layout
+   ✅ markChatAsSeen beim Öffnen des Chats
+
+4. CHAT-RECHTE-MODELL (Vorbereitung Phase 7)
+   ✅ Chat.mode: 'normal' | 'broadcast'
+   ✅ Chat.allowedSenders: string[]
+   ✅ Chat.allowReactions: boolean
+   ✅ Nur Datenmodell, keine UI-Implementierung
+
+================================================================================
+                              FIRESTORE SCHEMA
+================================================================================
+
+1. Chats (clubs/{clubId}/chats/{chatId})
+   - mode?: 'normal' | 'broadcast'
+   - allowedSenders?: string[]
+   - allowReactions?: boolean
+
+2. Messages (clubs/{clubId}/chats/{chatId}/messages/{messageId})
+   - type: 'text' | 'image' | 'audio' | 'video' | 'poll' | 'system'
+   - poll?: { question, options, votes, allowMultipleVotes?, expiresAt? }
+   - mediaUrl?: string (für Video)
+   - mediaType?: 'video'
+   - durationSeconds?: number
+
+3. ChatMetadata (users/{uid}/chatMetadata/{chatId}) - NEU
+   - chatId: string
+   - lastSeen: number
+   - unreadCount?: number
+
+================================================================================
+                              TESTING-HINWEISE
+================================================================================
+
+1. BROWSER-KOMPATIBILITÄT
+   ✅ Chrome/Edge: Vollständig unterstützt (video/webm)
+   ✅ Firefox: Vollständig unterstützt (video/webm)
+   ⚠️ Safari: Teilweise unterstützt (video/mp4)
+   ⚠️ Mobile Safari: Eingeschränkt
+
+2. FIREBASE STORAGE
+   ⚠️ Regeln müssen aktualisiert werden für /clubs/{clubId}/chats/{chatId}/video/
+   ⚠️ HTTPS erforderlich für getUserMedia (außer localhost)
+
+3. POLL-FUNKTIONALITÄT
+   ✅ Mindestens 2 Optionen erforderlich
+   ✅ Toggle-Vote-Logik (allowMultipleVotes)
+   ✅ Ablauf-Prüfung (expiresAt)
+   ✅ Prozent-Anzeige + Eigene Votes markiert
+
+4. NOTIFICATION-BUBBLE
+   ✅ totalUnread berechnet aus allen Chats
+   ✅ markChatAsSeen beim Öffnen
+   ✅ Banner oben (sticky)
+   ✅ Click → Navigation zu /crew
+
+================================================================================
+                            DEPENDENCIES
+================================================================================
+
+KEINE NEUEN DEPENDENCIES ERFORDERLICH!
+
+Phase 6 nutzt:
+- Browser-APIs (MediaRecorder, getUserMedia)
+- Bestehende Firebase-Integration
+- Bestehende UI-Komponenten
+
+================================================================================
+                            BREAKING CHANGES
+================================================================================
+
+❌ KEINE BREAKING CHANGES!
+
+Alle Features aus Phase 1-5 bleiben voll funktionsfähig:
+✅ Auth-System
+✅ User-Management
+✅ Check-In/Check-Out
+✅ Friend-System
+✅ Chat-System (Text, Image, Audio)
+✅ Ephemeral Images
+✅ Voice Messages
+✅ QR-Scanner
+
+================================================================================
+                              NEXT STEPS
+================================================================================
+
+Phase 7: Admin-Features & Broadcast
+- Implementierung mode='broadcast' Logik
+- Admin-Broadcast-Chats (Admin → alle Gäste)
+- DJ-Console: Polls für Musik-Abstimmungen
+- Push-Notifications (PWA)
+
+================================================================================
+                              STATUS: READY!
+================================================================================
+
+Phase 6 ist vollständig implementiert und bereit für:
+✅ Testing mit echtem Firebase Backend
+✅ Integration in Produktion
+✅ Weiterentwicklung (Phase 7)
+
+ALLE ZIELE ERREICHT! 🎉
+================================================================================

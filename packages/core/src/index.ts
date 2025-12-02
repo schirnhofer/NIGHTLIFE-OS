@@ -19,6 +19,7 @@ export * from './hooks/use-chats';
 export * from './hooks/use-chat-messages';
 export * from './hooks/use-i18n';
 export * from './hooks/use-check-in';
+export * from './hooks/use-unread-messages'; // Phase 6
 
 // Utils
 export * from './utils/friend-code';
