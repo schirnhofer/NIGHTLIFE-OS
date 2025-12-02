@@ -3,9 +3,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { Button, Card, Input, Modal, VoiceRecorderButton, EphemeralImageBubble, VideoRecorderButton, PollBubble } from '@nightlife-os/ui';
-import { useAuth, useI18n, useChatMessages, useChatMessagesActions, useUnreadMessages } from '@nightlife-os/core';
+import { useAuth, useI18n, useChatMessages, useChatMessagesActions, useUnreadMessages, useChats, usePlatformUserData } from '@nightlife-os/core';
 import { ArrowLeft, Send, Settings, Camera, Trash2, Image as ImageIcon, Timer, BarChart3, Plus, X } from 'lucide-react';
-import { Message } from '@nightlife-os/shared-types';
+import { Message, Chat } from '@nightlife-os/shared-types';
 
 export default function ChatPage() {
   const router = useRouter();
@@ -14,10 +14,18 @@ export default function ChatPage() {
   const { user, isAuthenticated } = useAuth();
   const { t } = useI18n();
   
-  // Messages
+  // Messages & Chat Data (Phase 7)
   const { messages, loading } = useChatMessages('demo-club-1', chatId);
+  const { chats } = useChats('demo-club-1', user?.uid || null);
+  const { userData } = usePlatformUserData(user?.uid || null);
   const { sendMessage, sendPoll, votePoll, deleteMessage, expireMedia, sending } = useChatMessagesActions();
   const { markChatAsSeen } = useUnreadMessages(user?.uid);
+  
+  // Phase 7: Finde aktuellen Chat und prüfe Broadcast-Mode
+  const currentChat = chats?.find((c: Chat) => c.id === chatId);
+  const isBroadcastChat = currentChat?.mode === 'broadcast';
+  const isAdmin = userData?.roles?.includes('club_admin') || userData?.isPlatformAdmin;
+  const canSend = !isBroadcastChat || (isBroadcastChat && isAdmin);
   
   const [messageText, setMessageText] = useState('');
   const [showImageUpload, setShowImageUpload] = useState(false);
@@ -403,65 +411,73 @@ export default function ChatPage() {
         </div>
       </div>
 
-      {/* Input */}
+      {/* Input - Phase 7: Bedingt für Broadcast-Chats */}
       <div className="bg-slate-800 border-t border-slate-700 p-4">
-        <div className="max-w-4xl mx-auto flex gap-2">
-          {/* Image Upload Button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setShowImageUpload(true)}
-          >
-            <Camera className="h-5 w-5" />
-          </Button>
-          
-          {/* Voice Recorder */}
-          <VoiceRecorderButton
-            maxDurationSeconds={30}
-            onRecorded={handleVoiceRecorded}
-            onError={(err) => {
-              console.error('Voice recording error:', err);
-              alert('Mikrofon-Zugriff fehlgeschlagen');
-            }}
-          />
-          
-          {/* Video Recorder */}
-          <VideoRecorderButton
-            maxDurationSeconds={30}
-            onRecorded={handleVideoRecorded}
-            onError={(err) => {
-              console.error('Video recording error:', err);
-              alert(t('video.cameraError'));
-            }}
-          />
-          
-          {/* Poll Button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setShowPollModal(true)}
-          >
-            <BarChart3 className="h-5 w-5" />
-          </Button>
-          
-          {/* Text Input */}
-          <Input
-            placeholder={t('chat.typeMessage')}
-            value={messageText}
-            onChange={(e) => setMessageText(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-            className="flex-1"
-          />
-          
-          {/* Send Button */}
-          <Button
-            variant="default"
-            onClick={handleSendMessage}
-            disabled={sending || !messageText.trim()}
-          >
-            <Send className="h-5 w-5" />
-          </Button>
-        </div>
+        {canSend ? (
+          <div className="max-w-4xl mx-auto flex gap-2">
+            {/* Image Upload Button */}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setShowImageUpload(true)}
+            >
+              <Camera className="h-5 w-5" />
+            </Button>
+            
+            {/* Voice Recorder */}
+            <VoiceRecorderButton
+              maxDurationSeconds={30}
+              onRecorded={handleVoiceRecorded}
+              onError={(err) => {
+                console.error('Voice recording error:', err);
+                alert('Mikrofon-Zugriff fehlgeschlagen');
+              }}
+            />
+            
+            {/* Video Recorder */}
+            <VideoRecorderButton
+              maxDurationSeconds={30}
+              onRecorded={handleVideoRecorded}
+              onError={(err) => {
+                console.error('Video recording error:', err);
+                alert(t('video.cameraError'));
+              }}
+            />
+            
+            {/* Poll Button */}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setShowPollModal(true)}
+            >
+              <BarChart3 className="h-5 w-5" />
+            </Button>
+            
+            {/* Text Input */}
+            <Input
+              placeholder={t('chat.typeMessage')}
+              value={messageText}
+              onChange={(e) => setMessageText(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+              className="flex-1"
+            />
+            
+            {/* Send Button */}
+            <Button
+              variant="default"
+              onClick={handleSendMessage}
+              disabled={sending || !messageText.trim()}
+            >
+              <Send className="h-5 w-5" />
+            </Button>
+          </div>
+        ) : (
+          <div className="max-w-4xl mx-auto text-center py-2">
+            <p className="text-slate-400 text-sm">
+              🔒 {t('broadcast.readOnly')}
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Modal: Image Upload */}

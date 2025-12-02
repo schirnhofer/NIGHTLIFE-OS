@@ -1,79 +1,63 @@
 /**
- * User-Typen für Nightlife OS
- * 
- * Zweistufiges User-Modell:
- * 1. PlatformUser - Plattformweiter Account (platform/users/{uid})
- * 2. ClubUser - Club-spezifische Daten (clubs/{clubId}/users/{uid})
+ * User Types for Nightlife OS
+ * Extended in Phase 2 for Friend System
+ * Extended in Phase 7 for Roles, Language & Multi-Club
  */
 
-// ===== PLATTFORM-EBENE =====
+/**
+ * Platform-weite Rollen (Phase 7)
+ */
+export type PlatformRole = 'super_admin' | 'club_admin' | 'staff' | 'visitor';
 
 /**
- * Globaler User-Account (platform/users/{uid})
- * Wird bei der ersten Registrierung angelegt
+ * PlatformUser: Globaler User-Account
+ * Firestore: platform/users/{uid}
  */
 export interface PlatformUser {
   uid: string;
-  email: string;
-  displayName: string | null;
-  photoURL: string | null;
-  friendCode?: string; // 7-stelliger Code (z.B. "ABXY489")
-  createdAt: number; // Unix-Timestamp (ms)
-  lastSeenAt: number;
-  isPlatformAdmin: boolean; // Super-Admin?
-  ownedClubs: string[]; // IDs der Clubs, die dieser User besitzt
-  memberClubs: string[]; // IDs der Clubs, in denen User Mitglied ist
+  email?: string;
+  displayName?: string;
+  photoURL?: string;
+  friendCode?: string;              // 7-stelliger alphanumerischer Code
+  createdAt: number;
+  lastSeenAt?: number;
+  isPlatformAdmin?: boolean;        // Legacy: für Super-Admin
+  
+  // Phase 7 Extensions
+  language?: string;                // Bevorzugte Sprache (ISO 639-1: 'de', 'en', 'es', etc.)
+  roles: PlatformRole[];            // Rollen des Users
+  clubs?: string[];                 // Club-IDs, denen der User angehört
+  
+  // Freundes-System
+  ownedClubs?: string[];            // Club-IDs die dieser User besitzt
+  memberClubs?: string[];           // Club-IDs in denen User Mitglied ist
 }
 
-// ===== CLUB-EBENE =====
-
 /**
- * User im Kontext eines spezifischen Clubs (clubs/{clubId}/users/{uid})
- * Enthält club-spezifische Daten wie Rolle, Check-In, Trust-Level
+ * ClubUser: Club-spezifische User-Daten
+ * Firestore: clubs/{clubId}/users/{uid}
  */
-export interface ClubUser {
-  uid: string;
-  email: string;
-  displayName: string | null;
-  photoURL: string | null;
+export interface ClubUser extends Omit<PlatformUser, 'roles'> {
+  roles?: string[];                 // Club-spezifische Rollen (überschreibt PlatformUser.roles)
+  checkedIn?: boolean;
+  language?: string;                // Bevorzugte Sprache für diesen Club
+  friendCode?: string;
+  friendIds?: string[];
   
-  // Rollen & Berechtigungen
-  roles: string[]; // z.B. ["guest"], ["staff", "door"], ["admin"]
-  
-  // Check-In/Out
-  checkedIn: boolean;
-  checkedInAt: number | null; // Unix-Timestamp (ms)
-  lastSeen: number;
-  
-  // Sprache
-  language: string; // "de", "en", "fr", etc.
-  
-  // Freundschafts-System
-  friendCode: string; // 7-stelliger Code (z.B. "ABXY489")
-  friendIds: string[]; // Denormalisiert für schnelle Queries
-  
-  // Trust-System
-  phoneNumber: string | null;
-  phoneVerified: boolean;
-  deviceIdHash: string | null; // SHA-256 Hash der Device-ID
-  faceHash: string | null; // Hash des Gesichts (FaceID)
-  trustedLevel: number; // 0-100
-  verifiedBy: string | null; // UID des Staff, der verifiziert hat
-  verifiedAt: number | null;
-  blacklisted: boolean;
-  blacklistReason: string | null;
-  
-  // Historie
-  visitCount: number;
-  lastVisits: number[]; // Timestamps der letzten 10 Besuche
+  // Trust-Score Faktoren
+  phoneVerified?: boolean;
+  deviceIdHash?: string;
+  faceHash?: string;
+  visitCount?: number;
+  staffVerified?: boolean;
 }
 
 /**
- * Minimale User-Info für UI-Anzeige
+ * UserProfile: Minimale User-Info für UI
  */
 export interface UserProfile {
   uid: string;
-  displayName: string | null;
-  photoURL: string | null;
-  checkedIn?: boolean;
+  displayName?: string;
+  photoURL?: string;
+  friendCode?: string;
 }

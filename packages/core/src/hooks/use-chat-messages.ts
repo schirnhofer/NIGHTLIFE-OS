@@ -8,11 +8,12 @@
 'use client';
 
 import { useState } from 'react';
-import { Message, MessageType } from '@nightlife-os/shared-types';
-import { setDocument, updateDocument, deleteDocument } from '../firebase/firestore';
+import { Message, MessageType, Chat } from '@nightlife-os/shared-types';
+import { setDocument, updateDocument, deleteDocument, getDocument } from '../firebase/firestore';
 import { getFirestoreInstance } from '../firebase/init';
 import { collection, doc } from 'firebase/firestore';
 import { uploadChatMedia } from '../utils/storage';
+import { dispatchBulkNotifications } from '../notifications/notification-dispatcher';
 
 export interface SendMessageOptions {
   text?: string;
@@ -84,6 +85,13 @@ export function useChatMessagesActions(): UseChatMessagesActionsReturn {
     setSending(true);
 
     try {
+      // Phase 7: Broadcast-Check - Prüfe ob Sender berechtigt ist
+      const chat = await getDocument<Chat>(`clubs/${clubId}/chats/${chatId}`);
+      if (chat?.mode === 'broadcast' && chat.allowedSenders) {
+        if (!chat.allowedSenders.includes(senderId)) {
+          throw new Error('You are not allowed to send messages in this broadcast chat');
+        }
+      }
       // Generiere Message-ID
       const db = getFirestoreInstance();
       const messagesRef = collection(db, `clubs/${clubId}/chats/${chatId}/messages`);
@@ -165,6 +173,45 @@ export function useChatMessagesActions(): UseChatMessagesActionsReturn {
           }
         }, ephemeralSeconds * 1000);
       }
+
+      // Phase 7: Dispatch Notifications für alle Empfänger (außer Sender)
+      if (chat?.participants) {
+        const recipients = chat.participants.filter((uid) => uid !== senderId);
+        
+        // Bestimme Notification-Type
+        let notificationType: 'NEW_DIRECT_MESSAGE' | 'NEW_GROUP_MESSAGE' | 'NEW_BROADCAST_MESSAGE' = 'NEW_DIRECT_MESSAGE';
+        if (chat.mode === 'broadcast') {
+          notificationType = 'NEW_BROADCAST_MESSAGE';
+        } else if (chat.type === 'group') {
+          notificationType = 'NEW_GROUP_MESSAGE';
+        }
+
+        // Erstelle Notification-Body
+        const notificationBody = text || (
+          imageFile ? '🖼️ Bild' :
+          audioFile ? '🎤 Sprachnachricht' :
+          videoFile ? '🎥 Video' :
+          'Neue Nachricht'
+        );
+
+        // Dispatch Notifications an alle Empfänger
+        try {
+          await dispatchBulkNotifications(
+            recipients,
+            notificationType,
+            `${senderName}`,
+            notificationBody,
+            {
+              chatId,
+              messageId,
+              clubId,
+            }
+          );
+        } catch (notifError) {
+          console.error('Error dispatching notifications:', notifError);
+          // Fehler beim Notification-Dispatch sollte nicht das Message-Senden blockieren
+        }
+      }
     } catch (error) {
       console.error('Error sending message:', error);
       throw error;
@@ -243,6 +290,13 @@ export function useChatMessagesActions(): UseChatMessagesActionsReturn {
     setSending(true);
 
     try {
+      // Phase 7: Broadcast-Check - Prüfe ob Sender berechtigt ist
+      const chat = await getDocument<Chat>(`clubs/${clubId}/chats/${chatId}`);
+      if (chat?.mode === 'broadcast' && chat.allowedSenders) {
+        if (!chat.allowedSenders.includes(senderId)) {
+          throw new Error('You are not allowed to send polls in this broadcast chat');
+        }
+      }
       // Generiere Message-ID
       const db = getFirestoreInstance();
       const messagesRef = collection(db, `clubs/${clubId}/chats/${chatId}/messages`);
@@ -280,6 +334,29 @@ export function useChatMessagesActions(): UseChatMessagesActionsReturn {
         lastMessageAt: now,
         lastMessagePreview: `📊 ${question.substring(0, 30)}...`
       });
+
+      // Phase 7: Dispatch Notifications für alle Empfänger (außer Sender)
+      if (chat?.participants) {
+        const recipients = chat.participants.filter((uid) => uid !== senderId);
+        
+        // Dispatch Notifications an alle Empfänger
+        try {
+          await dispatchBulkNotifications(
+            recipients,
+            'NEW_POLL',
+            `${senderName}`,
+            `📊 ${question}`,
+            {
+              chatId,
+              messageId,
+              clubId,
+            }
+          );
+        } catch (notifError) {
+          console.error('Error dispatching poll notifications:', notifError);
+          // Fehler beim Notification-Dispatch sollte nicht das Poll-Senden blockieren
+        }
+      }
     } catch (error) {
       console.error('Error sending poll:', error);
       throw error;

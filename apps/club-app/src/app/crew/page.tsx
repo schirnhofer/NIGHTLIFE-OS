@@ -104,29 +104,44 @@ export default function CrewPage() {
               {t('crew.crews')}
             </h2>
             <div className="space-y-2">
-              {groupChats.map(chat => (
-                <Card 
-                  key={chat.chatId} 
-                  hover
-                  className="cursor-pointer"
-                  onClick={() => router.push(`/crew/chat/${chat.chatId}`)}
-                >
-                  <CardContent className="py-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-cyan-600 rounded-full flex items-center justify-center">
-                        <UsersIcon className="h-6 w-6 text-white" />
+              {groupChats.map(chat => {
+                // Phase 7: Markiere Broadcast-Chats
+                const isBroadcast = chat.mode === 'broadcast';
+                const broadcastLabel = chat.broadcastScope === 'global' 
+                  ? t('broadcast.nightlifeNews') 
+                  : t('broadcast.clubNews');
+                
+                return (
+                  <Card 
+                    key={chat.chatId} 
+                    hover
+                    className="cursor-pointer"
+                    onClick={() => router.push(`/crew/chat/${chat.chatId}`)}
+                  >
+                    <CardContent className="py-4">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-12 h-12 ${isBroadcast ? 'bg-orange-600' : 'bg-cyan-600'} rounded-full flex items-center justify-center`}>
+                          <UsersIcon className="h-6 w-6 text-white" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2">
+                            <p className="font-semibold text-slate-200">{chat.name}</p>
+                            {isBroadcast && (
+                              <span className="px-2 py-0.5 bg-orange-500/20 text-orange-400 text-xs font-medium rounded">
+                                {broadcastLabel}
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-xs text-slate-400">
+                            {chat.participants?.length || 0} Mitglieder
+                          </p>
+                        </div>
+                        <MessageCircle className="h-5 w-5 text-slate-400" />
                       </div>
-                      <div className="flex-1">
-                        <p className="font-semibold text-slate-200">{chat.name}</p>
-                        <p className="text-xs text-slate-400">
-                          {chat.participants?.length || 0} Mitglieder
-                        </p>
-                      </div>
-                      <MessageCircle className="h-5 w-5 text-slate-400" />
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
           </div>
         ) : null}

@@ -157,7 +157,25 @@
   "notifications": {
     "newMessages": "You have {count} new messages",
     "unreadChats": "{count} unread chats",
-    "goToChats": "Go to Chats"
+    "goToChats": "Go to Chats",
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "noNotifications": "No notifications",
+    "types": {
+      "NEW_DIRECT_MESSAGE": "New direct message",
+      "NEW_GROUP_MESSAGE": "New group message",
+      "NEW_BROADCAST_MESSAGE": "New broadcast message",
+      "NEW_POLL": "New poll",
+      "SYSTEM_ANNOUNCEMENT": "System announcement"
+    }
+  },
+  "broadcast": {
+    "title": "Broadcast Messages",
+    "clubNews": "Club News",
+    "nightlifeNews": "Nightlife News",
+    "sendMessage": "Send Message",
+    "createPoll": "Create Poll",
+    "readOnly": "Only admins can write here"
   },
   "group": {
     "create": "Create Group",

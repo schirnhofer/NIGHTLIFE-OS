@@ -318,3 +318,81 @@ export function useChatMessages(
 
   return { messages, loading };
 }
+
+/**
+ * Erstellt einen Super-Admin Broadcast-Chat (global)
+ * Phase 7: Nur Super-Admins dürfen hier senden
+ * 
+ * @param clubId - Club-ID für Chat-Speicherort
+ * @param superAdminUid - UID des Super-Admins
+ * @param allUserIds - Array aller User-IDs (participants)
+ * @returns Chat-ID des Broadcast-Chats
+ */
+export async function createSuperAdminBroadcastChat(
+  clubId: string,
+  superAdminUid: string,
+  allUserIds: string[]
+): Promise<string> {
+  try {
+    const chatId = `broadcast_global_${Date.now()}`;
+    
+    const broadcastChat: Chat = {
+      id: chatId,
+      clubId,
+      type: 'group',
+      name: 'Nightlife News',
+      participants: allUserIds,
+      creatorId: superAdminUid,
+      createdAt: Date.now(),
+      mode: 'broadcast',
+      broadcastScope: 'global',
+      allowedSenders: [superAdminUid],
+      allowReactions: true,
+    };
+
+    await setDocument(`clubs/${clubId}/chats/${chatId}`, broadcastChat);
+    return chatId;
+  } catch (error) {
+    console.error('Error creating super admin broadcast chat:', error);
+    throw error;
+  }
+}
+
+/**
+ * Erstellt einen Club-Admin Broadcast-Chat
+ * Phase 7: Nur Club-Admins dürfen hier senden
+ * 
+ * @param clubId - Club-ID
+ * @param adminUid - UID des Club-Admins
+ * @param clubUserIds - Array aller User-IDs dieses Clubs
+ * @returns Chat-ID des Broadcast-Chats
+ */
+export async function createClubBroadcastChat(
+  clubId: string,
+  adminUid: string,
+  clubUserIds: string[]
+): Promise<string> {
+  try {
+    const chatId = `broadcast_club_${clubId}_${Date.now()}`;
+    
+    const broadcastChat: Chat = {
+      id: chatId,
+      clubId,
+      type: 'group',
+      name: 'Club News',
+      participants: clubUserIds,
+      creatorId: adminUid,
+      createdAt: Date.now(),
+      mode: 'broadcast',
+      broadcastScope: 'club',
+      allowedSenders: [adminUid],
+      allowReactions: true,
+    };
+
+    await setDocument(`clubs/${clubId}/chats/${chatId}`, broadcastChat);
+    return chatId;
+  } catch (error) {
+    console.error('Error creating club broadcast chat:', error);
+    throw error;
+  }
+}

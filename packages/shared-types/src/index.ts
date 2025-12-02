@@ -33,3 +33,6 @@ export * from './api';
 
 // Check-In/Check-Out-Typen
 export * from './checkin';
+
+// Notification-Typen (Phase 7)
+export * from './notifications';

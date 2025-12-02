@@ -1,0 +1,1927 @@
+
+> club-app@0.1.0 build /home/ubuntu/nightlife_os/apps/club-app
+> next build
+
+  ▲ Next.js 14.2.33
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+
+
+===== TS errors =====
+
+[Test Mode] ./src/app/crew/add-friend/page.tsx:7:41
+Type error: 'X' is declared but its value is never read.
+
+[0m [90m  5 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mInput[39m[33m,[39m [33mModal[39m[33m,[39m [33mQrScanner[39m } [36mfrom[39m [32m'@nightlife-os/ui'[39m[33m;[39m[0m
+[0m [90m  6 |[39m [36mimport[39m { useAuth[33m,[39m useI18n[33m,[39m useFriends } [36mfrom[39m [32m'@nightlife-os/core'[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mArrowLeft[39m[33m,[39m [33mCamera[39m[33m,[39m [33mArrowRight[39m[33m,[39m [33mX[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+[0m [90m    |[39m                                         [31m[1m^[22m[39m[0m
+[0m [90m  8 |[39m [36mimport[39m { [33mFRIEND_REQUEST_MESSAGES[39m } [36mfrom[39m [32m'@nightlife-os/shared-types'[39m[33m;[39m[0m
+[0m [90m  9 |[39m[0m
+[0m [90m 10 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mAddFriendPage[39m() {[0m
+
+[Test Mode] ./src/app/crew/broadcast/page.tsx:15:39
+Type error: 'PollBubble' is declared but its value is never read.
+
+[0m [90m 13 |[39m [36mimport[39m { useAuth[33m,[39m useChats[33m,[39m useChatMessagesActions[33m,[39m usePlatformUserData } [36mfrom[39m [32m'@nightlife-os/core'[39m[33m;[39m[0m
+[0m [90m 14 |[39m [36mimport[39m { [33mChat[39m } [36mfrom[39m [32m'@nightlife-os/shared-types'[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 15 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mInput[39m[33m,[39m [33mLoader[39m[33m,[39m [33mPollBubble[39m } [36mfrom[39m [32m'@nightlife-os/ui'[39m[33m;[39m[0m
+[0m [90m    |[39m                                       [31m[1m^[22m[39m[0m
+[0m [90m 16 |[39m [36mimport[39m { [33mSend[39m[33m,[39m [33mBarChart[39m[33m,[39m [33mArrowLeft[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+[0m [90m 17 |[39m[0m
+[0m [90m 18 |[39m [36mconst[39m [33mDEMO_CLUB_ID[39m [33m=[39m [32m'demo-club-123'[39m[33m;[39m [90m// TODO: Replace with actual club selection[39m[0m
+
+[Test Mode] ./src/app/crew/broadcast/page.tsx:23:11
+Type error: Property 'userData' does not exist on type 'UsePlatformUserDataReturn'.
+
+[0m [90m 21 |[39m   [36mconst[39m router [33m=[39m useRouter()[33m;[39m[0m
+[0m [90m 22 |[39m   [36mconst[39m { user[33m,[39m isAuthenticated } [33m=[39m useAuth()[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 23 |[39m   [36mconst[39m { userData } [33m=[39m usePlatformUserData(user[33m?[39m[33m.[39muid [33m||[39m [36mnull[39m)[33m;[39m[0m
+[0m [90m    |[39m           [31m[1m^[22m[39m[0m
+[0m [90m 24 |[39m   [36mconst[39m { chats[33m,[39m loading[33m:[39m chatsLoading } [33m=[39m useChats([33mDEMO_CLUB_ID[39m[33m,[39m user[33m?[39m[33m.[39muid [33m||[39m [36mnull[39m)[33m;[39m[0m
+[0m [90m 25 |[39m   [36mconst[39m { sendMessage[33m,[39m sending } [33m=[39m useChatMessagesActions()[33m;[39m[0m
+[0m [90m 26 |[39m[0m
+
+[Test Mode] ./src/app/crew/broadcast/page.tsx:28:10
+Type error: 'showPollModal' is declared but its value is never read.
+
+[0m [90m 26 |[39m[0m
+[0m [90m 27 |[39m   [36mconst[39m [messageText[33m,[39m setMessageText] [33m=[39m useState([32m''[39m)[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 28 |[39m   [36mconst[39m [showPollModal[33m,[39m setShowPollModal] [33m=[39m useState([36mfalse[39m)[33m;[39m[0m
+[0m [90m    |[39m          [31m[1m^[22m[39m[0m
+[0m [90m 29 |[39m   [36mconst[39m [pollQuestion[33m,[39m setPollQuestion] [33m=[39m useState([32m''[39m)[33m;[39m[0m
+[0m [90m 30 |[39m   [36mconst[39m [pollOptions[33m,[39m setPollOptions] [33m=[39m useState([[32m''[39m[33m,[39m [32m''[39m])[33m;[39m[0m
+[0m [90m 31 |[39m[0m
+
+[Test Mode] ./src/app/crew/broadcast/page.tsx:29:10
+Type error: 'pollQuestion' is declared but its value is never read.
+
+[0m [90m 27 |[39m   [36mconst[39m [messageText[33m,[39m setMessageText] [33m=[39m useState([32m''[39m)[33m;[39m[0m
+[0m [90m 28 |[39m   [36mconst[39m [showPollModal[33m,[39m setShowPollModal] [33m=[39m useState([36mfalse[39m)[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 29 |[39m   [36mconst[39m [pollQuestion[33m,[39m setPollQuestion] [33m=[39m useState([32m''[39m)[33m;[39m[0m
+[0m [90m    |[39m          [31m[1m^[22m[39m[0m
+[0m [90m 30 |[39m   [36mconst[39m [pollOptions[33m,[39m setPollOptions] [33m=[39m useState([[32m''[39m[33m,[39m [32m''[39m])[33m;[39m[0m
+[0m [90m 31 |[39m[0m
+[0m [90m 32 |[39m   [90m// Redirect wenn nicht eingeloggt[39m[0m
+
+[Test Mode] ./src/app/crew/broadcast/page.tsx:29:24
+Type error: 'setPollQuestion' is declared but its value is never read.
+
+[0m [90m 27 |[39m   [36mconst[39m [messageText[33m,[39m setMessageText] [33m=[39m useState([32m''[39m)[33m;[39m[0m
+[0m [90m 28 |[39m   [36mconst[39m [showPollModal[33m,[39m setShowPollModal] [33m=[39m useState([36mfalse[39m)[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 29 |[39m   [36mconst[39m [pollQuestion[33m,[39m setPollQuestion] [33m=[39m useState([32m''[39m)[33m;[39m[0m
+[0m [90m    |[39m                        [31m[1m^[22m[39m[0m
+[0m [90m 30 |[39m   [36mconst[39m [pollOptions[33m,[39m setPollOptions] [33m=[39m useState([[32m''[39m[33m,[39m [32m''[39m])[33m;[39m[0m
+[0m [90m 31 |[39m[0m
+[0m [90m 32 |[39m   [90m// Redirect wenn nicht eingeloggt[39m[0m
+
+[Test Mode] ./src/app/crew/broadcast/page.tsx:30:10
+Type error: 'pollOptions' is declared but its value is never read.
+
+[0m [90m 28 |[39m   [36mconst[39m [showPollModal[33m,[39m setShowPollModal] [33m=[39m useState([36mfalse[39m)[33m;[39m[0m
+[0m [90m 29 |[39m   [36mconst[39m [pollQuestion[33m,[39m setPollQuestion] [33m=[39m useState([32m''[39m)[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 30 |[39m   [36mconst[39m [pollOptions[33m,[39m setPollOptions] [33m=[39m useState([[32m''[39m[33m,[39m [32m''[39m])[33m;[39m[0m
+[0m [90m    |[39m          [31m[1m^[22m[39m[0m
+[0m [90m 31 |[39m[0m
+[0m [90m 32 |[39m   [90m// Redirect wenn nicht eingeloggt[39m[0m
+[0m [90m 33 |[39m   useEffect(() [33m=>[39m {[0m
+
+[Test Mode] ./src/app/crew/broadcast/page.tsx:30:23
+Type error: 'setPollOptions' is declared but its value is never read.
+
+[0m [90m 28 |[39m   [36mconst[39m [showPollModal[33m,[39m setShowPollModal] [33m=[39m useState([36mfalse[39m)[33m;[39m[0m
+[0m [90m 29 |[39m   [36mconst[39m [pollQuestion[33m,[39m setPollQuestion] [33m=[39m useState([32m''[39m)[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 30 |[39m   [36mconst[39m [pollOptions[33m,[39m setPollOptions] [33m=[39m useState([[32m''[39m[33m,[39m [32m''[39m])[33m;[39m[0m
+[0m [90m    |[39m                       [31m[1m^[22m[39m[0m
+[0m [90m 31 |[39m[0m
+[0m [90m 32 |[39m   [90m// Redirect wenn nicht eingeloggt[39m[0m
+[0m [90m 33 |[39m   useEffect(() [33m=>[39m {[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:5:18
+Type error: 'Card' is declared but its value is never read.
+
+[0m [90m 3 |[39m [36mimport[39m { useState[33m,[39m useEffect[33m,[39m useRef } [36mfrom[39m [32m'react'[39m[33m;[39m[0m
+[0m [90m 4 |[39m [36mimport[39m { useRouter[33m,[39m useParams } [36mfrom[39m [32m'next/navigation'[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mInput[39m[33m,[39m [33mModal[39m[33m,[39m [33mVoiceRecorderButton[39m[33m,[39m [33mEphemeralImageBubble[39m[33m,[39m [33mVideoRecorderButton[39m[33m,[39m [33mPollBubble[39m } [36mfrom[39m [32m'@nightlife-os/ui'[39m[33m;[39m[0m
+[0m [90m   |[39m                  [31m[1m^[22m[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { useAuth[33m,[39m useI18n[33m,[39m useChatMessages[33m,[39m useChatMessagesActions[33m,[39m useUnreadMessages[33m,[39m useChats[33m,[39m usePlatformUserData } [36mfrom[39m [32m'@nightlife-os/core'[39m[33m;[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { [33mArrowLeft[39m[33m,[39m [33mSend[39m[33m,[39m [33mSettings[39m[33m,[39m [33mCamera[39m[33m,[39m [33mTrash2[39m[33m,[39m [33mImage[39m [36mas[39m [33mImageIcon[39m[33m,[39m [33mTimer[39m[33m,[39m [33mBarChart3[39m[33m,[39m [33mPlus[39m[33m,[39m [33mX[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+[0m [90m 8 |[39m [36mimport[39m { [33mMessage[39m[33m,[39m [33mChat[39m } [36mfrom[39m [32m'@nightlife-os/shared-types'[39m[33m;[39m[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:20:11
+Type error: Property 'userData' does not exist on type 'UsePlatformUserDataReturn'.
+
+[0m [90m 18 |[39m   [36mconst[39m { messages[33m,[39m loading } [33m=[39m useChatMessages([32m'demo-club-1'[39m[33m,[39m chatId)[33m;[39m[0m
+[0m [90m 19 |[39m   [36mconst[39m { chats } [33m=[39m useChats([32m'demo-club-1'[39m[33m,[39m user[33m?[39m[33m.[39muid [33m||[39m [36mnull[39m)[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 20 |[39m   [36mconst[39m { userData } [33m=[39m usePlatformUserData(user[33m?[39m[33m.[39muid [33m||[39m [36mnull[39m)[33m;[39m[0m
+[0m [90m    |[39m           [31m[1m^[22m[39m[0m
+[0m [90m 21 |[39m   [36mconst[39m { sendMessage[33m,[39m sendPoll[33m,[39m votePoll[33m,[39m deleteMessage[33m,[39m expireMedia[33m,[39m sending } [33m=[39m useChatMessagesActions()[33m;[39m[0m
+[0m [90m 22 |[39m   [36mconst[39m { markChatAsSeen } [33m=[39m useUnreadMessages(user[33m?[39m[33m.[39muid)[33m;[39m[0m
+[0m [90m 23 |[39m   [0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:68:16
+Type error: Property 'ephemeral' does not exist on type 'Message'.
+
+[0m [90m 66 |[39m[0m
+[0m [90m 67 |[39m     messages[33m.[39mforEach((msg[33m:[39m [33mMessage[39m) [33m=>[39m {[0m
+[0m[31m[1m>[22m[39m[90m 68 |[39m       [36mif[39m (msg[33m?[39m[33m.[39mephemeral [33m&&[39m msg[33m?[39m[33m.[39mexpiresAt [33m&&[39m msg[33m?[39m[33m.[39mmediaUrl) {[0m
+[0m [90m    |[39m                [31m[1m^[22m[39m[0m
+[0m [90m 69 |[39m         [36mconst[39m now [33m=[39m [33mDate[39m[33m.[39mnow()[33m;[39m[0m
+[0m [90m 70 |[39m         [36mconst[39m remainingTime [33m=[39m msg[33m.[39mexpiresAt [33m-[39m now[33m;[39m[0m
+[0m [90m 71 |[39m[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:68:34
+Type error: Property 'expiresAt' does not exist on type 'Message'.
+
+[0m [90m 66 |[39m[0m
+[0m [90m 67 |[39m     messages[33m.[39mforEach((msg[33m:[39m [33mMessage[39m) [33m=>[39m {[0m
+[0m[31m[1m>[22m[39m[90m 68 |[39m       [36mif[39m (msg[33m?[39m[33m.[39mephemeral [33m&&[39m msg[33m?[39m[33m.[39mexpiresAt [33m&&[39m msg[33m?[39m[33m.[39mmediaUrl) {[0m
+[0m [90m    |[39m                                  [31m[1m^[22m[39m[0m
+[0m [90m 69 |[39m         [36mconst[39m now [33m=[39m [33mDate[39m[33m.[39mnow()[33m;[39m[0m
+[0m [90m 70 |[39m         [36mconst[39m remainingTime [33m=[39m msg[33m.[39mexpiresAt [33m-[39m now[33m;[39m[0m
+[0m [90m 71 |[39m[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:70:35
+Type error: Property 'expiresAt' does not exist on type 'Message'.
+
+[0m [90m 68 |[39m       [36mif[39m (msg[33m?[39m[33m.[39mephemeral [33m&&[39m msg[33m?[39m[33m.[39mexpiresAt [33m&&[39m msg[33m?[39m[33m.[39mmediaUrl) {[0m
+[0m [90m 69 |[39m         [36mconst[39m now [33m=[39m [33mDate[39m[33m.[39mnow()[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 70 |[39m         [36mconst[39m remainingTime [33m=[39m msg[33m.[39mexpiresAt [33m-[39m now[33m;[39m[0m
+[0m [90m    |[39m                                   [31m[1m^[22m[39m[0m
+[0m [90m 71 |[39m[0m
+[0m [90m 72 |[39m         [36mif[39m (remainingTime [33m>[39m [35m0[39m) {[0m
+[0m [90m 73 |[39m           [36mconst[39m timer [33m=[39m setTimeout(() [33m=>[39m {[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:74:52
+Type error: Property 'messageId' does not exist on type 'Message'.
+
+[0m [90m 72 |[39m         [36mif[39m (remainingTime [33m>[39m [35m0[39m) {[0m
+[0m [90m 73 |[39m           [36mconst[39m timer [33m=[39m setTimeout(() [33m=>[39m {[0m
+[0m[31m[1m>[22m[39m[90m 74 |[39m             expireMedia([32m'demo-club-1'[39m[33m,[39m chatId[33m,[39m msg[33m.[39mmessageId)[0m
+[0m [90m    |[39m                                                    [31m[1m^[22m[39m[0m
+[0m [90m 75 |[39m               [33m.[39m[36mcatch[39m((err) [33m=>[39m console[33m.[39merror([32m'Error expiring media:'[39m[33m,[39m err))[33m;[39m[0m
+[0m [90m 76 |[39m           }[33m,[39m remainingTime)[33m;[39m[0m
+[0m [90m 77 |[39m           timers[33m.[39mpush(timer)[33m;[39m[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:145:50
+Type error: 'durationSeconds' is declared but its value is never read.
+
+[0m [90m 143 |[39m   }[33m;[39m[0m
+[0m [90m 144 |[39m[0m
+[0m[31m[1m>[22m[39m[90m 145 |[39m   [36mconst[39m handleVoiceRecorded [33m=[39m [36masync[39m (file[33m:[39m [33mFile[39m[33m,[39m durationSeconds[33m:[39m number) [33m=>[39m {[0m
+[0m [90m     |[39m                                                  [31m[1m^[22m[39m[0m
+[0m [90m 146 |[39m     [36mif[39m ([33m![39muser[33m?[39m[33m.[39muid) [36mreturn[39m[33m;[39m[0m
+[0m [90m 147 |[39m[0m
+[0m [90m 148 |[39m     [36mtry[39m {[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:163:50
+Type error: 'durationSeconds' is declared but its value is never read.
+
+[0m [90m 161 |[39m   }[33m;[39m[0m
+[0m [90m 162 |[39m[0m
+[0m[31m[1m>[22m[39m[90m 163 |[39m   [36mconst[39m handleVideoRecorded [33m=[39m [36masync[39m (file[33m:[39m [33mFile[39m[33m,[39m durationSeconds[33m:[39m number) [33m=>[39m {[0m
+[0m [90m     |[39m                                                  [31m[1m^[22m[39m[0m
+[0m [90m 164 |[39m     [36mif[39m ([33m![39muser[33m?[39m[33m.[39muid) [36mreturn[39m[33m;[39m[0m
+[0m [90m 165 |[39m[0m
+[0m [90m 166 |[39m     [36mtry[39m {[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:271:41
+Type error: Property 'sender' does not exist on type 'Message'. Did you mean 'senderId'?
+
+[0m [90m 269 |[39m           ) [33m:[39m messages [33m&&[39m messages[33m.[39mlength [33m>[39m [35m0[39m [33m?[39m ([0m
+[0m [90m 270 |[39m             messages[33m.[39mmap((msg[33m:[39m [33mMessage[39m) [33m=>[39m {[0m
+[0m[31m[1m>[22m[39m[90m 271 |[39m               [36mconst[39m isOwnMessage [33m=[39m msg[33m?[39m[33m.[39msender [33m===[39m user[33m?[39m[33m.[39muid[33m;[39m[0m
+[0m [90m     |[39m                                         [31m[1m^[22m[39m[0m
+[0m [90m 272 |[39m               [36mconst[39m isDeleted [33m=[39m msg[33m?[39m[33m.[39mdeleted[33m;[39m[0m
+[0m [90m 273 |[39m[0m
+[0m [90m 274 |[39m               [36mreturn[39m ([0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:272:38
+Type error: Property 'deleted' does not exist on type 'Message'.
+
+[0m [90m 270 |[39m             messages[33m.[39mmap((msg[33m:[39m [33mMessage[39m) [33m=>[39m {[0m
+[0m [90m 271 |[39m               [36mconst[39m isOwnMessage [33m=[39m msg[33m?[39m[33m.[39msender [33m===[39m user[33m?[39m[33m.[39muid[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 272 |[39m               [36mconst[39m isDeleted [33m=[39m msg[33m?[39m[33m.[39mdeleted[33m;[39m[0m
+[0m [90m     |[39m                                      [31m[1m^[22m[39m[0m
+[0m [90m 273 |[39m[0m
+[0m [90m 274 |[39m               [36mreturn[39m ([0m
+[0m [90m 275 |[39m                 [33m<[39m[33mdiv[39m[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:276:29
+Type error: Property 'messageId' does not exist on type 'Message'.
+
+[0m [90m 274 |[39m               [36mreturn[39m ([0m
+[0m [90m 275 |[39m                 [33m<[39m[33mdiv[39m[0m
+[0m[31m[1m>[22m[39m[90m 276 |[39m                   key[33m=[39m{msg[33m?[39m[33m.[39mmessageId}[0m
+[0m [90m     |[39m                             [31m[1m^[22m[39m[0m
+[0m [90m 277 |[39m                   className[33m=[39m{[32m`flex ${isOwnMessage ? 'justify-end' : 'justify-start'}`[39m}[0m
+[0m [90m 278 |[39m                 [33m>[39m[0m
+[0m [90m 279 |[39m                   [33m<[39m[33mdiv[39m[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:304:35
+Type error: Property 'ephemeral' does not exist on type 'Message'.
+
+[0m [90m 302 |[39m                         {msg[33m?[39m[33m.[39mtype [33m===[39m [32m'image'[39m [33m&&[39m msg[33m?[39m[33m.[39mmediaUrl [33m&&[39m ([0m
+[0m [90m 303 |[39m                           [33m<[39m[33mdiv[39m className[33m=[39m[32m"mt-2"[39m[33m>[39m[0m
+[0m[31m[1m>[22m[39m[90m 304 |[39m                             {msg[33m?[39m[33m.[39mephemeral [33m&&[39m msg[33m?[39m[33m.[39mexpiresAt [33m?[39m ([0m
+[0m [90m     |[39m                                   [31m[1m^[22m[39m[0m
+[0m [90m 305 |[39m                               [33m<[39m[33mEphemeralImageBubble[39m[0m
+[0m [90m 306 |[39m                                 imageUrl[33m=[39m{msg[33m.[39mmediaUrl}[0m
+[0m [90m 307 |[39m                                 ephemeralSeconds[33m=[39m{msg[33m.[39mephemeral}[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:304:53
+Type error: Property 'expiresAt' does not exist on type 'Message'.
+
+[0m [90m 302 |[39m                         {msg[33m?[39m[33m.[39mtype [33m===[39m [32m'image'[39m [33m&&[39m msg[33m?[39m[33m.[39mmediaUrl [33m&&[39m ([0m
+[0m [90m 303 |[39m                           [33m<[39m[33mdiv[39m className[33m=[39m[32m"mt-2"[39m[33m>[39m[0m
+[0m[31m[1m>[22m[39m[90m 304 |[39m                             {msg[33m?[39m[33m.[39mephemeral [33m&&[39m msg[33m?[39m[33m.[39mexpiresAt [33m?[39m ([0m
+[0m [90m     |[39m                                                     [31m[1m^[22m[39m[0m
+[0m [90m 305 |[39m                               [33m<[39m[33mEphemeralImageBubble[39m[0m
+[0m [90m 306 |[39m                                 imageUrl[33m=[39m{msg[33m.[39mmediaUrl}[0m
+[0m [90m 307 |[39m                                 ephemeralSeconds[33m=[39m{msg[33m.[39mephemeral}[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:307:55
+Type error: Property 'ephemeral' does not exist on type 'Message'.
+
+[0m [90m 305 |[39m                               [33m<[39m[33mEphemeralImageBubble[39m[0m
+[0m [90m 306 |[39m                                 imageUrl[33m=[39m{msg[33m.[39mmediaUrl}[0m
+[0m[31m[1m>[22m[39m[90m 307 |[39m                                 ephemeralSeconds[33m=[39m{msg[33m.[39mephemeral}[0m
+[0m [90m     |[39m                                                       [31m[1m^[22m[39m[0m
+[0m [90m 308 |[39m                                 onExpire[33m=[39m{() [33m=>[39m {[0m
+[0m [90m 309 |[39m                                   expireMedia([32m'demo-club-1'[39m[33m,[39m chatId[33m,[39m msg[33m.[39mmessageId)[0m
+[0m [90m 310 |[39m                                     [33m.[39m[36mcatch[39m((err) [33m=>[39m console[33m.[39merror([32m'Error expiring:'[39m[33m,[39m err))[33m;[39m[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:309:74
+Type error: Property 'messageId' does not exist on type 'Message'.
+
+[0m [90m 307 |[39m                                 ephemeralSeconds[33m=[39m{msg[33m.[39mephemeral}[0m
+[0m [90m 308 |[39m                                 onExpire[33m=[39m{() [33m=>[39m {[0m
+[0m[31m[1m>[22m[39m[90m 309 |[39m                                   expireMedia([32m'demo-club-1'[39m[33m,[39m chatId[33m,[39m msg[33m.[39mmessageId)[0m
+[0m [90m     |[39m                                                                          [31m[1m^[22m[39m[0m
+[0m [90m 310 |[39m                                     [33m.[39m[36mcatch[39m((err) [33m=>[39m console[33m.[39merror([32m'Error expiring:'[39m[33m,[39m err))[33m;[39m[0m
+[0m [90m 311 |[39m                                 }}[0m
+[0m [90m 312 |[39m                               [33m/[39m[33m>[39m[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:324:26
+Type error: This comparison appears to be unintentional because the types 'MessageType' and '"audio"' have no overlap.
+
+[0m [90m 322 |[39m                         [0m
+[0m [90m 323 |[39m                         {[90m/* Audio */[39m}[0m
+[0m[31m[1m>[22m[39m[90m 324 |[39m                         {msg[33m?[39m[33m.[39mtype [33m===[39m [32m'audio'[39m [33m&&[39m msg[33m?[39m[33m.[39mmediaUrl [33m&&[39m ([0m
+[0m [90m     |[39m                          [31m[1m^[22m[39m[0m
+[0m [90m 325 |[39m                           [33m<[39m[33mdiv[39m className[33m=[39m[32m"mt-2"[39m[33m>[39m[0m
+[0m [90m 326 |[39m                             [33m<[39m[33maudio[39m controls src[33m=[39m{msg[33m.[39mmediaUrl} className[33m=[39m[32m"w-full"[39m [33m/[39m[33m>[39m[0m
+[0m [90m 327 |[39m                             {msg[33m?[39m[33m.[39mephemeral [33m&&[39m ([0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:327:35
+Type error: Property 'ephemeral' does not exist on type 'Message'.
+
+[0m [90m 325 |[39m                           [33m<[39m[33mdiv[39m className[33m=[39m[32m"mt-2"[39m[33m>[39m[0m
+[0m [90m 326 |[39m                             [33m<[39m[33maudio[39m controls src[33m=[39m{msg[33m.[39mmediaUrl} className[33m=[39m[32m"w-full"[39m [33m/[39m[33m>[39m[0m
+[0m[31m[1m>[22m[39m[90m 327 |[39m                             {msg[33m?[39m[33m.[39mephemeral [33m&&[39m ([0m
+[0m [90m     |[39m                                   [31m[1m^[22m[39m[0m
+[0m [90m 328 |[39m                               [33m<[39m[33mp[39m className[33m=[39m[32m"text-xs text-slate-300 mt-1"[39m[33m>[39m[0m
+[0m [90m 329 |[39m                                 [33m<[39m[33mTimer[39m className[33m=[39m[32m"inline h-3 w-3 mr-1"[39m [33m/[39m[33m>[39m[0m
+[0m [90m 330 |[39m                                 {msg[33m.[39mephemeral}s[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:330:38
+Type error: Property 'ephemeral' does not exist on type 'Message'.
+
+[0m [90m 328 |[39m                               [33m<[39m[33mp[39m className[33m=[39m[32m"text-xs text-slate-300 mt-1"[39m[33m>[39m[0m
+[0m [90m 329 |[39m                                 [33m<[39m[33mTimer[39m className[33m=[39m[32m"inline h-3 w-3 mr-1"[39m [33m/[39m[33m>[39m[0m
+[0m[31m[1m>[22m[39m[90m 330 |[39m                                 {msg[33m.[39mephemeral}s[0m
+[0m [90m     |[39m                                      [31m[1m^[22m[39m[0m
+[0m [90m 331 |[39m                               [33m<[39m[33m/[39m[33mp[39m[33m>[39m[0m
+[0m [90m 332 |[39m                             )}[0m
+[0m [90m 333 |[39m                           [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:359:52
+Type error: Property 'messageId' does not exist on type 'Message'.
+
+[0m [90m 357 |[39m                               currentUserId[33m=[39m{user[33m?[39m[33m.[39muid}[0m
+[0m [90m 358 |[39m                               onVote[33m=[39m{(optionIndex) [33m=>[39m[0m
+[0m[31m[1m>[22m[39m[90m 359 |[39m                                 handleVotePoll(msg[33m.[39mmessageId[33m,[39m optionIndex)[0m
+[0m [90m     |[39m                                                    [31m[1m^[22m[39m[0m
+[0m [90m 360 |[39m                               }[0m
+[0m [90m 361 |[39m                             [33m/[39m[33m>[39m[0m
+[0m [90m 362 |[39m                           [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:366:31
+Type error: Property 'image' does not exist on type 'Message'.
+
+[0m [90m 364 |[39m                         [0m
+[0m [90m 365 |[39m                         {[90m/* Backwards compatibility: image field */[39m}[0m
+[0m[31m[1m>[22m[39m[90m 366 |[39m                         {msg[33m?[39m[33m.[39mimage [33m&&[39m [33m![39mmsg[33m?[39m[33m.[39mmediaUrl [33m&&[39m ([0m
+[0m [90m     |[39m                               [31m[1m^[22m[39m[0m
+[0m [90m 367 |[39m                           [33m<[39m[33mdiv[39m className[33m=[39m[32m"mt-2"[39m[33m>[39m[0m
+[0m [90m 368 |[39m                             [33m<[39m[33mimg[39m[0m
+[0m [90m 369 |[39m                               src[33m=[39m{msg[33m.[39mimage}[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:369:40
+Type error: Property 'image' does not exist on type 'Message'.
+
+[0m [90m 367 |[39m                           [33m<[39m[33mdiv[39m className[33m=[39m[32m"mt-2"[39m[33m>[39m[0m
+[0m [90m 368 |[39m                             [33m<[39m[33mimg[39m[0m
+[0m[31m[1m>[22m[39m[90m 369 |[39m                               src[33m=[39m{msg[33m.[39mimage}[0m
+[0m [90m     |[39m                                        [31m[1m^[22m[39m[0m
+[0m [90m 370 |[39m                               alt[33m=[39m[32m"Chat image"[39m[0m
+[0m [90m 371 |[39m                               className[33m=[39m[32m"rounded max-w-full"[39m[0m
+[0m [90m 372 |[39m                             [33m/[39m[33m>[39m[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:373:35
+Type error: Property 'ephemeral' does not exist on type 'Message'.
+
+[0m [90m 371 |[39m                               className[33m=[39m[32m"rounded max-w-full"[39m[0m
+[0m [90m 372 |[39m                             [33m/[39m[33m>[39m[0m
+[0m[31m[1m>[22m[39m[90m 373 |[39m                             {msg[33m?[39m[33m.[39mephemeral [33m&&[39m ([0m
+[0m [90m     |[39m                                   [31m[1m^[22m[39m[0m
+[0m [90m 374 |[39m                               [33m<[39m[33mp[39m className[33m=[39m[32m"text-xs text-slate-300 mt-1"[39m[33m>[39m[0m
+[0m [90m 375 |[39m                                 [33m<[39m[33mTimer[39m className[33m=[39m[32m"inline h-3 w-3 mr-1"[39m [33m/[39m[33m>[39m[0m
+[0m [90m 376 |[39m                                 {msg[33m.[39mephemeral}s[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:376:38
+Type error: Property 'ephemeral' does not exist on type 'Message'.
+
+[0m [90m 374 |[39m                               [33m<[39m[33mp[39m className[33m=[39m[32m"text-xs text-slate-300 mt-1"[39m[33m>[39m[0m
+[0m [90m 375 |[39m                                 [33m<[39m[33mTimer[39m className[33m=[39m[32m"inline h-3 w-3 mr-1"[39m [33m/[39m[33m>[39m[0m
+[0m[31m[1m>[22m[39m[90m 376 |[39m                                 {msg[33m.[39mephemeral}s[0m
+[0m [90m     |[39m                                      [31m[1m^[22m[39m[0m
+[0m [90m 377 |[39m                               [33m<[39m[33m/[39m[33mp[39m[33m>[39m[0m
+[0m [90m 378 |[39m                             )}[0m
+[0m [90m 379 |[39m                           [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m[0m
+
+[Test Mode] ./src/app/crew/chat/[chatId]/page.tsx:394:67
+Type error: Property 'messageId' does not exist on type 'Message'.
+
+[0m [90m 392 |[39m                       {isOwnMessage [33m&&[39m [33m![39misDeleted [33m&&[39m ([0m
+[0m [90m 393 |[39m                         [33m<[39m[33mbutton[39m[0m
+[0m[31m[1m>[22m[39m[90m 394 |[39m                           onClick[33m=[39m{() [33m=>[39m handleDeleteMessage(msg[33m?[39m[33m.[39mmessageId)}[0m
+[0m [90m     |[39m                                                                   [31m[1m^[22m[39m[0m
+[0m [90m 395 |[39m                           className[33m=[39m[32m"text-xs opacity-70 hover:opacity-100 ml-2"[39m[0m
+[0m [90m 396 |[39m                         [33m>[39m[0m
+[0m [90m 397 |[39m                           [33m<[39m[33mTrash2[39m className[33m=[39m[32m"h-3 w-3"[39m [33m/[39m[33m>[39m[0m
+
+[Test Mode] ./src/app/crew/create-group/page.tsx:14:55
+Type error: Argument of type 'string | undefined' is not assignable to parameter of type 'string | null'.
+  Type 'undefined' is not assignable to type 'string | null'.
+
+[0m [90m 12 |[39m   [36mconst[39m { t } [33m=[39m useI18n()[33m;[39m[0m
+[0m [90m 13 |[39m   [36mconst[39m { friends } [33m=[39m useFriends(user[33m?[39m[33m.[39muid)[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 14 |[39m   [36mconst[39m { createGroupChat } [33m=[39m useChats([32m'demo-club-1'[39m[33m,[39m user[33m?[39m[33m.[39muid)[33m;[39m[0m
+[0m [90m    |[39m                                                       [31m[1m^[22m[39m[0m
+[0m [90m 15 |[39m   [0m
+[0m [90m 16 |[39m   [36mconst[39m [groupName[33m,[39m setGroupName] [33m=[39m useState([32m''[39m)[33m;[39m[0m
+[0m [90m 17 |[39m   [36mconst[39m [selectedFriends[33m,[39m setSelectedFriends] [33m=[39m useState[33m<[39m[33mstring[39m[][33m>[39m([])[33m;[39m[0m
+
+[Test Mode] ./src/app/crew/group/[groupId]/settings/page.tsx:17:80
+Type error: Argument of type 'string | undefined' is not assignable to parameter of type 'string | null'.
+  Type 'undefined' is not assignable to type 'string | null'.
+
+[0m [90m 15 |[39m   [36mconst[39m { user[33m,[39m isAuthenticated } [33m=[39m useAuth()[33m;[39m[0m
+[0m [90m 16 |[39m   [36mconst[39m { t } [33m=[39m useI18n()[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 17 |[39m   [36mconst[39m { removeFromGroup[33m,[39m leaveGroup[33m,[39m deleteGroup } [33m=[39m useChats([32m'demo-club-1'[39m[33m,[39m user[33m?[39m[33m.[39muid)[33m;[39m[0m
+[0m [90m    |[39m                                                                                [31m[1m^[22m[39m[0m
+[0m [90m 18 |[39m   [0m
+[0m [90m 19 |[39m   [36mconst[39m [chat[33m,[39m setChat] [33m=[39m useState[33m<[39m[33mChat[39m [33m|[39m [36mnull[39m[33m>[39m([36mnull[39m)[33m;[39m[0m
+[0m [90m 20 |[39m   [36mconst[39m [loading[33m,[39m setLoading] [33m=[39m useState([36mtrue[39m)[33m;[39m[0m
+
+[Test Mode] ./src/app/crew/group/[groupId]/settings/page.tsx:47:27
+Type error: Property 'createdBy' does not exist on type 'Chat'.
+
+[0m [90m 45 |[39m   }[33m,[39m [groupId])[33m;[39m[0m
+[0m [90m 46 |[39m[0m
+[0m[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m isCreator [33m=[39m chat[33m?[39m[33m.[39mcreatedBy [33m===[39m user[33m?[39m[33m.[39muid[33m;[39m[0m
+[0m [90m    |[39m                           [31m[1m^[22m[39m[0m
+[0m [90m 48 |[39m[0m
+[0m [90m 49 |[39m   [36mconst[39m handleRemoveMember [33m=[39m [36masync[39m (memberId[33m:[39m string) [33m=>[39m {[0m
+[0m [90m 50 |[39m     [36mif[39m ([33m![39mconfirm([32m'Mitglied wirklich entfernen?'[39m)) [36mreturn[39m[33m;[39m[0m
+
+[Test Mode] ./src/app/crew/group/[groupId]/settings/page.tsx:179:62
+Type error: Property 'createdBy' does not exist on type 'Chat'.
+
+[0m [90m 177 |[39m               {chat[33m.[39mparticipants[33m?[39m[33m.[39mmap((participantId) [33m=>[39m {[0m
+[0m [90m 178 |[39m                 [36mconst[39m isCurrentUser [33m=[39m participantId [33m===[39m user[33m?[39m[33m.[39muid[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 179 |[39m                 [36mconst[39m isChatCreator [33m=[39m participantId [33m===[39m chat[33m.[39mcreatedBy[33m;[39m[0m
+[0m [90m     |[39m                                                              [31m[1m^[22m[39m[0m
+[0m [90m 180 |[39m[0m
+[0m [90m 181 |[39m                 [36mreturn[39m ([0m
+[0m [90m 182 |[39m                   [33m<[39m[33mdiv[39m[0m
+
+[Test Mode] ./src/app/crew/page.tsx:5:24
+Type error: 'CardHeader' is declared but its value is never read.
+
+[0m [90m 3 |[39m [36mimport[39m { useState } [36mfrom[39m [32m'react'[39m[33m;[39m[0m
+[0m [90m 4 |[39m [36mimport[39m { useRouter } [36mfrom[39m [32m'next/navigation'[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mLoader[39m } [36mfrom[39m [32m'@nightlife-os/ui'[39m[33m;[39m[0m
+[0m [90m   |[39m                        [31m[1m^[22m[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { useAuth[33m,[39m useI18n[33m,[39m useFriends[33m,[39m useChats } [36mfrom[39m [32m'@nightlife-os/core'[39m[33m;[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { [33mArrowLeft[39m[33m,[39m [33mUserPlus[39m[33m,[39m [33mUsers[39m [36mas[39m [33mUsersIcon[39m[33m,[39m [33mMessageCircle[39m[33m,[39m [33mUserMinus[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+[0m [90m 8 |[39m[0m
+
+[Test Mode] ./src/app/crew/page.tsx:5:36
+Type error: 'CardTitle' is declared but its value is never read.
+
+[0m [90m 3 |[39m [36mimport[39m { useState } [36mfrom[39m [32m'react'[39m[33m;[39m[0m
+[0m [90m 4 |[39m [36mimport[39m { useRouter } [36mfrom[39m [32m'next/navigation'[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mLoader[39m } [36mfrom[39m [32m'@nightlife-os/ui'[39m[33m;[39m[0m
+[0m [90m   |[39m                                    [31m[1m^[22m[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { useAuth[33m,[39m useI18n[33m,[39m useFriends[33m,[39m useChats } [36mfrom[39m [32m'@nightlife-os/core'[39m[33m;[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { [33mArrowLeft[39m[33m,[39m [33mUserPlus[39m[33m,[39m [33mUsers[39m [36mas[39m [33mUsersIcon[39m[33m,[39m [33mMessageCircle[39m[33m,[39m [33mUserMinus[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+[0m [90m 8 |[39m[0m
+
+[Test Mode] ./src/app/crew/page.tsx:18:87
+Type error: Argument of type 'string | undefined' is not assignable to parameter of type 'string | null'.
+  Type 'undefined' is not assignable to type 'string | null'.
+
+[0m [90m 16 |[39m   [0m
+[0m [90m 17 |[39m   [90m// Chats (Demo-Club)[39m[0m
+[0m[31m[1m>[22m[39m[90m 18 |[39m   [36mconst[39m { chats[33m,[39m loading[33m:[39m chatsLoading[33m,[39m createPrivateChat } [33m=[39m useChats([32m'demo-club-1'[39m[33m,[39m user[33m?[39m[33m.[39muid)[33m;[39m[0m
+[0m [90m    |[39m                                                                                       [31m[1m^[22m[39m[0m
+[0m [90m 19 |[39m   [0m
+[0m [90m 20 |[39m   [36mconst[39m [removingFriendId[33m,[39m setRemovingFriendId] [33m=[39m useState[33m<[39m[33mstring[39m [33m|[39m [36mnull[39m[33m>[39m([36mnull[39m)[33m;[39m[0m
+[0m [90m 21 |[39m[0m
+
+[Test Mode] ./src/app/crew/page.tsx:116:31
+Type error: Property 'chatId' does not exist on type 'Chat'.
+
+[0m [90m 114 |[39m                 [36mreturn[39m ([0m
+[0m [90m 115 |[39m                   [33m<[39m[33mCard[39m [0m
+[0m[31m[1m>[22m[39m[90m 116 |[39m                     key[33m=[39m{chat[33m.[39mchatId} [0m
+[0m [90m     |[39m                               [31m[1m^[22m[39m[0m
+[0m [90m 117 |[39m                     hover[0m
+[0m [90m 118 |[39m                     className[33m=[39m[32m"cursor-pointer"[39m[0m
+[0m [90m 119 |[39m                     onClick[33m=[39m{() [33m=>[39m router[33m.[39mpush([32m`/crew/chat/${chat.chatId}`[39m)}[0m
+
+[Test Mode] ./src/app/crew/page.tsx:119:67
+Type error: Property 'chatId' does not exist on type 'Chat'.
+
+[0m [90m 117 |[39m                     hover[0m
+[0m [90m 118 |[39m                     className[33m=[39m[32m"cursor-pointer"[39m[0m
+[0m[31m[1m>[22m[39m[90m 119 |[39m                     onClick[33m=[39m{() [33m=>[39m router[33m.[39mpush([32m`/crew/chat/${chat.chatId}`[39m)}[0m
+[0m [90m     |[39m                                                                   [31m[1m^[22m[39m[0m
+[0m [90m 120 |[39m                   [33m>[39m[0m
+[0m [90m 121 |[39m                     [33m<[39m[33mCardContent[39m className[33m=[39m[32m"py-4"[39m[33m>[39m[0m
+[0m [90m 122 |[39m                       [33m<[39m[33mdiv[39m className[33m=[39m[32m"flex items-center gap-3"[39m[33m>[39m[0m
+
+[Test Mode] ./src/app/page.tsx:6:73
+Type error: 'generateUserQR' is declared but its value is never read.
+
+[0m [90m 4 |[39m [36mimport[39m { useRouter } [36mfrom[39m [32m'next/navigation'[39m[33m;[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mLoader[39m } [36mfrom[39m [32m'@nightlife-os/ui'[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { useAuth[33m,[39m useCheckIn[33m,[39m useI18n[33m,[39m usePlatformUserData[33m,[39m useFriends[33m,[39m generateUserQR } [36mfrom[39m [32m'@nightlife-os/core'[39m[33m;[39m[0m
+[0m [90m   |[39m                                                                         [31m[1m^[22m[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { [33mHome[39m[33m,[39m [33mMessageCircle[39m[33m,[39m [33mUsers[39m[33m,[39m [33mMusic[39m[33m,[39m [33mLogIn[39m[33m,[39m [33mLogOut[39m[33m,[39m [33mUserCircle[39m[33m,[39m [33mLoader2[39m[33m,[39m [33mCheckCircle[39m[33m,[39m [33mXCircle[39m[33m,[39m [33mQrCode[39m[33m,[39m [33mEyeOff[39m[33m,[39m [33mMapPin[39m[33m,[39m [33mEye[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+[0m [90m 8 |[39m[0m
+[0m [90m 9 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mHomePage[39m() {[0m
+
+[Test Mode] ./src/app/page.tsx:7:10
+Type error: 'Home' is declared but its value is never read.
+
+[0m [90m  5 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mLoader[39m } [36mfrom[39m [32m'@nightlife-os/ui'[39m[33m;[39m[0m
+[0m [90m  6 |[39m [36mimport[39m { useAuth[33m,[39m useCheckIn[33m,[39m useI18n[33m,[39m usePlatformUserData[33m,[39m useFriends[33m,[39m generateUserQR } [36mfrom[39m [32m'@nightlife-os/core'[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mHome[39m[33m,[39m [33mMessageCircle[39m[33m,[39m [33mUsers[39m[33m,[39m [33mMusic[39m[33m,[39m [33mLogIn[39m[33m,[39m [33mLogOut[39m[33m,[39m [33mUserCircle[39m[33m,[39m [33mLoader2[39m[33m,[39m [33mCheckCircle[39m[33m,[39m [33mXCircle[39m[33m,[39m [33mQrCode[39m[33m,[39m [33mEyeOff[39m[33m,[39m [33mMapPin[39m[33m,[39m [33mEye[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+[0m [90m    |[39m          [31m[1m^[22m[39m[0m
+[0m [90m  8 |[39m[0m
+[0m [90m  9 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mHomePage[39m() {[0m
+[0m [90m 10 |[39m   [36mconst[39m router [33m=[39m useRouter()[33m;[39m[0m
+
+[Test Mode] ./src/app/page.tsx:7:16
+Type error: 'MessageCircle' is declared but its value is never read.
+
+[0m [90m  5 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mLoader[39m } [36mfrom[39m [32m'@nightlife-os/ui'[39m[33m;[39m[0m
+[0m [90m  6 |[39m [36mimport[39m { useAuth[33m,[39m useCheckIn[33m,[39m useI18n[33m,[39m usePlatformUserData[33m,[39m useFriends[33m,[39m generateUserQR } [36mfrom[39m [32m'@nightlife-os/core'[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mHome[39m[33m,[39m [33mMessageCircle[39m[33m,[39m [33mUsers[39m[33m,[39m [33mMusic[39m[33m,[39m [33mLogIn[39m[33m,[39m [33mLogOut[39m[33m,[39m [33mUserCircle[39m[33m,[39m [33mLoader2[39m[33m,[39m [33mCheckCircle[39m[33m,[39m [33mXCircle[39m[33m,[39m [33mQrCode[39m[33m,[39m [33mEyeOff[39m[33m,[39m [33mMapPin[39m[33m,[39m [33mEye[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+[0m [90m    |[39m                [31m[1m^[22m[39m[0m
+[0m [90m  8 |[39m[0m
+[0m [90m  9 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mHomePage[39m() {[0m
+[0m [90m 10 |[39m   [36mconst[39m router [33m=[39m useRouter()[33m;[39m[0m
+
+[Test Mode] ./src/app/page.tsx:7:38
+Type error: 'Music' is declared but its value is never read.
+
+[0m [90m  5 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mLoader[39m } [36mfrom[39m [32m'@nightlife-os/ui'[39m[33m;[39m[0m
+[0m [90m  6 |[39m [36mimport[39m { useAuth[33m,[39m useCheckIn[33m,[39m useI18n[33m,[39m usePlatformUserData[33m,[39m useFriends[33m,[39m generateUserQR } [36mfrom[39m [32m'@nightlife-os/core'[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mHome[39m[33m,[39m [33mMessageCircle[39m[33m,[39m [33mUsers[39m[33m,[39m [33mMusic[39m[33m,[39m [33mLogIn[39m[33m,[39m [33mLogOut[39m[33m,[39m [33mUserCircle[39m[33m,[39m [33mLoader2[39m[33m,[39m [33mCheckCircle[39m[33m,[39m [33mXCircle[39m[33m,[39m [33mQrCode[39m[33m,[39m [33mEyeOff[39m[33m,[39m [33mMapPin[39m[33m,[39m [33mEye[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+[0m [90m    |[39m                                      [31m[1m^[22m[39m[0m
+[0m [90m  8 |[39m[0m
+[0m [90m  9 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mHomePage[39m() {[0m
+[0m [90m 10 |[39m   [36mconst[39m router [33m=[39m useRouter()[33m;[39m[0m
+
+[Test Mode] ./src/app/page.tsx:7:52
+Type error: 'LogOut' is declared but its value is never read.
+
+[0m [90m  5 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mLoader[39m } [36mfrom[39m [32m'@nightlife-os/ui'[39m[33m;[39m[0m
+[0m [90m  6 |[39m [36mimport[39m { useAuth[33m,[39m useCheckIn[33m,[39m useI18n[33m,[39m usePlatformUserData[33m,[39m useFriends[33m,[39m generateUserQR } [36mfrom[39m [32m'@nightlife-os/core'[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mHome[39m[33m,[39m [33mMessageCircle[39m[33m,[39m [33mUsers[39m[33m,[39m [33mMusic[39m[33m,[39m [33mLogIn[39m[33m,[39m [33mLogOut[39m[33m,[39m [33mUserCircle[39m[33m,[39m [33mLoader2[39m[33m,[39m [33mCheckCircle[39m[33m,[39m [33mXCircle[39m[33m,[39m [33mQrCode[39m[33m,[39m [33mEyeOff[39m[33m,[39m [33mMapPin[39m[33m,[39m [33mEye[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+[0m [90m    |[39m                                                    [31m[1m^[22m[39m[0m
+[0m [90m  8 |[39m[0m
+[0m [90m  9 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mHomePage[39m() {[0m
+[0m [90m 10 |[39m   [36mconst[39m router [33m=[39m useRouter()[33m;[39m[0m
+
+[Test Mode] ./src/app/page.tsx:7:81
+Type error: 'CheckCircle' is declared but its value is never read.
+
+[0m [90m  5 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mLoader[39m } [36mfrom[39m [32m'@nightlife-os/ui'[39m[33m;[39m[0m
+[0m [90m  6 |[39m [36mimport[39m { useAuth[33m,[39m useCheckIn[33m,[39m useI18n[33m,[39m usePlatformUserData[33m,[39m useFriends[33m,[39m generateUserQR } [36mfrom[39m [32m'@nightlife-os/core'[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mHome[39m[33m,[39m [33mMessageCircle[39m[33m,[39m [33mUsers[39m[33m,[39m [33mMusic[39m[33m,[39m [33mLogIn[39m[33m,[39m [33mLogOut[39m[33m,[39m [33mUserCircle[39m[33m,[39m [33mLoader2[39m[33m,[39m [33mCheckCircle[39m[33m,[39m [33mXCircle[39m[33m,[39m [33mQrCode[39m[33m,[39m [33mEyeOff[39m[33m,[39m [33mMapPin[39m[33m,[39m [33mEye[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+[0m [90m    |[39m                                                                                 [31m[1m^[22m[39m[0m
+[0m [90m  8 |[39m[0m
+[0m [90m  9 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mHomePage[39m() {[0m
+[0m [90m 10 |[39m   [36mconst[39m router [33m=[39m useRouter()[33m;[39m[0m
+
+[Test Mode] ./src/app/page.tsx:7:94
+Type error: 'XCircle' is declared but its value is never read.
+
+[0m [90m  5 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mLoader[39m } [36mfrom[39m [32m'@nightlife-os/ui'[39m[33m;[39m[0m
+[0m [90m  6 |[39m [36mimport[39m { useAuth[33m,[39m useCheckIn[33m,[39m useI18n[33m,[39m usePlatformUserData[33m,[39m useFriends[33m,[39m generateUserQR } [36mfrom[39m [32m'@nightlife-os/core'[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mHome[39m[33m,[39m [33mMessageCircle[39m[33m,[39m [33mUsers[39m[33m,[39m [33mMusic[39m[33m,[39m [33mLogIn[39m[33m,[39m [33mLogOut[39m[33m,[39m [33mUserCircle[39m[33m,[39m [33mLoader2[39m[33m,[39m [33mCheckCircle[39m[33m,[39m [33mXCircle[39m[33m,[39m [33mQrCode[39m[33m,[39m [33mEyeOff[39m[33m,[39m [33mMapPin[39m[33m,[39m [33mEye[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+[0m [90m    |[39m                                                                                              [31m[1m^[22m[39m[0m
+[0m [90m  8 |[39m[0m
+[0m [90m  9 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mHomePage[39m() {[0m
+[0m [90m 10 |[39m   [36mconst[39m router [33m=[39m useRouter()[33m;[39m[0m
+
+[Test Mode] ./src/app/page.tsx:7:127
+Type error: 'Eye' is declared but its value is never read.
+
+[0m [90m  5 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mLoader[39m } [36mfrom[39m [32m'@nightlife-os/ui'[39m[33m;[39m[0m
+[0m [90m  6 |[39m [36mimport[39m { useAuth[33m,[39m useCheckIn[33m,[39m useI18n[33m,[39m usePlatformUserData[33m,[39m useFriends[33m,[39m generateUserQR } [36mfrom[39m [32m'@nightlife-os/core'[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mHome[39m[33m,[39m [33mMessageCircle[39m[33m,[39m [33mUsers[39m[33m,[39m [33mMusic[39m[33m,[39m [33mLogIn[39m[33m,[39m [33mLogOut[39m[33m,[39m [33mUserCircle[39m[33m,[39m [33mLoader2[39m[33m,[39m [33mCheckCircle[39m[33m,[39m [33mXCircle[39m[33m,[39m [33mQrCode[39m[33m,[39m [33mEyeOff[39m[33m,[39m [33mMapPin[39m[33m,[39m [33mEye[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+[0m [90m    |[39m                                                                                                                               [31m[1m^[22m[39m[0m
+[0m [90m  8 |[39m[0m
+[0m [90m  9 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mHomePage[39m() {[0m
+[0m [90m 10 |[39m   [36mconst[39m router [33m=[39m useRouter()[33m;[39m[0m
+
+[Test Mode] ./src/app/page.tsx:12:14
+Type error: 'locale' is declared but its value is never read.
+
+[0m [90m 10 |[39m   [36mconst[39m router [33m=[39m useRouter()[33m;[39m[0m
+[0m [90m 11 |[39m   [36mconst[39m { user[33m,[39m loading[33m:[39m authLoading[33m,[39m isAuthenticated } [33m=[39m useAuth()[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m { t[33m,[39m locale[33m,[39m setLocale } [33m=[39m useI18n()[33m;[39m[0m
+[0m [90m    |[39m              [31m[1m^[22m[39m[0m
+[0m [90m 13 |[39m   [0m
+[0m [90m 14 |[39m   [90m// User-Daten[39m[0m
+[0m [90m 15 |[39m   [36mconst[39m { userData[33m:[39m platformUser[33m,[39m loading[33m:[39m userDataLoading } [33m=[39m usePlatformUserData(user[33m?[39m[33m.[39muid)[33m;[39m[0m
+
+[Test Mode] ./src/app/page.tsx:15:11
+Type error: Property 'userData' does not exist on type 'UsePlatformUserDataReturn'.
+
+[0m [90m 13 |[39m   [0m
+[0m [90m 14 |[39m   [90m// User-Daten[39m[0m
+[0m[31m[1m>[22m[39m[90m 15 |[39m   [36mconst[39m { userData[33m:[39m platformUser[33m,[39m loading[33m:[39m userDataLoading } [33m=[39m usePlatformUserData(user[33m?[39m[33m.[39muid)[33m;[39m[0m
+[0m [90m    |[39m           [31m[1m^[22m[39m[0m
+[0m [90m 16 |[39m   [0m
+[0m [90m 17 |[39m   [90m// Check-In für Demo-Club[39m[0m
+[0m [90m 18 |[39m   [36mconst[39m { checkIn[33m,[39m checkOut[33m,[39m currentStatus[33m,[39m loading[33m:[39m checkInLoading } [33m=[39m useCheckIn([32m'demo-club-1'[39m[33m,[39m user[33m?[39m[33m.[39muid)[33m;[39m[0m
+
+[Test Mode] ./src/app/page.tsx:15:44
+Type error: 'userDataLoading' is declared but its value is never read.
+
+[0m [90m 13 |[39m   [0m
+[0m [90m 14 |[39m   [90m// User-Daten[39m[0m
+[0m[31m[1m>[22m[39m[90m 15 |[39m   [36mconst[39m { userData[33m:[39m platformUser[33m,[39m loading[33m:[39m userDataLoading } [33m=[39m usePlatformUserData(user[33m?[39m[33m.[39muid)[33m;[39m[0m
+[0m [90m    |[39m                                            [31m[1m^[22m[39m[0m
+[0m [90m 16 |[39m   [0m
+[0m [90m 17 |[39m   [90m// Check-In für Demo-Club[39m[0m
+[0m [90m 18 |[39m   [36mconst[39m { checkIn[33m,[39m checkOut[33m,[39m currentStatus[33m,[39m loading[33m:[39m checkInLoading } [33m=[39m useCheckIn([32m'demo-club-1'[39m[33m,[39m user[33m?[39m[33m.[39muid)[33m;[39m[0m
+
+[Test Mode] ./src/components/app-container.tsx:4:85
+Type error: Cannot find module '@nightlife/core' or its corresponding type declarations.
+
+[0m [90m 2 |[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { useState[33m,[39m useEffect } [36mfrom[39m [32m'react'[39m[0m
+[0m[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { useAuth[33m,[39m doc[33m,[39m setDoc[33m,[39m onSnapshot[33m,[39m getDbInstance[33m,[39m generateFriendCode } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m   |[39m                                                                                     [31m[1m^[22m[39m[0m
+[0m [90m 5 |[39m [36mimport[39m type { [33mUserProfile[39m[33m,[39m [33mFriend[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { [33mLoading[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { [33mLoginScreen[39m } [36mfrom[39m [32m'./login-screen'[39m[0m
+
+[Test Mode] ./src/components/app-container.tsx:5:42
+Type error: Cannot find module '@nightlife/core' or its corresponding type declarations.
+
+[0m [90m 3 |[39m [36mimport[39m { useState[33m,[39m useEffect } [36mfrom[39m [32m'react'[39m[0m
+[0m [90m 4 |[39m [36mimport[39m { useAuth[33m,[39m doc[33m,[39m setDoc[33m,[39m onSnapshot[33m,[39m getDbInstance[33m,[39m generateFriendCode } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m type { [33mUserProfile[39m[33m,[39m [33mFriend[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m   |[39m                                          [31m[1m^[22m[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { [33mLoading[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { [33mLoginScreen[39m } [36mfrom[39m [32m'./login-screen'[39m[0m
+[0m [90m 8 |[39m [36mimport[39m { [33mHomeView[39m } [36mfrom[39m [32m'./home-view'[39m[0m
+
+[Test Mode] ./src/components/app-container.tsx:6:25
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m 4 |[39m [36mimport[39m { useAuth[33m,[39m doc[33m,[39m setDoc[33m,[39m onSnapshot[33m,[39m getDbInstance[33m,[39m generateFriendCode } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 5 |[39m [36mimport[39m type { [33mUserProfile[39m[33m,[39m [33mFriend[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { [33mLoading[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m   |[39m                         [31m[1m^[22m[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { [33mLoginScreen[39m } [36mfrom[39m [32m'./login-screen'[39m[0m
+[0m [90m 8 |[39m [36mimport[39m { [33mHomeView[39m } [36mfrom[39m [32m'./home-view'[39m[0m
+[0m [90m 9 |[39m [36mimport[39m { [33mChatSystem[39m } [36mfrom[39m [32m'./chat-system'[39m[0m
+
+[Test Mode] ./src/components/app-container.tsx:12:34
+Type error: Cannot find module '@nightlife/core' or its corresponding type declarations.
+
+[0m [90m 10 |[39m [36mimport[39m { [33mGlobalOverlay[39m } [36mfrom[39m [32m'./global-overlay'[39m[0m
+[0m [90m 11 |[39m [36mimport[39m { [33mTabNavigation[39m } [36mfrom[39m [32m'./tab-navigation'[39m[0m
+[0m[31m[1m>[22m[39m[90m 12 |[39m [36mimport[39m type { [33mGlobalState[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m    |[39m                                  [31m[1m^[22m[39m[0m
+[0m [90m 13 |[39m[0m
+[0m [90m 14 |[39m [36mexport[39m [36mconst[39m [33mAppContainer[39m [33m=[39m () [33m=>[39m {[0m
+[0m [90m 15 |[39m   [36mconst[39m { user[33m,[39m loading[33m:[39m authLoading } [33m=[39m useAuth()[0m
+
+[Test Mode] ./src/components/app-container.tsx:68:71
+Type error: Parameter 'snap' implicitly has an 'any' type.
+
+[0m [90m 66 |[39m   useEffect(() [33m=>[39m {[0m
+[0m [90m 67 |[39m     [36mconst[39m db [33m=[39m getDbInstance()[0m
+[0m[31m[1m>[22m[39m[90m 68 |[39m     [36mconst[39m unsubscribe [33m=[39m onSnapshot(doc(db[33m,[39m [32m'public'[39m[33m,[39m [32m'globalState'[39m)[33m,[39m (snap) [33m=>[39m {[0m
+[0m [90m    |[39m                                                                       [31m[1m^[22m[39m[0m
+[0m [90m 69 |[39m       [36mif[39m (snap[33m.[39mexists()) {[0m
+[0m [90m 70 |[39m         setAppState(snap[33m.[39mdata() [36mas[39m [33mGlobalState[39m)[0m
+[0m [90m 71 |[39m       }[0m
+
+[Test Mode] ./src/components/app-container.tsx:94:40
+Type error: Cannot find module 'firebase/firestore' or its corresponding type declarations.
+
+[0m [90m 92 |[39m[0m
+[0m [90m 93 |[39m     [90m// Anfrage löschen[39m[0m
+[0m[31m[1m>[22m[39m[90m 94 |[39m     [36mconst[39m { deleteDoc } [33m=[39m [36mawait[39m [36mimport[39m([32m'firebase/firestore'[39m)[0m
+[0m [90m    |[39m                                        [31m[1m^[22m[39m[0m
+[0m [90m 95 |[39m     [36mawait[39m deleteDoc(doc(db[33m,[39m [32m'users'[39m[33m,[39m user[33m.[39muid[33m,[39m [32m'requests'[39m[33m,[39m req[33m.[39mid))[0m
+[0m [90m 96 |[39m[0m
+[0m [90m 97 |[39m     [90m// Direkt zum Chat navigieren[39m[0m
+
+[Test Mode] ./src/components/chat-system.tsx:4:22
+Type error: Cannot find module 'firebase/auth' or its corresponding type declarations.
+
+[0m [90m 2 |[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { useState[33m,[39m useEffect } [36mfrom[39m [32m'react'[39m[0m
+[0m[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m [90m   |[39m                      [31m[1m^[22m[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { [33mUserProfile[39m[33m,[39m [33mFriend[39m[33m,[39m [33mChat[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { collection[33m,[39m query[33m,[39m where[33m,[39m onSnapshot } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+
+[Test Mode] ./src/components/chat-system.tsx:5:43
+Type error: Cannot find module '@nightlife/core' or its corresponding type declarations.
+
+[0m [90m 3 |[39m [36mimport[39m { useState[33m,[39m useEffect } [36mfrom[39m [32m'react'[39m[0m
+[0m [90m 4 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m { [33mUserProfile[39m[33m,[39m [33mFriend[39m[33m,[39m [33mChat[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m   |[39m                                           [31m[1m^[22m[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { collection[33m,[39m query[33m,[39m where[33m,[39m onSnapshot } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 8 |[39m [36mimport[39m { [33mChatListView[39m } [36mfrom[39m [32m'./chat/chat-list-view'[39m[0m
+
+[Test Mode] ./src/components/chat-system.tsx:6:54
+Type error: Cannot find module 'firebase/firestore' or its corresponding type declarations.
+
+[0m [90m 4 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { [33mUserProfile[39m[33m,[39m [33mFriend[39m[33m,[39m [33mChat[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { collection[33m,[39m query[33m,[39m where[33m,[39m onSnapshot } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m   |[39m                                                      [31m[1m^[22m[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 8 |[39m [36mimport[39m { [33mChatListView[39m } [36mfrom[39m [32m'./chat/chat-list-view'[39m[0m
+[0m [90m 9 |[39m [36mimport[39m { [33mChatAddFriendView[39m } [36mfrom[39m [32m'./chat/chat-add-friend-view'[39m[0m
+
+[Test Mode] ./src/components/chat-system.tsx:7:31
+Type error: Cannot find module '@nightlife/core' or its corresponding type declarations.
+
+[0m [90m  5 |[39m [36mimport[39m { [33mUserProfile[39m[33m,[39m [33mFriend[39m[33m,[39m [33mChat[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m  6 |[39m [36mimport[39m { collection[33m,[39m query[33m,[39m where[33m,[39m onSnapshot } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m    |[39m                               [31m[1m^[22m[39m[0m
+[0m [90m  8 |[39m [36mimport[39m { [33mChatListView[39m } [36mfrom[39m [32m'./chat/chat-list-view'[39m[0m
+[0m [90m  9 |[39m [36mimport[39m { [33mChatAddFriendView[39m } [36mfrom[39m [32m'./chat/chat-add-friend-view'[39m[0m
+[0m [90m 10 |[39m [36mimport[39m { [33mChatGroupCreateView[39m } [36mfrom[39m [32m'./chat/chat-group-create-view'[39m[0m
+
+[Test Mode] ./src/components/chat-system.tsx:35:49
+Type error: Parameter 'snapshot' implicitly has an 'any' type.
+
+[0m [90m 33 |[39m     [36mconst[39m friendsRef [33m=[39m collection(db[33m,[39m [32m'users'[39m[33m,[39m user[33m.[39muid[33m,[39m [32m'friends'[39m)[0m
+[0m [90m 34 |[39m     [0m
+[0m[31m[1m>[22m[39m[90m 35 |[39m     [36mconst[39m unsubscribe [33m=[39m onSnapshot(friendsRef[33m,[39m (snapshot) [33m=>[39m {[0m
+[0m [90m    |[39m                                                 [31m[1m^[22m[39m[0m
+[0m [90m 36 |[39m       [36mconst[39m friendsList [33m=[39m snapshot[33m.[39mdocs[33m.[39mmap(doc [33m=>[39m ({[0m
+[0m [90m 37 |[39m         id[33m:[39m doc[33m.[39mid[33m,[39m[0m
+[0m [90m 38 |[39m         [33m...[39mdoc[33m.[39mdata()[0m
+
+[Test Mode] ./src/components/chat-system.tsx:36:45
+Type error: Parameter 'doc' implicitly has an 'any' type.
+
+[0m [90m 34 |[39m     [0m
+[0m [90m 35 |[39m     [36mconst[39m unsubscribe [33m=[39m onSnapshot(friendsRef[33m,[39m (snapshot) [33m=>[39m {[0m
+[0m[31m[1m>[22m[39m[90m 36 |[39m       [36mconst[39m friendsList [33m=[39m snapshot[33m.[39mdocs[33m.[39mmap(doc [33m=>[39m ({[0m
+[0m [90m    |[39m                                             [31m[1m^[22m[39m[0m
+[0m [90m 37 |[39m         id[33m:[39m doc[33m.[39mid[33m,[39m[0m
+[0m [90m 38 |[39m         [33m...[39mdoc[33m.[39mdata()[0m
+[0m [90m 39 |[39m       })) [36mas[39m [33mFriend[39m[][0m
+
+[Test Mode] ./src/components/chat-system.tsx:52:40
+Type error: Parameter 'snapshot' implicitly has an 'any' type.
+
+[0m [90m 50 |[39m     [36mconst[39m q [33m=[39m query(chatsRef[33m,[39m where([32m'participants'[39m[33m,[39m [32m'array-contains'[39m[33m,[39m user[33m.[39muid))[0m
+[0m [90m 51 |[39m     [0m
+[0m[31m[1m>[22m[39m[90m 52 |[39m     [36mconst[39m unsubscribe [33m=[39m onSnapshot(q[33m,[39m (snapshot) [33m=>[39m {[0m
+[0m [90m    |[39m                                        [31m[1m^[22m[39m[0m
+[0m [90m 53 |[39m       [36mconst[39m allChats [33m=[39m snapshot[33m.[39mdocs[33m.[39mmap(doc [33m=>[39m ({[0m
+[0m [90m 54 |[39m         id[33m:[39m doc[33m.[39mid[33m,[39m[0m
+[0m [90m 55 |[39m         [33m...[39mdoc[33m.[39mdata()[0m
+
+[Test Mode] ./src/components/chat-system.tsx:53:42
+Type error: Parameter 'doc' implicitly has an 'any' type.
+
+[0m [90m 51 |[39m     [0m
+[0m [90m 52 |[39m     [36mconst[39m unsubscribe [33m=[39m onSnapshot(q[33m,[39m (snapshot) [33m=>[39m {[0m
+[0m[31m[1m>[22m[39m[90m 53 |[39m       [36mconst[39m allChats [33m=[39m snapshot[33m.[39mdocs[33m.[39mmap(doc [33m=>[39m ({[0m
+[0m [90m    |[39m                                          [31m[1m^[22m[39m[0m
+[0m [90m 54 |[39m         id[33m:[39m doc[33m.[39mid[33m,[39m[0m
+[0m [90m 55 |[39m         [33m...[39mdoc[33m.[39mdata()[0m
+[0m [90m 56 |[39m       })) [36mas[39m [33mChat[39m[][0m
+
+[Test Mode] ./src/components/chat/chat-add-friend-view.tsx:4:22
+Type error: Cannot find module 'firebase/auth' or its corresponding type declarations.
+
+[0m [90m 2 |[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { useState[33m,[39m useRef } [36mfrom[39m [32m'react'[39m[0m
+[0m[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m [90m   |[39m                      [31m[1m^[22m[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { [33mUserProfile[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { collection[33m,[39m query[33m,[39m where[33m,[39m getDocs[33m,[39m setDoc[33m,[39m doc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+
+[Test Mode] ./src/components/chat/chat-add-friend-view.tsx:5:29
+Type error: Cannot find module '@nightlife/core' or its corresponding type declarations.
+
+[0m [90m 3 |[39m [36mimport[39m { useState[33m,[39m useRef } [36mfrom[39m [32m'react'[39m[0m
+[0m [90m 4 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m { [33mUserProfile[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m   |[39m                             [31m[1m^[22m[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { collection[33m,[39m query[33m,[39m where[33m,[39m getDocs[33m,[39m setDoc[33m,[39m doc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+
+[Test Mode] ./src/components/chat/chat-add-friend-view.tsx:6:64
+Type error: Cannot find module 'firebase/firestore' or its corresponding type declarations.
+
+[0m [90m 4 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { [33mUserProfile[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { collection[33m,[39m query[33m,[39m where[33m,[39m getDocs[33m,[39m setDoc[33m,[39m doc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m   |[39m                                                                [31m[1m^[22m[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 9 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mInput[39m[33m,[39m [33mCard[39m[33m,[39m [33mIcon[39m[33m,[39m [33mModal[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+
+[Test Mode] ./src/components/chat/chat-add-friend-view.tsx:7:31
+Type error: Cannot find module '@nightlife/core' or its corresponding type declarations.
+
+[0m [90m  5 |[39m [36mimport[39m { [33mUserProfile[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m  6 |[39m [36mimport[39m { collection[33m,[39m query[33m,[39m where[33m,[39m getDocs[33m,[39m setDoc[33m,[39m doc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m    |[39m                               [31m[1m^[22m[39m[0m
+[0m [90m  8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m  9 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mInput[39m[33m,[39m [33mCard[39m[33m,[39m [33mIcon[39m[33m,[39m [33mModal[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 10 |[39m[0m
+
+[Test Mode] ./src/components/chat/chat-add-friend-view.tsx:8:32
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m  6 |[39m [36mimport[39m { collection[33m,[39m query[33m,[39m where[33m,[39m getDocs[33m,[39m setDoc[33m,[39m doc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m  7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m    |[39m                                [31m[1m^[22m[39m[0m
+[0m [90m  9 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mInput[39m[33m,[39m [33mCard[39m[33m,[39m [33mIcon[39m[33m,[39m [33mModal[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 10 |[39m[0m
+[0m [90m 11 |[39m [36minterface[39m [33mChatAddFriendViewProps[39m {[0m
+
+[Test Mode] ./src/components/chat/chat-add-friend-view.tsx:9:25
+Type error: 'Card' is declared but its value is never read.
+
+[0m [90m  7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m  8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m[31m[1m>[22m[39m[90m  9 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mInput[39m[33m,[39m [33mCard[39m[33m,[39m [33mIcon[39m[33m,[39m [33mModal[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m    |[39m                         [31m[1m^[22m[39m[0m
+[0m [90m 10 |[39m[0m
+[0m [90m 11 |[39m [36minterface[39m [33mChatAddFriendViewProps[39m {[0m
+[0m [90m 12 |[39m   user[33m:[39m [33mUser[39m[0m
+
+[Test Mode] ./src/components/chat/chat-add-friend-view.tsx:9:50
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m  7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m  8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m[31m[1m>[22m[39m[90m  9 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mInput[39m[33m,[39m [33mCard[39m[33m,[39m [33mIcon[39m[33m,[39m [33mModal[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m    |[39m                                                  [31m[1m^[22m[39m[0m
+[0m [90m 10 |[39m[0m
+[0m [90m 11 |[39m [36minterface[39m [33mChatAddFriendViewProps[39m {[0m
+[0m [90m 12 |[39m   user[33m:[39m [33mUser[39m[0m
+
+[Test Mode] ./src/components/chat/chat-add-friend-view.tsx:29:44
+Type error: Cannot find module 'html5-qrcode' or its corresponding type declarations.
+
+[0m [90m 27 |[39m     [90m// QR-Scanner mit html5-qrcode[39m[0m
+[0m [90m 28 |[39m     [36mif[39m ([36mtypeof[39m window [33m!==[39m [32m'undefined'[39m) {[0m
+[0m[31m[1m>[22m[39m[90m 29 |[39m       [36mconst[39m { [33mHtml5Qrcode[39m } [33m=[39m [36mawait[39m [36mimport[39m([32m'html5-qrcode'[39m)[0m
+[0m [90m    |[39m                                            [31m[1m^[22m[39m[0m
+[0m [90m 30 |[39m       setIsScanning([36mtrue[39m)[0m
+[0m [90m 31 |[39m[0m
+[0m [90m 32 |[39m       setTimeout(() [33m=>[39m {[0m
+
+[Test Mode] ./src/components/chat/chat-add-friend-view.tsx:141:24
+Type error: Parameter 'e' implicitly has an 'any' type.
+
+[0m [90m 139 |[39m             placeholder[33m=[39m{t([32m'chat.enterCode'[39m)}[0m
+[0m [90m 140 |[39m             value[33m=[39m{addCode}[0m
+[0m[31m[1m>[22m[39m[90m 141 |[39m             onChange[33m=[39m{(e) [33m=>[39m setAddCode(e[33m.[39mtarget[33m.[39mvalue[33m.[39mtoUpperCase())}[0m
+[0m [90m     |[39m                        [31m[1m^[22m[39m[0m
+[0m [90m 142 |[39m             className[33m=[39m[32m"text-center text-2xl font-mono"[39m[0m
+[0m [90m 143 |[39m             maxLength[33m=[39m{[35m7[39m}[0m
+[0m [90m 144 |[39m           [33m/[39m[33m>[39m[0m
+
+[Test Mode] ./src/components/chat/chat-add-friend-view.tsx:184:26
+Type error: Parameter 'e' implicitly has an 'any' type.
+
+[0m [90m 182 |[39m             [33m<[39m[33mInput[39m[0m
+[0m [90m 183 |[39m               value[33m=[39m{msg}[0m
+[0m[31m[1m>[22m[39m[90m 184 |[39m               onChange[33m=[39m{(e) [33m=>[39m setMsg(e[33m.[39mtarget[33m.[39mvalue)}[0m
+[0m [90m     |[39m                          [31m[1m^[22m[39m[0m
+[0m [90m 185 |[39m               placeholder[33m=[39m[32m"Eigene Nachricht..."[39m[0m
+[0m [90m 186 |[39m             [33m/[39m[33m>[39m[0m
+[0m [90m 187 |[39m           [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m[0m
+
+[Test Mode] ./src/components/chat/chat-group-create-view.tsx:4:22
+Type error: Cannot find module 'firebase/auth' or its corresponding type declarations.
+
+[0m [90m 2 |[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { useState } [36mfrom[39m [32m'react'[39m[0m
+[0m[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m [90m   |[39m                      [31m[1m^[22m[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { [33mFriend[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { collection[33m,[39m addDoc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+
+[Test Mode] ./src/components/chat/chat-group-create-view.tsx:5:24
+Type error: Cannot find module '@nightlife/core' or its corresponding type declarations.
+
+[0m [90m 3 |[39m [36mimport[39m { useState } [36mfrom[39m [32m'react'[39m[0m
+[0m [90m 4 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m { [33mFriend[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m   |[39m                        [31m[1m^[22m[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { collection[33m,[39m addDoc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+
+[Test Mode] ./src/components/chat/chat-group-create-view.tsx:6:36
+Type error: Cannot find module 'firebase/firestore' or its corresponding type declarations.
+
+[0m [90m 4 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { [33mFriend[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { collection[33m,[39m addDoc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m   |[39m                                    [31m[1m^[22m[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 9 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mInput[39m[33m,[39m [33mCard[39m[33m,[39m [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+
+[Test Mode] ./src/components/chat/chat-group-create-view.tsx:7:31
+Type error: Cannot find module '@nightlife/core' or its corresponding type declarations.
+
+[0m [90m  5 |[39m [36mimport[39m { [33mFriend[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m  6 |[39m [36mimport[39m { collection[33m,[39m addDoc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m    |[39m                               [31m[1m^[22m[39m[0m
+[0m [90m  8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m  9 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mInput[39m[33m,[39m [33mCard[39m[33m,[39m [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 10 |[39m[0m
+
+[Test Mode] ./src/components/chat/chat-group-create-view.tsx:8:32
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m  6 |[39m [36mimport[39m { collection[33m,[39m addDoc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m  7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m    |[39m                                [31m[1m^[22m[39m[0m
+[0m [90m  9 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mInput[39m[33m,[39m [33mCard[39m[33m,[39m [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 10 |[39m[0m
+[0m [90m 11 |[39m [36minterface[39m [33mChatGroupCreateViewProps[39m {[0m
+
+[Test Mode] ./src/components/chat/chat-group-create-view.tsx:9:43
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m  7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m  8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m[31m[1m>[22m[39m[90m  9 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mInput[39m[33m,[39m [33mCard[39m[33m,[39m [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m    |[39m                                           [31m[1m^[22m[39m[0m
+[0m [90m 10 |[39m[0m
+[0m [90m 11 |[39m [36minterface[39m [33mChatGroupCreateViewProps[39m {[0m
+[0m [90m 12 |[39m   user[33m:[39m [33mUser[39m[0m
+
+[Test Mode] ./src/components/chat/chat-group-create-view.tsx:62:20
+Type error: Parameter 'e' implicitly has an 'any' type.
+
+[0m [90m 60 |[39m         placeholder[33m=[39m{t([32m'chat.groupName'[39m)}[0m
+[0m [90m 61 |[39m         value[33m=[39m{groupName}[0m
+[0m[31m[1m>[22m[39m[90m 62 |[39m         onChange[33m=[39m{(e) [33m=>[39m setGroupName(e[33m.[39mtarget[33m.[39mvalue)}[0m
+[0m [90m    |[39m                    [31m[1m^[22m[39m[0m
+[0m [90m 63 |[39m       [33m/[39m[33m>[39m[0m
+[0m [90m 64 |[39m[0m
+[0m [90m 65 |[39m       {[90m/* Select Friends */[39m}[0m
+
+[Test Mode] ./src/components/chat/chat-group-manage-view.tsx:3:22
+Type error: Cannot find module 'firebase/auth' or its corresponding type declarations.
+
+[0m [90m 1 |[39m [32m'use client'[39m[0m
+[0m [90m 2 |[39m[0m
+[0m[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m [90m   |[39m                      [31m[1m^[22m[39m[0m
+[0m [90m 4 |[39m [36mimport[39m { [33mChat[39m[33m,[39m [33mFriend[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { doc[33m,[39m updateDoc[33m,[39m deleteDoc[33m,[39m arrayRemove[33m,[39m arrayUnion } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+
+[Test Mode] ./src/components/chat/chat-group-manage-view.tsx:4:30
+Type error: Cannot find module '@nightlife/core' or its corresponding type declarations.
+
+[0m [90m 2 |[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mChat[39m[33m,[39m [33mFriend[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m   |[39m                              [31m[1m^[22m[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { doc[33m,[39m updateDoc[33m,[39m deleteDoc[33m,[39m arrayRemove[33m,[39m arrayUnion } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+
+[Test Mode] ./src/components/chat/chat-group-manage-view.tsx:5:68
+Type error: Cannot find module 'firebase/firestore' or its corresponding type declarations.
+
+[0m [90m 3 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m [90m 4 |[39m [36mimport[39m { [33mChat[39m[33m,[39m [33mFriend[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m { doc[33m,[39m updateDoc[33m,[39m deleteDoc[33m,[39m arrayRemove[33m,[39m arrayUnion } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m   |[39m                                                                    [31m[1m^[22m[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 8 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+
+[Test Mode] ./src/components/chat/chat-group-manage-view.tsx:6:31
+Type error: Cannot find module '@nightlife/core' or its corresponding type declarations.
+
+[0m [90m 4 |[39m [36mimport[39m { [33mChat[39m[33m,[39m [33mFriend[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { doc[33m,[39m updateDoc[33m,[39m deleteDoc[33m,[39m arrayRemove[33m,[39m arrayUnion } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m   |[39m                               [31m[1m^[22m[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 8 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 9 |[39m[0m
+
+[Test Mode] ./src/components/chat/chat-group-manage-view.tsx:7:32
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m  5 |[39m [36mimport[39m { doc[33m,[39m updateDoc[33m,[39m deleteDoc[33m,[39m arrayRemove[33m,[39m arrayUnion } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m  6 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m    |[39m                                [31m[1m^[22m[39m[0m
+[0m [90m  8 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m  9 |[39m[0m
+[0m [90m 10 |[39m [36minterface[39m [33mChatGroupManageViewProps[39m {[0m
+
+[Test Mode] ./src/components/chat/chat-group-manage-view.tsx:8:36
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m  6 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m  7 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m    |[39m                                    [31m[1m^[22m[39m[0m
+[0m [90m  9 |[39m[0m
+[0m [90m 10 |[39m [36minterface[39m [33mChatGroupManageViewProps[39m {[0m
+[0m [90m 11 |[39m   user[33m:[39m [33mUser[39m[0m
+
+[Test Mode] ./src/components/chat/chat-group-manage-view.tsx:70:35
+Type error: Parameter 'participantId' implicitly has an 'any' type.
+
+[0m [90m 68 |[39m       [33m<[39m[33mdiv[39m className[33m=[39m[32m"space-y-3"[39m[33m>[39m[0m
+[0m [90m 69 |[39m         [33m<[39m[33mh2[39m className[33m=[39m[32m"text-sm font-bold text-slate-400"[39m[33m>[39m{t([32m'chat.members'[39m)}[33m<[39m[33m/[39m[33mh2[39m[33m>[39m[0m
+[0m[31m[1m>[22m[39m[90m 70 |[39m         {group[33m.[39mparticipants[33m?[39m[33m.[39mmap((participantId) [33m=>[39m {[0m
+[0m [90m    |[39m                                   [31m[1m^[22m[39m[0m
+[0m [90m 71 |[39m           [36mconst[39m isMe [33m=[39m participantId [33m===[39m user[33m.[39muid[0m
+[0m [90m 72 |[39m           [36mreturn[39m ([0m
+[0m [90m 73 |[39m             [33m<[39m[33mCard[39m key[33m=[39m{participantId}[33m>[39m[0m
+
+[Test Mode] ./src/components/chat/chat-list-view.tsx:3:22
+Type error: Cannot find module 'firebase/auth' or its corresponding type declarations.
+
+[0m [90m 1 |[39m [32m'use client'[39m[0m
+[0m [90m 2 |[39m[0m
+[0m[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m [90m   |[39m                      [31m[1m^[22m[39m[0m
+[0m [90m 4 |[39m [36mimport[39m { [33mFriend[39m[33m,[39m [33mChat[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { doc[33m,[39m deleteDoc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+
+[Test Mode] ./src/components/chat/chat-list-view.tsx:4:30
+Type error: Cannot find module '@nightlife/core' or its corresponding type declarations.
+
+[0m [90m 2 |[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mFriend[39m[33m,[39m [33mChat[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m   |[39m                              [31m[1m^[22m[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { doc[33m,[39m deleteDoc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+
+[Test Mode] ./src/components/chat/chat-list-view.tsx:5:32
+Type error: Cannot find module 'firebase/firestore' or its corresponding type declarations.
+
+[0m [90m 3 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m [90m 4 |[39m [36mimport[39m { [33mFriend[39m[33m,[39m [33mChat[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m { doc[33m,[39m deleteDoc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m   |[39m                                [31m[1m^[22m[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 8 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+
+[Test Mode] ./src/components/chat/chat-list-view.tsx:6:31
+Type error: Cannot find module '@nightlife/core' or its corresponding type declarations.
+
+[0m [90m 4 |[39m [36mimport[39m { [33mFriend[39m[33m,[39m [33mChat[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { doc[33m,[39m deleteDoc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m   |[39m                               [31m[1m^[22m[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 8 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 9 |[39m[0m
+
+[Test Mode] ./src/components/chat/chat-list-view.tsx:7:32
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m  5 |[39m [36mimport[39m { doc[33m,[39m deleteDoc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m  6 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m    |[39m                                [31m[1m^[22m[39m[0m
+[0m [90m  8 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m  9 |[39m[0m
+[0m [90m 10 |[39m [36minterface[39m [33mChatListViewProps[39m {[0m
+
+[Test Mode] ./src/components/chat/chat-list-view.tsx:8:36
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m  6 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m  7 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m    |[39m                                    [31m[1m^[22m[39m[0m
+[0m [90m  9 |[39m[0m
+[0m [90m 10 |[39m [36minterface[39m [33mChatListViewProps[39m {[0m
+[0m [90m 11 |[39m   user[33m:[39m [33mUser[39m[0m
+
+[Test Mode] ./src/components/chat/chat-list-view.tsx:25:3
+Type error: 'onOpenGroupManage' is declared but its value is never read.
+
+[0m [90m 23 |[39m   groups[33m,[39m[0m
+[0m [90m 24 |[39m   onOpenChat[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 25 |[39m   onOpenGroupManage[33m,[39m[0m
+[0m [90m    |[39m   [31m[1m^[22m[39m[0m
+[0m [90m 26 |[39m   onAddFriend[33m,[39m[0m
+[0m [90m 27 |[39m   onCreateGroup[33m,[39m[0m
+[0m [90m 28 |[39m }[33m:[39m [33mChatListViewProps[39m) [33m=>[39m {[0m
+
+[Test Mode] ./src/components/chat/chat-room.tsx:4:22
+Type error: Cannot find module 'firebase/auth' or its corresponding type declarations.
+
+[0m [90m 2 |[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { useState[33m,[39m useEffect[33m,[39m useRef } [36mfrom[39m [32m'react'[39m[0m
+[0m[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m [90m   |[39m                      [31m[1m^[22m[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { [33mChatMessage[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { collection[33m,[39m query[33m,[39m orderBy[33m,[39m limit[33m,[39m onSnapshot[33m,[39m addDoc[33m,[39m deleteDoc[33m,[39m updateDoc[33m,[39m doc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+
+[Test Mode] ./src/components/chat/chat-room.tsx:5:29
+Type error: Cannot find module '@nightlife/core' or its corresponding type declarations.
+
+[0m [90m 3 |[39m [36mimport[39m { useState[33m,[39m useEffect[33m,[39m useRef } [36mfrom[39m [32m'react'[39m[0m
+[0m [90m 4 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m { [33mChatMessage[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m   |[39m                             [31m[1m^[22m[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { collection[33m,[39m query[33m,[39m orderBy[33m,[39m limit[33m,[39m onSnapshot[33m,[39m addDoc[33m,[39m deleteDoc[33m,[39m updateDoc[33m,[39m doc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+
+[Test Mode] ./src/components/chat/chat-room.tsx:6:98
+Type error: Cannot find module 'firebase/firestore' or its corresponding type declarations.
+
+[0m [90m 4 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { [33mChatMessage[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { collection[33m,[39m query[33m,[39m orderBy[33m,[39m limit[33m,[39m onSnapshot[33m,[39m addDoc[33m,[39m deleteDoc[33m,[39m updateDoc[33m,[39m doc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m   |[39m                                                                                                  [31m[1m^[22m[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 9 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mInput[39m[33m,[39m [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+
+[Test Mode] ./src/components/chat/chat-room.tsx:7:31
+Type error: Cannot find module '@nightlife/core' or its corresponding type declarations.
+
+[0m [90m  5 |[39m [36mimport[39m { [33mChatMessage[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m  6 |[39m [36mimport[39m { collection[33m,[39m query[33m,[39m orderBy[33m,[39m limit[33m,[39m onSnapshot[33m,[39m addDoc[33m,[39m deleteDoc[33m,[39m updateDoc[33m,[39m doc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m    |[39m                               [31m[1m^[22m[39m[0m
+[0m [90m  8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m  9 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mInput[39m[33m,[39m [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 10 |[39m [36mimport[39m { compressImage } [36mfrom[39m [32m'@/lib/image-compression'[39m[0m
+
+[Test Mode] ./src/components/chat/chat-room.tsx:8:32
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m  6 |[39m [36mimport[39m { collection[33m,[39m query[33m,[39m orderBy[33m,[39m limit[33m,[39m onSnapshot[33m,[39m addDoc[33m,[39m deleteDoc[33m,[39m updateDoc[33m,[39m doc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m  7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m    |[39m                                [31m[1m^[22m[39m[0m
+[0m [90m  9 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mInput[39m[33m,[39m [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 10 |[39m [36mimport[39m { compressImage } [36mfrom[39m [32m'@/lib/image-compression'[39m[0m
+[0m [90m 11 |[39m [36mimport[39m { [33mEphemeralImage[39m } [36mfrom[39m [32m'./ephemeral-image'[39m[0m
+
+[Test Mode] ./src/components/chat/chat-room.tsx:9:10
+Type error: 'Button' is declared but its value is never read.
+
+[0m [90m  7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m  8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m[31m[1m>[22m[39m[90m  9 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mInput[39m[33m,[39m [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m    |[39m          [31m[1m^[22m[39m[0m
+[0m [90m 10 |[39m [36mimport[39m { compressImage } [36mfrom[39m [32m'@/lib/image-compression'[39m[0m
+[0m [90m 11 |[39m [36mimport[39m { [33mEphemeralImage[39m } [36mfrom[39m [32m'./ephemeral-image'[39m[0m
+[0m [90m 12 |[39m[0m
+
+[Test Mode] ./src/components/chat/chat-room.tsx:9:37
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m  7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m  8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m[31m[1m>[22m[39m[90m  9 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mInput[39m[33m,[39m [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m    |[39m                                     [31m[1m^[22m[39m[0m
+[0m [90m 10 |[39m [36mimport[39m { compressImage } [36mfrom[39m [32m'@/lib/image-compression'[39m[0m
+[0m [90m 11 |[39m [36mimport[39m { [33mEphemeralImage[39m } [36mfrom[39m [32m'./ephemeral-image'[39m[0m
+[0m [90m 12 |[39m[0m
+
+[Test Mode] ./src/components/chat/chat-room.tsx:38:40
+Type error: Parameter 'snapshot' implicitly has an 'any' type.
+
+[0m [90m 36 |[39m     [36mconst[39m q [33m=[39m query(messagesRef[33m,[39m orderBy([32m'createdAt'[39m[33m,[39m [32m'asc'[39m)[33m,[39m limit([35m50[39m))[0m
+[0m [90m 37 |[39m[0m
+[0m[31m[1m>[22m[39m[90m 38 |[39m     [36mconst[39m unsubscribe [33m=[39m onSnapshot(q[33m,[39m (snapshot) [33m=>[39m {[0m
+[0m [90m    |[39m                                        [31m[1m^[22m[39m[0m
+[0m [90m 39 |[39m       [36mconst[39m msgs [33m=[39m snapshot[33m.[39mdocs[33m.[39mmap(doc [33m=>[39m ({[0m
+[0m [90m 40 |[39m         id[33m:[39m doc[33m.[39mid[33m,[39m[0m
+[0m [90m 41 |[39m         [33m...[39mdoc[33m.[39mdata()[0m
+
+[Test Mode] ./src/components/chat/chat-room.tsx:39:38
+Type error: Parameter 'doc' implicitly has an 'any' type.
+
+[0m [90m 37 |[39m[0m
+[0m [90m 38 |[39m     [36mconst[39m unsubscribe [33m=[39m onSnapshot(q[33m,[39m (snapshot) [33m=>[39m {[0m
+[0m[31m[1m>[22m[39m[90m 39 |[39m       [36mconst[39m msgs [33m=[39m snapshot[33m.[39mdocs[33m.[39mmap(doc [33m=>[39m ({[0m
+[0m [90m    |[39m                                      [31m[1m^[22m[39m[0m
+[0m [90m 40 |[39m         id[33m:[39m doc[33m.[39mid[33m,[39m[0m
+[0m [90m 41 |[39m         [33m...[39mdoc[33m.[39mdata()[0m
+[0m [90m 42 |[39m       })) [36mas[39m [33mChatMessage[39m[][0m
+
+[Test Mode] ./src/components/chat/chat-room.tsx:180:22
+Type error: Parameter 'e' implicitly has an 'any' type.
+
+[0m [90m 178 |[39m           placeholder[33m=[39m{t([32m'chat.typeMessage'[39m)}[0m
+[0m [90m 179 |[39m           value[33m=[39m{txt}[0m
+[0m[31m[1m>[22m[39m[90m 180 |[39m           onChange[33m=[39m{(e) [33m=>[39m setTxt(e[33m.[39mtarget[33m.[39mvalue)}[0m
+[0m [90m     |[39m                      [31m[1m^[22m[39m[0m
+[0m [90m 181 |[39m           onKeyDown[33m=[39m{(e) [33m=>[39m e[33m.[39mkey [33m===[39m [32m'Enter'[39m [33m&&[39m sendMessage(txt)}[0m
+[0m [90m 182 |[39m           className[33m=[39m[32m"flex-1"[39m[0m
+[0m [90m 183 |[39m         [33m/[39m[33m>[39m[0m
+
+[Test Mode] ./src/components/chat/chat-room.tsx:181:23
+Type error: Parameter 'e' implicitly has an 'any' type.
+
+[0m [90m 179 |[39m           value[33m=[39m{txt}[0m
+[0m [90m 180 |[39m           onChange[33m=[39m{(e) [33m=>[39m setTxt(e[33m.[39mtarget[33m.[39mvalue)}[0m
+[0m[31m[1m>[22m[39m[90m 181 |[39m           onKeyDown[33m=[39m{(e) [33m=>[39m e[33m.[39mkey [33m===[39m [32m'Enter'[39m [33m&&[39m sendMessage(txt)}[0m
+[0m [90m     |[39m                       [31m[1m^[22m[39m[0m
+[0m [90m 182 |[39m           className[33m=[39m[32m"flex-1"[39m[0m
+[0m [90m 183 |[39m         [33m/[39m[33m>[39m[0m
+[0m [90m 184 |[39m         [33m<[39m[33mbutton[39m[0m
+
+[Test Mode] ./src/components/chat/ephemeral-image.tsx:4:32
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m 2 |[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { useState[33m,[39m useEffect } [36mfrom[39m [32m'react'[39m[0m
+[0m[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m   |[39m                                [31m[1m^[22m[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 6 |[39m [36mimport[39m [33mImage[39m [36mfrom[39m [32m'next/image'[39m[0m
+[0m [90m 7 |[39m[0m
+
+[Test Mode] ./src/components/chat/ephemeral-image.tsx:5:22
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m 3 |[39m [36mimport[39m { useState[33m,[39m useEffect } [36mfrom[39m [32m'react'[39m[0m
+[0m [90m 4 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m { [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m   |[39m                      [31m[1m^[22m[39m[0m
+[0m [90m 6 |[39m [36mimport[39m [33mImage[39m [36mfrom[39m [32m'next/image'[39m[0m
+[0m [90m 7 |[39m[0m
+[0m [90m 8 |[39m [36minterface[39m [33mEphemeralImageProps[39m {[0m
+
+[Test Mode] ./src/components/error-boundary.tsx:4:22
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m 2 |[39m[0m
+[0m [90m 3 |[39m [36mimport[39m [33mReact[39m[33m,[39m { [33mComponent[39m[33m,[39m [33mErrorInfo[39m[33m,[39m [33mReactNode[39m } [36mfrom[39m [32m'react'[39m[0m
+[0m[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m   |[39m                      [31m[1m^[22m[39m[0m
+[0m [90m 5 |[39m[0m
+[0m [90m 6 |[39m [36minterface[39m [33mProps[39m {[0m
+[0m [90m 7 |[39m   children[33m:[39m [33mReactNode[39m[0m
+
+[Test Mode] ./src/components/global-overlay.tsx:4:29
+Type error: Cannot find module '@nightlife/core' or its corresponding type declarations.
+
+[0m [90m 2 |[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { useState[33m,[39m useEffect } [36mfrom[39m [32m'react'[39m[0m
+[0m[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mGlobalState[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m   |[39m                             [31m[1m^[22m[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 7 |[39m[0m
+
+[Test Mode] ./src/components/global-overlay.tsx:5:22
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m 3 |[39m [36mimport[39m { useState[33m,[39m useEffect } [36mfrom[39m [32m'react'[39m[0m
+[0m [90m 4 |[39m [36mimport[39m { [33mGlobalState[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m { [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m   |[39m                      [31m[1m^[22m[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 7 |[39m[0m
+[0m [90m 8 |[39m [36minterface[39m [33mGlobalOverlayProps[39m {[0m
+
+[Test Mode] ./src/components/global-overlay.tsx:6:32
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m 4 |[39m [36mimport[39m { [33mGlobalState[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m   |[39m                                [31m[1m^[22m[39m[0m
+[0m [90m 7 |[39m[0m
+[0m [90m 8 |[39m [36minterface[39m [33mGlobalOverlayProps[39m {[0m
+[0m [90m 9 |[39m   appState[33m:[39m [33mGlobalState[39m[0m
+
+[Test Mode] ./src/components/home-view.tsx:4:22
+Type error: Cannot find module 'firebase/auth' or its corresponding type declarations.
+
+[0m [90m 2 |[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { useState[33m,[39m useEffect } [36mfrom[39m [32m'react'[39m[0m
+[0m[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m [90m   |[39m                      [31m[1m^[22m[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { [33mUserProfile[39m[33m,[39m [33mFriend[39m[33m,[39m [33mFriendRequest[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { collection[33m,[39m onSnapshot[33m,[39m updateDoc[33m,[39m doc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+
+[Test Mode] ./src/components/home-view.tsx:5:52
+Type error: Cannot find module '@nightlife/core' or its corresponding type declarations.
+
+[0m [90m 3 |[39m [36mimport[39m { useState[33m,[39m useEffect } [36mfrom[39m [32m'react'[39m[0m
+[0m [90m 4 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m { [33mUserProfile[39m[33m,[39m [33mFriend[39m[33m,[39m [33mFriendRequest[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m   |[39m                                                    [31m[1m^[22m[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { collection[33m,[39m onSnapshot[33m,[39m updateDoc[33m,[39m doc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+
+[Test Mode] ./src/components/home-view.tsx:6:56
+Type error: Cannot find module 'firebase/firestore' or its corresponding type declarations.
+
+[0m [90m 4 |[39m [36mimport[39m { [33mUser[39m } [36mfrom[39m [32m'firebase/auth'[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { [33mUserProfile[39m[33m,[39m [33mFriend[39m[33m,[39m [33mFriendRequest[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { collection[33m,[39m onSnapshot[33m,[39m updateDoc[33m,[39m doc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m   |[39m                                                        [31m[1m^[22m[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 9 |[39m [36mimport[39m { [33mIcon[39m[33m,[39m [33mButton[39m[33m,[39m [33mCard[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+
+[Test Mode] ./src/components/home-view.tsx:7:31
+Type error: Cannot find module '@nightlife/core' or its corresponding type declarations.
+
+[0m [90m  5 |[39m [36mimport[39m { [33mUserProfile[39m[33m,[39m [33mFriend[39m[33m,[39m [33mFriendRequest[39m } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m  6 |[39m [36mimport[39m { collection[33m,[39m onSnapshot[33m,[39m updateDoc[33m,[39m doc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m    |[39m                               [31m[1m^[22m[39m[0m
+[0m [90m  8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m  9 |[39m [36mimport[39m { [33mIcon[39m[33m,[39m [33mButton[39m[33m,[39m [33mCard[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 10 |[39m [36mimport[39m { [33mQRCodeDisplay[39m } [36mfrom[39m [32m'./qr-code-display'[39m[0m
+
+[Test Mode] ./src/components/home-view.tsx:8:32
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m  6 |[39m [36mimport[39m { collection[33m,[39m onSnapshot[33m,[39m updateDoc[33m,[39m doc } [36mfrom[39m [32m'firebase/firestore'[39m[0m
+[0m [90m  7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m    |[39m                                [31m[1m^[22m[39m[0m
+[0m [90m  9 |[39m [36mimport[39m { [33mIcon[39m[33m,[39m [33mButton[39m[33m,[39m [33mCard[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 10 |[39m [36mimport[39m { [33mQRCodeDisplay[39m } [36mfrom[39m [32m'./qr-code-display'[39m[0m
+[0m [90m 11 |[39m[0m
+
+[Test Mode] ./src/components/home-view.tsx:9:36
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m  7 |[39m [36mimport[39m { getDbInstance } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m  8 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m[31m[1m>[22m[39m[90m  9 |[39m [36mimport[39m { [33mIcon[39m[33m,[39m [33mButton[39m[33m,[39m [33mCard[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m    |[39m                                    [31m[1m^[22m[39m[0m
+[0m [90m 10 |[39m [36mimport[39m { [33mQRCodeDisplay[39m } [36mfrom[39m [32m'./qr-code-display'[39m[0m
+[0m [90m 11 |[39m[0m
+[0m [90m 12 |[39m [36minterface[39m [33mHomeViewProps[39m {[0m
+
+[Test Mode] ./src/components/home-view.tsx:31:50
+Type error: Parameter 'snapshot' implicitly has an 'any' type.
+
+[0m [90m 29 |[39m     [36mconst[39m requestsRef [33m=[39m collection(db[33m,[39m [32m'users'[39m[33m,[39m user[33m.[39muid[33m,[39m [32m'requests'[39m)[0m
+[0m [90m 30 |[39m     [0m
+[0m[31m[1m>[22m[39m[90m 31 |[39m     [36mconst[39m unsubscribe [33m=[39m onSnapshot(requestsRef[33m,[39m (snapshot) [33m=>[39m {[0m
+[0m [90m    |[39m                                                  [31m[1m^[22m[39m[0m
+[0m [90m 32 |[39m       [36mconst[39m reqs [33m=[39m snapshot[33m.[39mdocs[33m.[39mmap(doc [33m=>[39m ({[0m
+[0m [90m 33 |[39m         id[33m:[39m doc[33m.[39mid[33m,[39m[0m
+[0m [90m 34 |[39m         [33m...[39mdoc[33m.[39mdata()[0m
+
+[Test Mode] ./src/components/home-view.tsx:32:38
+Type error: Parameter 'doc' implicitly has an 'any' type.
+
+[0m [90m 30 |[39m     [0m
+[0m [90m 31 |[39m     [36mconst[39m unsubscribe [33m=[39m onSnapshot(requestsRef[33m,[39m (snapshot) [33m=>[39m {[0m
+[0m[31m[1m>[22m[39m[90m 32 |[39m       [36mconst[39m reqs [33m=[39m snapshot[33m.[39mdocs[33m.[39mmap(doc [33m=>[39m ({[0m
+[0m [90m    |[39m                                      [31m[1m^[22m[39m[0m
+[0m [90m 33 |[39m         id[33m:[39m doc[33m.[39mid[33m,[39m[0m
+[0m [90m 34 |[39m         [33m...[39mdoc[33m.[39mdata()[0m
+[0m [90m 35 |[39m       })) [36mas[39m ([33mFriendRequest[39m [33m&[39m { id[33m:[39m string })[][0m
+
+[Test Mode] ./src/components/login-screen.tsx:4:25
+Type error: Cannot find module '@nightlife/core' or its corresponding type declarations.
+
+[0m [90m 2 |[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { useState } [36mfrom[39m [32m'react'[39m[0m
+[0m[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { useAuth } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m   |[39m                         [31m[1m^[22m[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mInput[39m[33m,[39m [33mCard[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 7 |[39m[0m
+
+[Test Mode] ./src/components/login-screen.tsx:5:32
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m 3 |[39m [36mimport[39m { useState } [36mfrom[39m [32m'react'[39m[0m
+[0m [90m 4 |[39m [36mimport[39m { useAuth } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m   |[39m                                [31m[1m^[22m[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mInput[39m[33m,[39m [33mCard[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 7 |[39m[0m
+[0m [90m 8 |[39m [36mexport[39m [36mconst[39m [33mLoginScreen[39m [33m=[39m () [33m=>[39m {[0m
+
+[Test Mode] ./src/components/login-screen.tsx:6:37
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m 4 |[39m [36mimport[39m { useAuth } [36mfrom[39m [32m'@nightlife/core'[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mInput[39m[33m,[39m [33mCard[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m   |[39m                                     [31m[1m^[22m[39m[0m
+[0m [90m 7 |[39m[0m
+[0m [90m 8 |[39m [36mexport[39m [36mconst[39m [33mLoginScreen[39m [33m=[39m () [33m=>[39m {[0m
+[0m [90m 9 |[39m   [36mconst[39m { t } [33m=[39m useTranslation()[0m
+
+[Test Mode] ./src/components/login-screen.tsx:82:24
+Type error: Parameter 'e' implicitly has an 'any' type.
+
+[0m [90m 80 |[39m             placeholder[33m=[39m{t([32m'login.email'[39m)}[0m
+[0m [90m 81 |[39m             value[33m=[39m{inputEmail}[0m
+[0m[31m[1m>[22m[39m[90m 82 |[39m             onChange[33m=[39m{(e) [33m=>[39m setInputEmail(e[33m.[39mtarget[33m.[39mvalue)}[0m
+[0m [90m    |[39m                        [31m[1m^[22m[39m[0m
+[0m [90m 83 |[39m             required[0m
+[0m [90m 84 |[39m             disabled[33m=[39m{busy}[0m
+[0m [90m 85 |[39m           [33m/[39m[33m>[39m[0m
+
+[Test Mode] ./src/components/login-screen.tsx:92:26
+Type error: Parameter 'e' implicitly has an 'any' type.
+
+[0m [90m 90 |[39m               placeholder[33m=[39m{t([32m'login.password'[39m)}[0m
+[0m [90m 91 |[39m               value[33m=[39m{pass}[0m
+[0m[31m[1m>[22m[39m[90m 92 |[39m               onChange[33m=[39m{(e) [33m=>[39m setPass(e[33m.[39mtarget[33m.[39mvalue)}[0m
+[0m [90m    |[39m                          [31m[1m^[22m[39m[0m
+[0m [90m 93 |[39m               required[0m
+[0m [90m 94 |[39m               disabled[33m=[39m{busy}[0m
+[0m [90m 95 |[39m             [33m/[39m[33m>[39m[0m
+
+[Test Mode] ./src/components/tab-navigation.tsx:3:22
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m 1 |[39m [32m'use client'[39m[0m
+[0m [90m 2 |[39m[0m
+[0m[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m   |[39m                      [31m[1m^[22m[39m[0m
+[0m [90m 4 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m 5 |[39m[0m
+[0m [90m 6 |[39m [36minterface[39m [33mTabNavigationProps[39m {[0m
+
+[Test Mode] ./src/components/tab-navigation.tsx:4:32
+Type error: Cannot find module '@nightlife/ui' or its corresponding type declarations.
+
+[0m [90m 2 |[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { [33mIcon[39m } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { useTranslation } [36mfrom[39m [32m'@nightlife/ui'[39m[0m
+[0m [90m   |[39m                                [31m[1m^[22m[39m[0m
+[0m [90m 5 |[39m[0m
+[0m [90m 6 |[39m [36minterface[39m [33mTabNavigationProps[39m {[0m
+[0m [90m 7 |[39m   activeTab[33m:[39m [32m'home'[39m [33m|[39m [32m'chat'[39m[0m
+
+[Test Mode] ./src/lib/image-compression.ts:3:24
+Type error: Cannot find module 'compressorjs' or its corresponding type declarations.
+
+[0m [90m 1 |[39m [32m'use client'[39m[0m
+[0m [90m 2 |[39m[0m
+[0m[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m [33mCompressor[39m [36mfrom[39m [32m'compressorjs'[39m[0m
+[0m [90m   |[39m                        [31m[1m^[22m[39m[0m
+[0m [90m 4 |[39m[0m
+[0m [90m 5 |[39m [90m/**[39m[0m
+[0m [90m 6 |[39m [90m * Komprimiert ein Bild-File zu Base64[39m[0m
+
+[Test Mode] ./src/lib/image-compression.ts:23:15
+Type error: Parameter 'result' implicitly has an 'any' type.
+
+[0m [90m 21 |[39m       maxWidth[33m,[39m[0m
+[0m [90m 22 |[39m       maxHeight[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 23 |[39m       success(result) {[0m
+[0m [90m    |[39m               [31m[1m^[22m[39m[0m
+[0m [90m 24 |[39m         [36mconst[39m reader [33m=[39m [36mnew[39m [33mFileReader[39m()[0m
+[0m [90m 25 |[39m         reader[33m.[39mreadAsDataURL(result [36mas[39m [33mBlob[39m)[0m
+[0m [90m 26 |[39m         reader[33m.[39monloadend [33m=[39m () [33m=>[39m resolve(reader[33m.[39mresult [36mas[39m string)[0m
+
+[Test Mode] ./src/lib/image-compression.ts:29:13
+Type error: Parameter 'err' implicitly has an 'any' type.
+
+[0m [90m 27 |[39m         reader[33m.[39monerror [33m=[39m reject[0m
+[0m [90m 28 |[39m       }[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 29 |[39m       error(err) {[0m
+[0m [90m    |[39m             [31m[1m^[22m[39m[0m
+[0m [90m 30 |[39m         reject(err)[0m
+[0m [90m 31 |[39m       }[33m,[39m[0m
+[0m [90m 32 |[39m     })[0m
+
+[Test Mode] ./src/lib/qr-code.ts:3:20
+Type error: Cannot find module 'qrcode' or its corresponding type declarations.
+
+[0m [90m 1 |[39m [32m'use client'[39m[0m
+[0m [90m 2 |[39m[0m
+[0m[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m [33mQRCode[39m [36mfrom[39m [32m'qrcode'[39m[0m
+[0m [90m   |[39m                    [31m[1m^[22m[39m[0m
+[0m [90m 4 |[39m[0m
+[0m [90m 5 |[39m [90m/**[39m[0m
+[0m [90m 6 |[39m [90m * Generiert einen QR-Code als Data-URL[39m[0m
+
+[Test Mode] ./tailwind.config.ts:5:13
+Type error: Type '{ theme: { extend: { colors: { primary: "#00ffff"; secondary: "#0891b2"; accent: "#06b6d4"; 'bg-primary': "#0f172a"; 'bg-secondary': "#1e293b"; 'bg-tertiary': "#334155"; success: "#10b981"; warning: "#f59e0b"; error: "#ef4444"; info: "#3b82f6"; }; ... 4 more ...; animation: { ...; }; }; }; }' is not assignable to type 'Partial<Config>'.
+  The types of 'theme.extend.fontWeight' are incompatible between these types.
+    Type '{ readonly normal: 400; readonly medium: 500; readonly semibold: 600; readonly bold: 700; }' is not assignable to type 'ResolvableTo<KeyValuePair<string, string>> | undefined'.
+      Type '{ readonly normal: 400; readonly medium: 500; readonly semibold: 600; readonly bold: 700; }' is not assignable to type 'KeyValuePair<string, string>'.
+        Property 'normal' is incompatible with index signature.
+          Type 'number' is not assignable to type 'string'.
+
+[0m [90m 3 |[39m[0m
+[0m [90m 4 |[39m [36mconst[39m config[33m:[39m [33mConfig[39m [33m=[39m {[0m
+[0m[31m[1m>[22m[39m[90m 5 |[39m   presets[33m:[39m [nightlifePreset][33m,[39m[0m
+[0m [90m   |[39m             [31m[1m^[22m[39m[0m
+[0m [90m 6 |[39m   content[33m:[39m [[0m
+[0m [90m 7 |[39m     [32m'./src/pages/**/*.{js,ts,jsx,tsx,mdx}'[39m[33m,[39m[0m
+[0m [90m 8 |[39m     [32m'./src/components/**/*.{js,ts,jsx,tsx,mdx}'[39m[33m,[39m[0m
+
+[Test Mode] ../../packages/core/src/firebase/firestore.ts:20:3
+Type error: 'DocumentReference' is declared but its value is never read.
+
+[0m [90m 18 |[39m   getDocs[33m,[39m[0m
+[0m [90m 19 |[39m   onSnapshot[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 20 |[39m   [33mDocumentReference[39m[33m,[39m[0m
+[0m [90m    |[39m   [31m[1m^[22m[39m[0m
+[0m [90m 21 |[39m   [33mCollectionReference[39m[33m,[39m[0m
+[0m [90m 22 |[39m   [33mQueryConstraint[39m[33m,[39m[0m
+[0m [90m 23 |[39m   [33mDocumentData[39m[33m,[39m[0m
+
+[Test Mode] ../../packages/core/src/firebase/firestore.ts:21:3
+Type error: 'CollectionReference' is declared but its value is never read.
+
+[0m [90m 19 |[39m   onSnapshot[33m,[39m[0m
+[0m [90m 20 |[39m   [33mDocumentReference[39m[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 21 |[39m   [33mCollectionReference[39m[33m,[39m[0m
+[0m [90m    |[39m   [31m[1m^[22m[39m[0m
+[0m [90m 22 |[39m   [33mQueryConstraint[39m[33m,[39m[0m
+[0m [90m 23 |[39m   [33mDocumentData[39m[33m,[39m[0m
+[0m [90m 24 |[39m   [33mUnsubscribe[39m[33m,[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-chat-messages.ts:12:39
+Type error: 'deleteDocument' is declared but its value is never read.
+
+[0m [90m 10 |[39m [36mimport[39m { useState } [36mfrom[39m [32m'react'[39m[33m;[39m[0m
+[0m [90m 11 |[39m [36mimport[39m { [33mMessage[39m[33m,[39m [33mMessageType[39m[33m,[39m [33mChat[39m } [36mfrom[39m [32m'@nightlife-os/shared-types'[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 12 |[39m [36mimport[39m { setDocument[33m,[39m updateDocument[33m,[39m deleteDocument[33m,[39m getDocument } [36mfrom[39m [32m'../firebase/firestore'[39m[33m;[39m[0m
+[0m [90m    |[39m                                       [31m[1m^[22m[39m[0m
+[0m [90m 13 |[39m [36mimport[39m { getFirestoreInstance } [36mfrom[39m [32m'../firebase/init'[39m[33m;[39m[0m
+[0m [90m 14 |[39m [36mimport[39m { collection[33m,[39m doc } [36mfrom[39m [32m'firebase/firestore'[39m[33m;[39m[0m
+[0m [90m 15 |[39m [36mimport[39m { uploadChatMedia } [36mfrom[39m [32m'../utils/storage'[39m[33m;[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-chat-messages.ts:129:22
+Type error: Type '"audio"' is not assignable to type 'MessageType'.
+
+[0m [90m 127 |[39m       [36mlet[39m messageType[33m:[39m [33mMessageType[39m [33m=[39m type [33m||[39m [32m'text'[39m[33m;[39m[0m
+[0m [90m 128 |[39m       [36mif[39m (imageFile) messageType [33m=[39m [32m'image'[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 129 |[39m       [36mif[39m (audioFile) messageType [33m=[39m [32m'audio'[39m[33m;[39m[0m
+[0m [90m     |[39m                      [31m[1m^[22m[39m[0m
+[0m [90m 130 |[39m       [36mif[39m (videoFile) messageType [33m=[39m [32m'video'[39m[33m;[39m[0m
+[0m [90m 131 |[39m[0m
+[0m [90m 132 |[39m       [90m// Erstelle Message[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-chat-messages.ts:138:9
+Type error: Type '"audio" | "video" | "image" | undefined' is not assignable to type 'MediaType | undefined'.
+  Type '"audio"' is not assignable to type 'MediaType | undefined'.
+
+[0m [90m 136 |[39m         text[33m:[39m text [33m||[39m undefined[33m,[39m[0m
+[0m [90m 137 |[39m         mediaUrl[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 138 |[39m         mediaType[33m,[39m[0m
+[0m [90m     |[39m         [31m[1m^[22m[39m[0m
+[0m [90m 139 |[39m         durationSeconds[33m,[39m[0m
+[0m [90m 140 |[39m         sender[33m:[39m senderId[33m,[39m[0m
+[0m [90m 141 |[39m         senderName[33m,[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-chat-messages.ts:310:9
+Type error: Object literal may only specify known properties, and 'messageId' does not exist in type 'Message'.
+
+[0m [90m 308 |[39m       [90m// Erstelle Poll-Message[39m[0m
+[0m [90m 309 |[39m       [36mconst[39m pollMessage[33m:[39m [33mMessage[39m [33m=[39m {[0m
+[0m[31m[1m>[22m[39m[90m 310 |[39m         messageId[33m,[39m[0m
+[0m [90m     |[39m         [31m[1m^[22m[39m[0m
+[0m [90m 311 |[39m         type[33m:[39m [32m'poll'[39m[33m,[39m[0m
+[0m [90m 312 |[39m         poll[33m:[39m {[0m
+[0m [90m 313 |[39m           question[33m:[39m question[33m.[39mtrim()[33m,[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-chat-messages.ts:380:13
+Type error: 'messageRef' is declared but its value is never read.
+
+[0m [90m 378 |[39m     [36mtry[39m {[0m
+[0m [90m 379 |[39m       [36mconst[39m db [33m=[39m getFirestoreInstance()[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 380 |[39m       [36mconst[39m messageRef [33m=[39m doc(db[33m,[39m [32m`clubs/${clubId}/chats/${chatId}/messages/${messageId}`[39m)[33m;[39m[0m
+[0m [90m     |[39m             [31m[1m^[22m[39m[0m
+[0m [90m 381 |[39m       [0m
+[0m [90m 382 |[39m       [90m// Hole aktuelle Message[39m[0m
+[0m [90m 383 |[39m       [36mconst[39m { getDocument } [33m=[39m [36mawait[39m [36mimport[39m([32m'../firebase/firestore'[39m)[33m;[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-chats.ts:58:30
+Type error: Property 'lastMessageAt' does not exist on type 'Chat'. Did you mean 'lastMessage'?
+
+[0m [90m 56 |[39m         [36mconst[39m myChats [33m=[39m data[0m
+[0m [90m 57 |[39m           [33m.[39mfilter(chat [33m=>[39m chat[33m.[39mparticipants[33m?[39m[33m.[39mincludes(uid))[0m
+[0m[31m[1m>[22m[39m[90m 58 |[39m           [33m.[39msort((a[33m,[39m b) [33m=>[39m (b[33m.[39mlastMessageAt [33m||[39m [35m0[39m) [33m-[39m (a[33m.[39mlastMessageAt [33m||[39m [35m0[39m))[33m;[39m[0m
+[0m [90m    |[39m                              [31m[1m^[22m[39m[0m
+[0m [90m 59 |[39m         setChats(myChats)[33m;[39m[0m
+[0m [90m 60 |[39m         setLoading([36mfalse[39m)[33m;[39m[0m
+[0m [90m 61 |[39m       }[33m,[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-chats.ts:58:55
+Type error: Property 'lastMessageAt' does not exist on type 'Chat'. Did you mean 'lastMessage'?
+
+[0m [90m 56 |[39m         [36mconst[39m myChats [33m=[39m data[0m
+[0m [90m 57 |[39m           [33m.[39mfilter(chat [33m=>[39m chat[33m.[39mparticipants[33m?[39m[33m.[39mincludes(uid))[0m
+[0m[31m[1m>[22m[39m[90m 58 |[39m           [33m.[39msort((a[33m,[39m b) [33m=>[39m (b[33m.[39mlastMessageAt [33m||[39m [35m0[39m) [33m-[39m (a[33m.[39mlastMessageAt [33m||[39m [35m0[39m))[33m;[39m[0m
+[0m [90m    |[39m                                                       [31m[1m^[22m[39m[0m
+[0m [90m 59 |[39m         setChats(myChats)[33m;[39m[0m
+[0m [90m 60 |[39m         setLoading([36mfalse[39m)[33m;[39m[0m
+[0m [90m 61 |[39m       }[33m,[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-chats.ts:92:9
+Type error: Object literal may only specify known properties, and 'chatId' does not exist in type 'Chat'.
+
+[0m [90m 90 |[39m       [90m// Erstelle neuen privaten Chat[39m[0m
+[0m [90m 91 |[39m       [36mconst[39m newChat[33m:[39m [33mChat[39m [33m=[39m {[0m
+[0m[31m[1m>[22m[39m[90m 92 |[39m         chatId[33m,[39m[0m
+[0m [90m    |[39m         [31m[1m^[22m[39m[0m
+[0m [90m 93 |[39m         type[33m:[39m [32m'private'[39m[33m,[39m[0m
+[0m [90m 94 |[39m         participants[33m:[39m [uid[33m,[39m otherUserId][33m,[39m[0m
+[0m [90m 95 |[39m         lastMessageAt[33m:[39m [33mDate[39m[33m.[39mnow()[33m,[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-chats.ts:128:9
+Type error: Object literal may only specify known properties, and 'chatId' does not exist in type 'Chat'.
+
+[0m [90m 126 |[39m       [90m// Erstelle Gruppen-Chat[39m[0m
+[0m [90m 127 |[39m       [36mconst[39m newChat[33m:[39m [33mChat[39m [33m=[39m {[0m
+[0m[31m[1m>[22m[39m[90m 128 |[39m         chatId[33m,[39m[0m
+[0m [90m     |[39m         [31m[1m^[22m[39m[0m
+[0m [90m 129 |[39m         type[33m:[39m [32m'group'[39m[33m,[39m[0m
+[0m [90m 130 |[39m         name[33m,[39m[0m
+[0m [90m 131 |[39m         createdBy[33m:[39m creatorId[33m,[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-chats.ts:194:16
+Type error: Property 'createdBy' does not exist on type 'Chat'.
+
+[0m [90m 192 |[39m[0m
+[0m [90m 193 |[39m       [90m// Prüfe, ob aktueller User Creator ist[39m[0m
+[0m[31m[1m>[22m[39m[90m 194 |[39m       [36mif[39m (chat[33m.[39mcreatedBy [33m!==[39m uid) {[0m
+[0m [90m     |[39m                [31m[1m^[22m[39m[0m
+[0m [90m 195 |[39m         [36mthrow[39m [36mnew[39m [33mError[39m([32m'Only creator can remove members'[39m)[33m;[39m[0m
+[0m [90m 196 |[39m       }[0m
+[0m [90m 197 |[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-chats.ts:258:16
+Type error: Property 'createdBy' does not exist on type 'Chat'.
+
+[0m [90m 256 |[39m[0m
+[0m [90m 257 |[39m       [90m// Prüfe, ob aktueller User Creator ist[39m[0m
+[0m[31m[1m>[22m[39m[90m 258 |[39m       [36mif[39m (chat[33m.[39mcreatedBy [33m!==[39m creatorId) {[0m
+[0m [90m     |[39m                [31m[1m^[22m[39m[0m
+[0m [90m 259 |[39m         [36mthrow[39m [36mnew[39m [33mError[39m([32m'Only creator can delete group'[39m)[33m;[39m[0m
+[0m [90m 260 |[39m       }[0m
+[0m [90m 261 |[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-club-state.ts:47:32
+Type error: Cannot find name 'error'. Did you mean 'Error'?
+
+[0m [90m 45 |[39m   }[33m,[39m [clubId])[33m;[39m[0m
+[0m [90m 46 |[39m[0m
+[0m[31m[1m>[22m[39m[90m 47 |[39m   [36mreturn[39m { clubState[33m,[39m loading[33m,[39m error }[33m;[39m[0m
+[0m [90m    |[39m                                [31m[1m^[22m[39m[0m
+[0m [90m 48 |[39m }[0m
+[0m [90m 49 |[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-friends.ts:116:9
+Type error: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+
+[0m [90m 114 |[39m       [36mconst[39m request[33m:[39m [33mFriendRequest[39m [33m=[39m {[0m
+[0m [90m 115 |[39m         requesterId[33m:[39m uid[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 116 |[39m         email[33m:[39m myUserDoc[33m.[39memail[33m,[39m[0m
+[0m [90m     |[39m         [31m[1m^[22m[39m[0m
+[0m [90m 117 |[39m         displayName[33m:[39m myUserDoc[33m.[39mdisplayName[33m,[39m[0m
+[0m [90m 118 |[39m         photoURL[33m:[39m myUserDoc[33m.[39mphotoURL[33m,[39m[0m
+[0m [90m 119 |[39m         friendCode[33m:[39m myUserDoc[33m.[39mfriendCode [33m||[39m [32m''[39m[33m,[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-friends.ts:117:9
+Type error: Type 'string | undefined' is not assignable to type 'string | null'.
+  Type 'undefined' is not assignable to type 'string | null'.
+
+[0m [90m 115 |[39m         requesterId[33m:[39m uid[33m,[39m[0m
+[0m [90m 116 |[39m         email[33m:[39m myUserDoc[33m.[39memail[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 117 |[39m         displayName[33m:[39m myUserDoc[33m.[39mdisplayName[33m,[39m[0m
+[0m [90m     |[39m         [31m[1m^[22m[39m[0m
+[0m [90m 118 |[39m         photoURL[33m:[39m myUserDoc[33m.[39mphotoURL[33m,[39m[0m
+[0m [90m 119 |[39m         friendCode[33m:[39m myUserDoc[33m.[39mfriendCode [33m||[39m [32m''[39m[33m,[39m[0m
+[0m [90m 120 |[39m         message[33m:[39m message[33m,[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-friends.ts:118:9
+Type error: Type 'string | undefined' is not assignable to type 'string | null'.
+  Type 'undefined' is not assignable to type 'string | null'.
+
+[0m [90m 116 |[39m         email[33m:[39m myUserDoc[33m.[39memail[33m,[39m[0m
+[0m [90m 117 |[39m         displayName[33m:[39m myUserDoc[33m.[39mdisplayName[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 118 |[39m         photoURL[33m:[39m myUserDoc[33m.[39mphotoURL[33m,[39m[0m
+[0m [90m     |[39m         [31m[1m^[22m[39m[0m
+[0m [90m 119 |[39m         friendCode[33m:[39m myUserDoc[33m.[39mfriendCode [33m||[39m [32m''[39m[33m,[39m[0m
+[0m [90m 120 |[39m         message[33m:[39m message[33m,[39m[0m
+[0m [90m 121 |[39m         status[33m:[39m [32m'pending'[39m[33m,[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-friends.ts:160:9
+Type error: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+
+[0m [90m 158 |[39m       [36mconst[39m theirFriend[33m:[39m [33mFriend[39m [33m=[39m {[0m
+[0m [90m 159 |[39m         friendId[33m:[39m uid[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 160 |[39m         email[33m:[39m myUserDoc[33m.[39memail[33m,[39m[0m
+[0m [90m     |[39m         [31m[1m^[22m[39m[0m
+[0m [90m 161 |[39m         displayName[33m:[39m myUserDoc[33m.[39mdisplayName[33m,[39m[0m
+[0m [90m 162 |[39m         photoURL[33m:[39m myUserDoc[33m.[39mphotoURL[33m,[39m[0m
+[0m [90m 163 |[39m         friendCode[33m:[39m myUserDoc[33m.[39mfriendCode [33m||[39m [32m''[39m[33m,[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-friends.ts:161:9
+Type error: Type 'string | undefined' is not assignable to type 'string | null'.
+  Type 'undefined' is not assignable to type 'string | null'.
+
+[0m [90m 159 |[39m         friendId[33m:[39m uid[33m,[39m[0m
+[0m [90m 160 |[39m         email[33m:[39m myUserDoc[33m.[39memail[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 161 |[39m         displayName[33m:[39m myUserDoc[33m.[39mdisplayName[33m,[39m[0m
+[0m [90m     |[39m         [31m[1m^[22m[39m[0m
+[0m [90m 162 |[39m         photoURL[33m:[39m myUserDoc[33m.[39mphotoURL[33m,[39m[0m
+[0m [90m 163 |[39m         friendCode[33m:[39m myUserDoc[33m.[39mfriendCode [33m||[39m [32m''[39m[33m,[39m[0m
+[0m [90m 164 |[39m         createdAt[33m:[39m [33mDate[39m[33m.[39mnow()[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-friends.ts:162:9
+Type error: Type 'string | undefined' is not assignable to type 'string | null'.
+  Type 'undefined' is not assignable to type 'string | null'.
+
+[0m [90m 160 |[39m         email[33m:[39m myUserDoc[33m.[39memail[33m,[39m[0m
+[0m [90m 161 |[39m         displayName[33m:[39m myUserDoc[33m.[39mdisplayName[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 162 |[39m         photoURL[33m:[39m myUserDoc[33m.[39mphotoURL[33m,[39m[0m
+[0m [90m     |[39m         [31m[1m^[22m[39m[0m
+[0m [90m 163 |[39m         friendCode[33m:[39m myUserDoc[33m.[39mfriendCode [33m||[39m [32m''[39m[33m,[39m[0m
+[0m [90m 164 |[39m         createdAt[33m:[39m [33mDate[39m[33m.[39mnow()[0m
+[0m [90m 165 |[39m       }[33m;[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-unread-messages.ts:75:11
+Type error: Argument of type 'QueryFieldFilterConstraint' is not assignable to parameter of type 'QueryConstraint[]'.
+  Type 'QueryFieldFilterConstraint' is missing the following properties from type 'QueryConstraint[]': length, pop, push, concat, and 35 more.
+
+[0m [90m 73 |[39m         [36mconst[39m chatsQuery [33m=[39m [36mawait[39m getCollection[33m<[39m[33mChat[39m[33m>[39m([0m
+[0m [90m 74 |[39m           [32m`clubs/${clubId}/chats`[39m[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 75 |[39m           where([32m'participants'[39m[33m,[39m [32m'array-contains'[39m[33m,[39m uid)[0m
+[0m [90m    |[39m           [31m[1m^[22m[39m[0m
+[0m [90m 76 |[39m         )[33m;[39m[0m
+[0m [90m 77 |[39m[0m
+[0m [90m 78 |[39m         [36mconst[39m chats [33m=[39m chatsQuery [33m||[39m [][33m;[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-unread-messages.ts:84:22
+Type error: Property 'chatId' does not exist on type 'Chat'.
+
+[0m [90m 82 |[39m[0m
+[0m [90m 83 |[39m         [36mfor[39m ([36mconst[39m chat [36mof[39m chats) {[0m
+[0m[31m[1m>[22m[39m[90m 84 |[39m           [36mif[39m ([33m![39mchat[33m?[39m[33m.[39mchatId) [36mcontinue[39m[33m;[39m[0m
+[0m [90m    |[39m                      [31m[1m^[22m[39m[0m
+[0m [90m 85 |[39m[0m
+[0m [90m 86 |[39m           [36mtry[39m {[0m
+[0m [90m 87 |[39m             [90m// Hole ChatMetadata[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-unread-messages.ts:90:42
+Type error: Property 'chatId' does not exist on type 'Chat'.
+
+[0m [90m 88 |[39m             [36mconst[39m metadataList [33m=[39m [36mawait[39m getCollection[33m<[39m[33mChatMetadata[39m[33m>[39m([0m
+[0m [90m 89 |[39m               [32m`users/${uid}/chatMetadata`[39m[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 90 |[39m               where([32m'chatId'[39m[33m,[39m [32m'=='[39m[33m,[39m chat[33m.[39mchatId)[33m,[39m[0m
+[0m [90m    |[39m                                          [31m[1m^[22m[39m[0m
+[0m [90m 91 |[39m               limit([35m1[39m)[0m
+[0m [90m 92 |[39m             )[33m;[39m[0m
+[0m [90m 93 |[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-unread-messages.ts:91:15
+Type error: Expected 1-2 arguments, but got 3.
+
+[0m [90m 89 |[39m               [32m`users/${uid}/chatMetadata`[39m[33m,[39m[0m
+[0m [90m 90 |[39m               where([32m'chatId'[39m[33m,[39m [32m'=='[39m[33m,[39m chat[33m.[39mchatId)[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 91 |[39m               limit([35m1[39m)[0m
+[0m [90m    |[39m               [31m[1m^[22m[39m[0m
+[0m [90m 92 |[39m             )[33m;[39m[0m
+[0m [90m 93 |[39m[0m
+[0m [90m 94 |[39m             [36mconst[39m metadata [33m=[39m metadataList[33m?[39m[33m.[39m[[35m0[39m][33m;[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-unread-messages.ts:99:45
+Type error: Property 'chatId' does not exist on type 'Chat'.
+
+[0m [90m  97 |[39m             [90m// Zähle Messages nach lastSeen[39m[0m
+[0m [90m  98 |[39m             [36mconst[39m messagesQuery [33m=[39m [36mawait[39m getCollection[33m<[39m[33mMessage[39m[33m>[39m([0m
+[0m[31m[1m>[22m[39m[90m  99 |[39m               [32m`clubs/${clubId}/chats/${chat.chatId}/messages`[39m[33m,[39m[0m
+[0m [90m     |[39m                                             [31m[1m^[22m[39m[0m
+[0m [90m 100 |[39m               where([32m'createdAt'[39m[33m,[39m [32m'>'[39m[33m,[39m lastSeen)[33m,[39m[0m
+[0m [90m 101 |[39m               where([32m'sender'[39m[33m,[39m [32m'!='[39m[33m,[39m uid)[33m,[39m [90m// Nur fremde Messages[39m[0m
+[0m [90m 102 |[39m               orderBy([32m'createdAt'[39m[33m,[39m [32m'desc'[39m)[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-unread-messages.ts:101:15
+Type error: Expected 1-2 arguments, but got 4.
+
+[0m [90m  99 |[39m               [32m`clubs/${clubId}/chats/${chat.chatId}/messages`[39m[33m,[39m[0m
+[0m [90m 100 |[39m               where([32m'createdAt'[39m[33m,[39m [32m'>'[39m[33m,[39m lastSeen)[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 101 |[39m               where([32m'sender'[39m[33m,[39m [32m'!='[39m[33m,[39m uid)[33m,[39m [90m// Nur fremde Messages[39m[0m
+[0m [90m     |[39m               [31m[1m^[22m[39m[0m
+[0m [90m 102 |[39m               orderBy([32m'createdAt'[39m[33m,[39m [32m'desc'[39m)[0m
+[0m [90m 103 |[39m             )[33m;[39m[0m
+[0m [90m 104 |[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-unread-messages.ts:106:31
+Type error: Property 'chatId' does not exist on type 'Chat'.
+
+[0m [90m 104 |[39m[0m
+[0m [90m 105 |[39m             [36mconst[39m unreadMessages [33m=[39m messagesQuery [33m||[39m [][33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 106 |[39m             unreadCounts[chat[33m.[39mchatId] [33m=[39m unreadMessages[33m.[39mlength[33m;[39m[0m
+[0m [90m     |[39m                               [31m[1m^[22m[39m[0m
+[0m [90m 107 |[39m           } [36mcatch[39m (err) {[0m
+[0m [90m 108 |[39m             console[33m.[39merror([32m`Error counting unread for chat ${chat.chatId}:`[39m[33m,[39m err)[33m;[39m[0m
+[0m [90m 109 |[39m             unreadCounts[chat[33m.[39mchatId] [33m=[39m [35m0[39m[33m;[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-unread-messages.ts:108:66
+Type error: Property 'chatId' does not exist on type 'Chat'.
+
+[0m [90m 106 |[39m             unreadCounts[chat[33m.[39mchatId] [33m=[39m unreadMessages[33m.[39mlength[33m;[39m[0m
+[0m [90m 107 |[39m           } [36mcatch[39m (err) {[0m
+[0m[31m[1m>[22m[39m[90m 108 |[39m             console[33m.[39merror([32m`Error counting unread for chat ${chat.chatId}:`[39m[33m,[39m err)[33m;[39m[0m
+[0m [90m     |[39m                                                                  [31m[1m^[22m[39m[0m
+[0m [90m 109 |[39m             unreadCounts[chat[33m.[39mchatId] [33m=[39m [35m0[39m[33m;[39m[0m
+[0m [90m 110 |[39m           }[0m
+[0m [90m 111 |[39m         }[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-unread-messages.ts:109:31
+Type error: Property 'chatId' does not exist on type 'Chat'.
+
+[0m [90m 107 |[39m           } [36mcatch[39m (err) {[0m
+[0m [90m 108 |[39m             console[33m.[39merror([32m`Error counting unread for chat ${chat.chatId}:`[39m[33m,[39m err)[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 109 |[39m             unreadCounts[chat[33m.[39mchatId] [33m=[39m [35m0[39m[33m;[39m[0m
+[0m [90m     |[39m                               [31m[1m^[22m[39m[0m
+[0m [90m 110 |[39m           }[0m
+[0m [90m 111 |[39m         }[0m
+[0m [90m 112 |[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-unread-messages.ts:124:11
+Type error: Argument of type 'QueryFieldFilterConstraint' is not assignable to parameter of type '(data: Chat[]) => void'.
+  Type 'QueryFieldFilterConstraint' provides no match for the signature '(data: Chat[]): void'.
+
+[0m [90m 122 |[39m         unsubscribeChats [33m=[39m onCollectionSnapshot[33m<[39m[33mChat[39m[33m>[39m([0m
+[0m [90m 123 |[39m           [32m`clubs/${clubId}/chats`[39m[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 124 |[39m           where([32m'participants'[39m[33m,[39m [32m'array-contains'[39m[33m,[39m uid)[33m,[39m[0m
+[0m [90m     |[39m           [31m[1m^[22m[39m[0m
+[0m [90m 125 |[39m           [36masync[39m (updatedChats) [33m=>[39m {[0m
+[0m [90m 126 |[39m             [90m// Re-count unread wenn sich Chats ändern[39m[0m
+[0m [90m 127 |[39m             setupUnreadTracking()[33m;[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-unread-messages.ts:125:18
+Type error: 'updatedChats' is declared but its value is never read.
+
+[0m [90m 123 |[39m           [32m`clubs/${clubId}/chats`[39m[33m,[39m[0m
+[0m [90m 124 |[39m           where([32m'participants'[39m[33m,[39m [32m'array-contains'[39m[33m,[39m uid)[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 125 |[39m           [36masync[39m (updatedChats) [33m=>[39m {[0m
+[0m [90m     |[39m                  [31m[1m^[22m[39m[0m
+[0m [90m 126 |[39m             [90m// Re-count unread wenn sich Chats ändern[39m[0m
+[0m [90m 127 |[39m             setupUnreadTracking()[33m;[39m[0m
+[0m [90m 128 |[39m           }[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-unread-messages.ts:125:18
+Type error: Parameter 'updatedChats' implicitly has an 'any' type.
+
+[0m [90m 123 |[39m           [32m`clubs/${clubId}/chats`[39m[33m,[39m[0m
+[0m [90m 124 |[39m           where([32m'participants'[39m[33m,[39m [32m'array-contains'[39m[33m,[39m uid)[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 125 |[39m           [36masync[39m (updatedChats) [33m=>[39m {[0m
+[0m [90m     |[39m                  [31m[1m^[22m[39m[0m
+[0m [90m 126 |[39m             [90m// Re-count unread wenn sich Chats ändern[39m[0m
+[0m [90m 127 |[39m             setupUnreadTracking()[33m;[39m[0m
+[0m [90m 128 |[39m           }[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-user-data.ts:58:13
+Type error: Type 'null' is not assignable to type 'string | undefined'.
+
+[0m [90m 56 |[39m             uid[33m,[39m[0m
+[0m [90m 57 |[39m             email[33m:[39m [32m''[39m[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 58 |[39m             displayName[33m:[39m [36mnull[39m[33m,[39m[0m
+[0m [90m    |[39m             [31m[1m^[22m[39m[0m
+[0m [90m 59 |[39m             photoURL[33m:[39m [36mnull[39m[33m,[39m[0m
+[0m [90m 60 |[39m             createdAt[33m:[39m [33mDate[39m[33m.[39mnow()[33m,[39m[0m
+[0m [90m 61 |[39m             lastSeenAt[33m:[39m [33mDate[39m[33m.[39mnow()[33m,[39m[0m
+
+[Test Mode] ../../packages/core/src/hooks/use-user-data.ts:59:13
+Type error: Type 'null' is not assignable to type 'string | undefined'.
+
+[0m [90m 57 |[39m             email[33m:[39m [32m''[39m[33m,[39m[0m
+[0m [90m 58 |[39m             displayName[33m:[39m [36mnull[39m[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 59 |[39m             photoURL[33m:[39m [36mnull[39m[33m,[39m[0m
+[0m [90m    |[39m             [31m[1m^[22m[39m[0m
+[0m [90m 60 |[39m             createdAt[33m:[39m [33mDate[39m[33m.[39mnow()[33m,[39m[0m
+[0m [90m 61 |[39m             lastSeenAt[33m:[39m [33mDate[39m[33m.[39mnow()[33m,[39m[0m
+[0m [90m 62 |[39m             isPlatformAdmin[33m:[39m [36mfalse[39m[33m,[39m[0m
+
+[Test Mode] ../../packages/core/src/utils/trust-score.ts:44:12
+Type error: Property 'verifiedBy' does not exist on type 'Partial<ClubUser>'.
+
+[0m [90m 42 |[39m[0m
+[0m [90m 43 |[39m   [90m// Staff-Verifizierung[39m[0m
+[0m[31m[1m>[22m[39m[90m 44 |[39m   [36mif[39m (user[33m.[39mverifiedBy) {[0m
+[0m [90m    |[39m            [31m[1m^[22m[39m[0m
+[0m [90m 45 |[39m     score [33m+=[39m [35m30[39m[33m;[39m[0m
+[0m [90m 46 |[39m   }[0m
+[0m [90m 47 |[39m[0m
+
+[Test Mode] ../../packages/ui/src/components/notification-list-item.tsx:8:33
+Type error: Cannot find module '@nightlife-os/shared-types' or its corresponding type declarations.
+
+[0m [90m  6 |[39m [90m */[39m[0m
+[0m [90m  7 |[39m[0m
+[0m[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { [33mAppNotification[39m } [36mfrom[39m [32m'@nightlife-os/shared-types'[39m[33m;[39m[0m
+[0m [90m    |[39m                                 [31m[1m^[22m[39m[0m
+[0m [90m  9 |[39m [36mimport[39m { cn } [36mfrom[39m [32m'../utils/cn'[39m[33m;[39m[0m
+[0m [90m 10 |[39m [36mimport[39m { [0m
+[0m [90m 11 |[39m   [33mMessageCircle[39m[33m,[39m [0m
+
+[Test Mode] ../../packages/ui/src/components/poll-bubble.tsx:66:9
+Type error: 'hasVoted' is declared but its value is never read.
+
+[0m [90m 64 |[39m[0m
+[0m [90m 65 |[39m   [36mconst[39m userVotes [33m=[39m getUserVotes()[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 66 |[39m   [36mconst[39m hasVoted [33m=[39m userVotes[33m.[39mlength [33m>[39m [35m0[39m[33m;[39m[0m
+[0m [90m    |[39m         [31m[1m^[22m[39m[0m
+[0m [90m 67 |[39m[0m
+[0m [90m 68 |[39m   [36mreturn[39m ([0m
+[0m [90m 69 |[39m     [33m<[39m[33mdiv[39m className[33m=[39m{cn([32m'space-y-3'[39m[33m,[39m className)}[33m>[39m[0m
+
+===== TS errors =====
+
+
+Failed to compile.
+
+./src/app/crew/add-friend/page.tsx:7:41
+Type error: 'X' is declared but its value is never read.
+
+[0m [90m  5 |[39m [36mimport[39m { [33mButton[39m[33m,[39m [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mInput[39m[33m,[39m [33mModal[39m[33m,[39m [33mQrScanner[39m } [36mfrom[39m [32m'@nightlife-os/ui'[39m[33m;[39m[0m
+[0m [90m  6 |[39m [36mimport[39m { useAuth[33m,[39m useI18n[33m,[39m useFriends } [36mfrom[39m [32m'@nightlife-os/core'[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mArrowLeft[39m[33m,[39m [33mCamera[39m[33m,[39m [33mArrowRight[39m[33m,[39m [33mX[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+[0m [90m    |[39m                                         [31m[1m^[22m[39m[0m
+[0m [90m  8 |[39m [36mimport[39m { [33mFRIEND_REQUEST_MESSAGES[39m } [36mfrom[39m [32m'@nightlife-os/shared-types'[39m[33m;[39m[0m
+[0m [90m  9 |[39m[0m
+[0m [90m 10 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mAddFriendPage[39m() {[0m
+Next.js build worker exited with code: 1 and signal: null
+ ELIFECYCLE  Command failed with exit code 1.

@@ -20,6 +20,10 @@ export * from './hooks/use-chat-messages';
 export * from './hooks/use-i18n';
 export * from './hooks/use-check-in';
 export * from './hooks/use-unread-messages'; // Phase 6
+export * from './hooks/use-notifications'; // Phase 7
+
+// Notifications (Phase 7)
+export * from './notifications/notification-dispatcher';
 
 // Utils
 export * from './utils/friend-code';

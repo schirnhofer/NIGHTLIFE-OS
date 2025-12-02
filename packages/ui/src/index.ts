@@ -19,6 +19,7 @@ export * from './components/ephemeral-image-bubble';
 export * from './components/video-recorder-button'; // Phase 6
 export * from './components/poll-bubble'; // Phase 6
 export * from './components/notification-bubble'; // Phase 6
+export * from './components/notification-list-item'; // Phase 7
 
 // Utils
 export * from './utils/cn';
