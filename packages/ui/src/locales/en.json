@@ -206,7 +206,11 @@
     "theme": "Theme",
     "notifications": "Notifications",
     "privacy": "Privacy",
-    "account": "Account"
+    "account": "Account",
+    "pushNotifications": "Push Notifications",
+    "pushEnabled": "Push notifications enabled",
+    "pushDisabled": "Push notifications disabled",
+    "loading": "Loading settings..."
   },
   "admin": {
     "dashboard": "Dashboard",

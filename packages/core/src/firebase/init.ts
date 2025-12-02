@@ -11,6 +11,7 @@ import { initializeApp, getApps, FirebaseApp } from 'firebase/app';
 import { getAuth, Auth } from 'firebase/auth';
 import { getFirestore, Firestore } from 'firebase/firestore';
 import { getStorage, FirebaseStorage } from 'firebase/storage';
+import { getMessaging, Messaging } from 'firebase/messaging';
 
 // Firebase-Konfiguration aus Umgebungsvariablen
 const firebaseConfig = {
@@ -73,4 +74,21 @@ export function getAuthInstance(): Auth {
 export function getStorageInstance(): FirebaseStorage {
   const app = getFirebaseApp();
   return getStorage(app);
+}
+
+/**
+ * Gibt die Messaging-Instanz zurück (Phase 8: FCM)
+ */
+export function getMessagingInstance(): Messaging | null {
+  try {
+    const app = getFirebaseApp();
+    // Messaging ist nur im Browser verfügbar
+    if (typeof window !== 'undefined') {
+      return getMessaging(app);
+    }
+    return null;
+  } catch (error) {
+    console.error('Error initializing Firebase Messaging:', error);
+    return null;
+  }
 }

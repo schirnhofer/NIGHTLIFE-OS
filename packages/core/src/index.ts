@@ -22,8 +22,9 @@ export * from './hooks/use-check-in';
 export * from './hooks/use-unread-messages'; // Phase 6
 export * from './hooks/use-notifications'; // Phase 7
 
-// Notifications (Phase 7)
+// Notifications (Phase 7 + 8)
 export * from './notifications/notification-dispatcher';
+export * from './notifications/fcm-token-manager'; // Phase 8: FCM
 
 // Utils
 export * from './utils/friend-code';

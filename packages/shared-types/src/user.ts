@@ -2,6 +2,7 @@
  * User Types for Nightlife OS
  * Extended in Phase 2 for Friend System
  * Extended in Phase 7 for Roles, Language & Multi-Club
+ * Extended in Phase 8 for Push Notifications (FCM)
  */
 
 /**
@@ -27,6 +28,10 @@ export interface PlatformUser {
   language?: string;                // Bevorzugte Sprache (ISO 639-1: 'de', 'en', 'es', etc.)
   roles: PlatformRole[];            // Rollen des Users
   clubs?: string[];                 // Club-IDs, denen der User angehört
+  
+  // Phase 8 Extensions: Push Notifications (FCM)
+  fcmTokens?: string[];             // Array von FCM-Tokens für verschiedene Geräte
+  pushEnabled?: boolean;            // true, wenn Push-Nachrichten aktiviert sind (Standard: true)
   
   // Freundes-System
   ownedClubs?: string[];            // Club-IDs die dieser User besitzt

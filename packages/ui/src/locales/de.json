@@ -206,7 +206,11 @@
     "theme": "Theme",
     "notifications": "Benachrichtigungen",
     "privacy": "Privatsphäre",
-    "account": "Konto"
+    "account": "Konto",
+    "pushNotifications": "Push-Benachrichtigungen",
+    "pushEnabled": "Push-Benachrichtigungen aktiviert",
+    "pushDisabled": "Push-Benachrichtigungen deaktiviert",
+    "loading": "Lade Einstellungen..."
   },
   "admin": {
     "dashboard": "Dashboard",
