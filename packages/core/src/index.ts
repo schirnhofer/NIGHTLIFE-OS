@@ -10,6 +10,12 @@ export * from './firebase/auth';
 export * from './firebase/firestore';
 export * from './firebase/storage';
 
+// User Profile Management
+export * from './user-profile';
+
+// Check-In Management
+export * from './check-in';
+
 // Hooks
 export * from './hooks/use-auth';
 export * from './hooks/use-user-data';

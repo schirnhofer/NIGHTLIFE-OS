@@ -7,12 +7,14 @@ import {
   createUserWithEmailAndPassword,
   signOut as firebaseSignOut,
   onAuthStateChanged as firebaseOnAuthStateChanged,
+  sendPasswordResetEmail as firebaseSendPasswordResetEmail,
   updateProfile,
   User,
   UserCredential,
 } from 'firebase/auth';
 import { getAuthInstance } from './init';
 import { setDocument } from './firestore';
+import { generateFriendCode } from '../utils/friend-code';
 
 /**
  * Login mit E-Mail und Passwort
@@ -48,6 +50,7 @@ export async function signup(
 
 /**
  * Registrierung mit E-Mail, Passwort und Display Name
+ * Erstellt automatisch ein PlatformUser-Dokument mit initialer Rolle 'visitor' und Friend-Code
  */
 export async function signUpWithEmailAndPassword(
   email: string,
@@ -60,18 +63,24 @@ export async function signUpWithEmailAndPassword(
   // Display Name setzen, falls angegeben
   if (displayName && userCredential.user) {
     await updateProfile(userCredential.user, { displayName });
-    
-    // PlatformUser-Dokument erstellen
+  }
+  
+  // PlatformUser-Dokument erstellen mit initialer Rolle und Friend-Code
+  if (userCredential.user) {
     await setDocument(`platform/users/${userCredential.user.uid}`, {
       uid: userCredential.user.uid,
       email: userCredential.user.email,
-      displayName: displayName,
+      displayName: displayName || null,
       photoURL: null,
+      friendCode: generateFriendCode(), // Automatisch Friend-Code generieren
       createdAt: Date.now(),
       lastSeenAt: Date.now(),
       isPlatformAdmin: false,
+      roles: ['visitor'], // Initiale Rolle: visitor
+      clubs: [],
       ownedClubs: [],
       memberClubs: [],
+      pushEnabled: true, // Push-Benachrichtigungen standardmäßig aktiviert
     });
   }
   
@@ -113,4 +122,23 @@ export const onAuthStateChangedListener = onAuthStateChanged;
 export function getCurrentUser(): User | null {
   const auth = getAuthInstance();
   return auth.currentUser;
+}
+
+/**
+ * Sendet eine Passwort-Zurücksetzen-E-Mail
+ */
+export async function resetPassword(email: string): Promise<void> {
+  const auth = getAuthInstance();
+  try {
+    await firebaseSendPasswordResetEmail(auth, email);
+  } catch (error: any) {
+    // Fehlerbehandlung für häufige Fehler
+    if (error.code === 'auth/user-not-found') {
+      throw new Error('Kein Benutzer mit dieser E-Mail-Adresse gefunden.');
+    } else if (error.code === 'auth/invalid-email') {
+      throw new Error('Ungültige E-Mail-Adresse.');
+    } else {
+      throw new Error('Fehler beim Senden der Passwort-Zurücksetzen-E-Mail.');
+    }
+  }
 }

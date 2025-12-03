@@ -131,6 +131,11 @@ export default function LoginPage() {
                   {t('auth.signup')}
                 </Link>
               </p>
+              <p className="text-sm text-slate-400">
+                <Link href="/auth/reset-password" className="text-cyan-400 hover:text-cyan-300">
+                  Passwort vergessen?
+                </Link>
+              </p>
             </div>
           </CardContent>
         </Card>

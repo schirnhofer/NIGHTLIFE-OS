@@ -1,0 +1,43 @@
+
+> @nightlife-os/core@0.1.0 lint /home/ubuntu/nightlife_os/packages/core
+> tsc --noEmit
+
+src/check-in.ts(79,24): error TS2345: Argument of type 'QueryLimitConstraint' is not assignable to parameter of type 'QueryFieldFilterConstraint | QueryOrderByConstraint'.
+  Type 'QueryLimitConstraint' is not assignable to type 'QueryOrderByConstraint'.
+    Types of property 'type' are incompatible.
+      Type '"limit" | "limitToLast"' is not assignable to type '"orderBy"'.
+        Type '"limit"' is not assignable to type '"orderBy"'.
+src/firebase/firestore.ts(20,3): error TS6133: 'DocumentReference' is declared but its value is never read.
+src/firebase/firestore.ts(21,3): error TS6133: 'CollectionReference' is declared but its value is never read.
+src/firebase/init.ts(18,11): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.
+src/firebase/init.ts(19,15): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.
+src/firebase/init.ts(20,14): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.
+src/firebase/init.ts(21,18): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.
+src/firebase/init.ts(22,22): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.
+src/firebase/init.ts(23,10): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.
+src/hooks/use-chat-messages.ts(12,39): error TS6133: 'deleteDocument' is declared but its value is never read.
+src/hooks/use-chat-messages.ts(129,22): error TS2322: Type '"audio"' is not assignable to type 'MessageType'.
+src/hooks/use-chat-messages.ts(138,9): error TS2322: Type '"image" | "audio" | "video" | undefined' is not assignable to type 'MediaType | undefined'.
+  Type '"audio"' is not assignable to type 'MediaType | undefined'.
+src/hooks/use-chat-messages.ts(310,9): error TS2353: Object literal may only specify known properties, and 'messageId' does not exist in type 'Message'.
+src/hooks/use-chat-messages.ts(380,13): error TS6133: 'messageRef' is declared but its value is never read.
+src/hooks/use-chats.ts(58,30): error TS2551: Property 'lastMessageAt' does not exist on type 'Chat'. Did you mean 'lastMessage'?
+src/hooks/use-chats.ts(58,55): error TS2551: Property 'lastMessageAt' does not exist on type 'Chat'. Did you mean 'lastMessage'?
+src/hooks/use-chats.ts(92,9): error TS2353: Object literal may only specify known properties, and 'chatId' does not exist in type 'Chat'.
+src/hooks/use-chats.ts(128,9): error TS2353: Object literal may only specify known properties, and 'chatId' does not exist in type 'Chat'.
+src/hooks/use-chats.ts(194,16): error TS2339: Property 'createdBy' does not exist on type 'Chat'.
+src/hooks/use-chats.ts(258,16): error TS2339: Property 'createdBy' does not exist on type 'Chat'.
+src/hooks/use-club-state.ts(47,32): error TS2552: Cannot find name 'error'. Did you mean 'Error'?
+src/hooks/use-firestore.ts(8,3): error TS6133: 'DocumentReference' is declared but its value is never read.
+src/hooks/use-friends.ts(116,9): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+src/hooks/use-friends.ts(117,9): error TS2322: Type 'string | undefined' is not assignable to type 'string | null'.
+  Type 'undefined' is not assignable to type 'string | null'.
+src/hooks/use-friends.ts(118,9): error TS2322: Type 'string | undefined' is not assignable to type 'string | null'.
+  Type 'undefined' is not assignable to type 'string | null'.
+src/hooks/use-friends.ts(160,9): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+src/hooks/use-friends.ts(161,9): error TS2322: Type 'string | undefined' is not assignable to type 'string | null'.
+  Type 'undefined' is not assignable to type 'string | null'.
+src/hooks/use-friends.ts(162,9): error TS2322: Type 'string | undefined' is not assignable to type 'string | null'.
+  Type 'undefined' is not assignable to type 'string | null'.
