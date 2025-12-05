@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Card, CardContent, Input, Modal, QrScanner } from '@nightlife-os/ui';
 import { useAuth, useI18n, useFriends } from '@nightlife-os/core';
-import { ArrowLeft, Camera, ArrowRight, X } from 'lucide-react';
+import { ArrowLeft, Camera, ArrowRight } from 'lucide-react';
 import { FRIEND_REQUEST_MESSAGES } from '@nightlife-os/shared-types';
 
 export default function AddFriendPage() {
