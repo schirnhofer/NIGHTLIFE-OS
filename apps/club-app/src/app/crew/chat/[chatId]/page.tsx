@@ -17,7 +17,7 @@ export default function ChatPage() {
   // Messages & Chat Data (Phase 7)
   const { messages, loading } = useChatMessages('demo-club-1', chatId);
   const { chats } = useChats('demo-club-1', user?.uid || null);
-  const { userData } = usePlatformUserData(user?.uid || null);
+  const { user: userData } = usePlatformUserData(user?.uid || null);
   const { sendMessage, sendPoll, votePoll, deleteMessage, expireMedia, sending } = useChatMessagesActions();
   const { markChatAsSeen } = useUnreadMessages(user?.uid);
   

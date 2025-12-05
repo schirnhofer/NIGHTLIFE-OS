@@ -18,3 +18,10 @@ out
 .deploy
 .logs
 *.tsbuildinfo
+
+# Turbo
+.turbo/
+*.log
+
+# pnpm
+pnpm-lock.yaml

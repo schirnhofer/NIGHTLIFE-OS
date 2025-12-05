@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useAuth } from '@nightlife/core'
+import { useAuth } from '@nightlife-os/core'
 import { useTranslation } from '@nightlife/ui'
 import { Button, Input, Card } from '@nightlife/ui'
 

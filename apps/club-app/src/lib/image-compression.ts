@@ -26,7 +26,7 @@ export const compressImage = async (
         reader.onloadend = () => resolve(reader.result as string)
         reader.onerror = reject
       },
-      error(err) {
+      error(err: Error) {
         reject(err)
       },
     })

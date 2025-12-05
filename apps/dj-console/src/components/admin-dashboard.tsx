@@ -2,10 +2,10 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { User } from 'firebase/auth'
-import { UserProfile, GlobalState } from '@nightlife/core'
+import { UserProfile, GlobalState } from '@nightlife-os/core'
 import { collection, onSnapshot, doc, setDoc } from 'firebase/firestore'
-import { getDbInstance } from '@nightlife/core'
-import { useAuth } from '@nightlife/core'
+import { getDbInstance } from '@nightlife-os/core'
+import { useAuth } from '@nightlife-os/core'
 import { useTranslation } from '@nightlife/ui'
 import { Button, Card, Icon, Input } from '@nightlife/ui'
 

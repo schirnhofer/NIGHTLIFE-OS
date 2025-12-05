@@ -1,9 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useAuth, UserProfile } from '@nightlife/core'
+import { useAuth, UserProfile } from '@nightlife-os/core'
 import { doc, setDoc, onSnapshot, collection } from 'firebase/firestore'
-import { getDbInstance } from '@nightlife/core'
+import { getDbInstance } from '@nightlife-os/core'
 import { Loading } from '@nightlife/ui'
 import { AdminLogin } from './admin-login'
 import { AdminDashboard } from './admin-dashboard'

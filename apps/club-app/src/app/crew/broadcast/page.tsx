@@ -12,22 +12,19 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth, useChats, useChatMessagesActions, usePlatformUserData } from '@nightlife-os/core';
 import { Chat } from '@nightlife-os/shared-types';
-import { Button, Card, Input, Loader, PollBubble } from '@nightlife-os/ui';
-import { Send, BarChart, ArrowLeft } from 'lucide-react';
+import { Button, Card, Input, Loader } from '@nightlife-os/ui';
+import { Send, ArrowLeft } from 'lucide-react';
 
 const DEMO_CLUB_ID = 'demo-club-123'; // TODO: Replace with actual club selection
 
 export default function BroadcastPage() {
   const router = useRouter();
   const { user, isAuthenticated } = useAuth();
-  const { userData } = usePlatformUserData(user?.uid || null);
+  const { user: userData } = usePlatformUserData(user?.uid || null);
   const { chats, loading: chatsLoading } = useChats(DEMO_CLUB_ID, user?.uid || null);
   const { sendMessage, sending } = useChatMessagesActions();
 
   const [messageText, setMessageText] = useState('');
-  const [showPollModal, setShowPollModal] = useState(false);
-  const [pollQuestion, setPollQuestion] = useState('');
-  const [pollOptions, setPollOptions] = useState(['', '']);
 
   // Redirect wenn nicht eingeloggt
   useEffect(() => {
@@ -138,13 +135,6 @@ export default function BroadcastPage() {
               }}
               className="flex-1"
             />
-            <Button
-              onClick={() => setShowPollModal(true)}
-              variant="ghost"
-              size="sm"
-            >
-              <BarChart className="w-5 h-5" />
-            </Button>
             <Button
               onClick={handleSendMessage}
               disabled={!messageText.trim() || sending}
