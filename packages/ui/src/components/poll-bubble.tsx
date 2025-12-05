@@ -51,20 +51,6 @@ export function PollBubble({
     0
   );
 
-  // Prüfe ob User bereits gevoted hat
-  const getUserVotes = () => {
-    const userVotes: number[] = [];
-    Object.entries(votes || {}).forEach(([indexStr, voterIds]) => {
-      if (voterIds?.includes(currentUserId || '')) {
-        userVotes.push(parseInt(indexStr));
-      }
-    });
-    return userVotes;
-  };
-
-  const userVotes = getUserVotes();
-  const hasVoted = userVotes.length > 0;
-
   return (
     <div className={cn('space-y-3', className)}>
       {/* Frage */}

@@ -72,7 +72,7 @@ export function useUnreadMessages(
         // 1. Hole alle Chats des Users
         const chatsQuery = await getCollection<Chat>(
           `clubs/${clubId}/chats`,
-          where('participants', 'array-contains', uid)
+          [where('participants', 'array-contains', uid)]
         );
 
         const chats = chatsQuery || [];
@@ -81,14 +81,13 @@ export function useUnreadMessages(
         const unreadCounts: Record<string, number> = {};
 
         for (const chat of chats) {
-          if (!chat?.chatId) continue;
+          if (!chat?.id) continue;
 
           try {
             // Hole ChatMetadata
             const metadataList = await getCollection<ChatMetadata>(
               `users/${uid}/chatMetadata`,
-              where('chatId', '==', chat.chatId),
-              limit(1)
+              [where('chatId', '==', chat.id), limit(1)]
             );
 
             const metadata = metadataList?.[0];
@@ -96,17 +95,19 @@ export function useUnreadMessages(
 
             // Zähle Messages nach lastSeen
             const messagesQuery = await getCollection<Message>(
-              `clubs/${clubId}/chats/${chat.chatId}/messages`,
-              where('createdAt', '>', lastSeen),
-              where('sender', '!=', uid), // Nur fremde Messages
-              orderBy('createdAt', 'desc')
+              `clubs/${clubId}/chats/${chat.id}/messages`,
+              [
+                where('createdAt', '>', lastSeen),
+                where('senderId', '!=', uid), // Nur fremde Messages
+                orderBy('createdAt', 'desc')
+              ]
             );
 
             const unreadMessages = messagesQuery || [];
-            unreadCounts[chat.chatId] = unreadMessages.length;
+            unreadCounts[chat.id] = unreadMessages.length;
           } catch (err) {
-            console.error(`Error counting unread for chat ${chat.chatId}:`, err);
-            unreadCounts[chat.chatId] = 0;
+            console.error(`Error counting unread for chat ${chat.id}:`, err);
+            unreadCounts[chat.id] = 0;
           }
         }
 
@@ -121,11 +122,11 @@ export function useUnreadMessages(
         // (vereinfachte Variante: nur chats-Collection subscriben)
         unsubscribeChats = onCollectionSnapshot<Chat>(
           `clubs/${clubId}/chats`,
-          where('participants', 'array-contains', uid),
-          async (updatedChats) => {
+          async () => {
             // Re-count unread wenn sich Chats ändern
             setupUnreadTracking();
-          }
+          },
+          [where('participants', 'array-contains', uid)]
         );
       } catch (error) {
         console.error('Error setting up unread tracking:', error);

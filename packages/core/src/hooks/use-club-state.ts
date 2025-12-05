@@ -23,6 +23,7 @@ export interface UseClubStateReturn {
 export function useClubState(clubId: string | null): UseClubStateReturn {
   const [clubState, setClubState] = useState<ClubState | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     if (!clubId) {
@@ -31,17 +32,23 @@ export function useClubState(clubId: string | null): UseClubStateReturn {
       return;
     }
 
-    // Realtime-Listener für clubs/{clubId}/state/global
-    const unsubscribe = onDocumentSnapshot<ClubState>(
-      `clubs/${clubId}/state/global`,
-      (data) => {
-        setClubState(data);
-        setLoading(false);
-      }
-    );
+    try {
+      // Realtime-Listener für clubs/{clubId}/state/global
+      const unsubscribe = onDocumentSnapshot<ClubState>(
+        `clubs/${clubId}/state/global`,
+        (data) => {
+          setClubState(data);
+          setLoading(false);
+          setError(null);
+        }
+      );
 
-    // Cleanup
-    return () => unsubscribe();
+      // Cleanup
+      return () => unsubscribe();
+    } catch (err) {
+      setError(err as Error);
+      setLoading(false);
+    }
   }, [clubId]);
 
   return { clubState, loading, error };

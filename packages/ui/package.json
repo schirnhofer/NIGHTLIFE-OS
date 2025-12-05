@@ -8,6 +8,7 @@
     "lint": "tsc --noEmit"
   },
   "dependencies": {
+    "@nightlife-os/shared-types": "workspace:*",
     "clsx": "^2.0.0",
     "html5-qrcode": "^2.3.8",
     "lucide-react": "^0.294.0",

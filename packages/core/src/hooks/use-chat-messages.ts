@@ -9,7 +9,7 @@
 
 import { useState } from 'react';
 import { Message, MessageType, Chat } from '@nightlife-os/shared-types';
-import { setDocument, updateDocument, deleteDocument, getDocument } from '../firebase/firestore';
+import { setDocument, updateDocument, getDocument } from '../firebase/firestore';
 import { getFirestoreInstance } from '../firebase/init';
 import { collection, doc } from 'firebase/firestore';
 import { uploadChatMedia } from '../utils/storage';
@@ -102,7 +102,7 @@ export function useChatMessagesActions(): UseChatMessagesActionsReturn {
 
       // Upload Media falls vorhanden
       let mediaUrl: string | undefined;
-      let mediaType: 'image' | 'audio' | 'video' | undefined;
+      let mediaType: 'image' | 'voice' | 'video' | undefined;
       let durationSeconds: number | undefined;
 
       if (imageFile) {
@@ -112,7 +112,7 @@ export function useChatMessagesActions(): UseChatMessagesActionsReturn {
       } else if (audioFile) {
         const result = await uploadChatMedia(clubId, chatId, audioFile, 'audio');
         mediaUrl = result.downloadUrl;
-        mediaType = 'audio';
+        mediaType = 'voice';
         // TODO: Extrahiere tatsächliche Audio-Dauer
         durationSeconds = 0; // Platzhalter
       } else if (videoFile) {
@@ -126,23 +126,21 @@ export function useChatMessagesActions(): UseChatMessagesActionsReturn {
       // Bestimme Message-Type
       let messageType: MessageType = type || 'text';
       if (imageFile) messageType = 'image';
-      if (audioFile) messageType = 'audio';
+      if (audioFile) messageType = 'voice';
       if (videoFile) messageType = 'video';
 
       // Erstelle Message
       const newMessage: Message = {
-        messageId,
+        id: messageId,
+        chatId,
+        senderId,
+        senderName,
         type: messageType,
         text: text || undefined,
         mediaUrl,
         mediaType,
         durationSeconds,
-        sender: senderId,
-        senderName,
-        ephemeral: ephemeralSeconds,
-        expiresAt: ephemeralSeconds ? now + ephemeralSeconds * 1000 : undefined,
-        viewedBy: [senderId], // Sender hat die Message bereits "gesehen"
-        deleted: false,
+        ephemeralSeconds,
         createdAt: now
       };
 
@@ -307,7 +305,10 @@ export function useChatMessagesActions(): UseChatMessagesActionsReturn {
 
       // Erstelle Poll-Message
       const pollMessage: Message = {
-        messageId,
+        id: messageId,
+        chatId,
+        senderId,
+        senderName,
         type: 'poll',
         poll: {
           question: question.trim(),
@@ -316,10 +317,6 @@ export function useChatMessagesActions(): UseChatMessagesActionsReturn {
           allowMultipleVotes: allowMultipleVotes || false,
           expiresAt: expiresAt || undefined
         },
-        sender: senderId,
-        senderName,
-        viewedBy: [senderId],
-        deleted: false,
         createdAt: now
       };
 
@@ -376,9 +373,6 @@ export function useChatMessagesActions(): UseChatMessagesActionsReturn {
     optionIndex: number
   ): Promise<void> => {
     try {
-      const db = getFirestoreInstance();
-      const messageRef = doc(db, `clubs/${clubId}/chats/${chatId}/messages/${messageId}`);
-      
       // Hole aktuelle Message
       const { getDocument } = await import('../firebase/firestore');
       const message = await getDocument<Message>(

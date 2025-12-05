@@ -15,7 +15,7 @@ import { PlatformUser, CheckInRecord } from '@nightlife-os/shared-types';
 
 export default function CheckInPage() {
   const router = useRouter();
-  const { user, isAuthenticated, loading: authLoading } = useAuth();
+  const { isAuthenticated, loading: authLoading } = useAuth();
   
   // Formular-State
   const [searchInput, setSearchInput] = useState(''); // userId oder friendCode

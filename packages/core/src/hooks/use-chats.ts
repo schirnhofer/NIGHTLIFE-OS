@@ -55,7 +55,7 @@ export function useChats(
         // Filtere Chats nach participants und sortiere nach lastMessageAt
         const myChats = data
           .filter(chat => chat.participants?.includes(uid))
-          .sort((a, b) => (b.lastMessageAt || 0) - (a.lastMessageAt || 0));
+          .sort((a, b) => (b.lastMessage?.timestamp || 0) - (a.lastMessage?.timestamp || 0));
         setChats(myChats);
         setLoading(false);
       },
@@ -89,11 +89,9 @@ export function useChats(
 
       // Erstelle neuen privaten Chat
       const newChat: Chat = {
-        chatId,
+        id: chatId,
         type: 'private',
         participants: [uid, otherUserId],
-        lastMessageAt: Date.now(),
-        lastMessagePreview: '',
         createdAt: Date.now()
       };
 
@@ -125,13 +123,12 @@ export function useChats(
 
       // Erstelle Gruppen-Chat
       const newChat: Chat = {
-        chatId,
+        id: chatId,
+        clubId,
         type: 'group',
         name,
-        createdBy: creatorId,
+        creatorId,
         participants: [creatorId, ...memberIds.filter(id => id !== creatorId)],
-        lastMessageAt: Date.now(),
-        lastMessagePreview: '',
         createdAt: Date.now()
       };
 
@@ -191,7 +188,7 @@ export function useChats(
       }
 
       // Prüfe, ob aktueller User Creator ist
-      if (chat.createdBy !== uid) {
+      if (chat.creatorId !== uid) {
         throw new Error('Only creator can remove members');
       }
 
@@ -255,7 +252,7 @@ export function useChats(
       }
 
       // Prüfe, ob aktueller User Creator ist
-      if (chat.createdBy !== creatorId) {
+      if (chat.creatorId !== creatorId) {
         throw new Error('Only creator can delete group');
       }
 

@@ -29,16 +29,14 @@ export async function createUserProfile(
   const newProfile: PlatformUser = {
     uid: userId,
     email,
-    displayName: displayName || null,
-    photoURL: null,
+    displayName: displayName || undefined,
+    photoURL: undefined,
     friendCode: generateFriendCode(), // Automatisch Friend-Code generieren
     createdAt: Date.now(),
     lastSeenAt: Date.now(),
     isPlatformAdmin: role === 'super_admin',
     roles: [role],
     clubs: [],
-    ownedClubs: [],
-    memberClubs: [],
     pushEnabled: true,
   };
 
@@ -115,8 +113,8 @@ export async function createClubUserProfile(
   const clubUser: ClubUser = {
     uid: userId,
     email: platformUser?.email || '',
-    displayName: platformUser?.displayName || null,
-    photoURL: platformUser?.photoURL || null,
+    displayName: platformUser?.displayName || undefined,
+    photoURL: platformUser?.photoURL || undefined,
     friendCode: platformUser?.friendCode || generateFriendCode(),
     createdAt: Date.now(),
     lastSeenAt: Date.now(),

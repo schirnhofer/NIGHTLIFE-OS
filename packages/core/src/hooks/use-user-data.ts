@@ -55,13 +55,13 @@ export function usePlatformUserData(uid?: string | null): UsePlatformUserDataRet
           const newUser: PlatformUser = {
             uid,
             email: '',
-            displayName: null,
-            photoURL: null,
+            displayName: undefined,
+            photoURL: undefined,
             createdAt: Date.now(),
             lastSeenAt: Date.now(),
             isPlatformAdmin: false,
-            ownedClubs: [],
-            memberClubs: [],
+            roles: [],
+            clubs: [],
           };
           setDocument(`platform/users/${uid}`, newUser)
             .then(() => setUser(newUser))

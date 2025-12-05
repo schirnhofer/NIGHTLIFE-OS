@@ -11,7 +11,7 @@ import { QrCode, ArrowLeft } from 'lucide-react';
 
 export default function ScannerPage() {
   const router = useRouter();
-  const { user, isAuthenticated, loading: authLoading } = useAuth();
+  const { isAuthenticated, loading: authLoading } = useAuth();
   
   // Club-ID (in echter Anwendung würde das aus dem User-Profil oder einer Auswahl kommen)
   const [clubId] = useState('club-demo-001');

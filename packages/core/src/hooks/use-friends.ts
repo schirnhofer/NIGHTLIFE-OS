@@ -113,9 +113,9 @@ export function useFriends(
       // 7. Erstelle Freundschaftsanfrage beim Ziel-User
       const request: FriendRequest = {
         requesterId: uid,
-        email: myUserDoc.email,
-        displayName: myUserDoc.displayName,
-        photoURL: myUserDoc.photoURL,
+        email: myUserDoc.email || '',
+        displayName: myUserDoc.displayName || '',
+        photoURL: myUserDoc.photoURL || '',
         friendCode: myUserDoc.friendCode || '',
         message: message,
         status: 'pending',
@@ -157,9 +157,9 @@ export function useFriends(
 
       const theirFriend: Friend = {
         friendId: uid,
-        email: myUserDoc.email,
-        displayName: myUserDoc.displayName,
-        photoURL: myUserDoc.photoURL,
+        email: myUserDoc.email || '',
+        displayName: myUserDoc.displayName || '',
+        photoURL: myUserDoc.photoURL || '',
         friendCode: myUserDoc.friendCode || '',
         createdAt: Date.now()
       };

@@ -312,6 +312,9 @@ importers:
 
   packages/ui:
     dependencies:
+      '@nightlife-os/shared-types':
+        specifier: workspace:*
+        version: link:../shared-types
       clsx:
         specifier: ^2.0.0
         version: 2.1.1

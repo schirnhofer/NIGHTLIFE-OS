@@ -17,8 +17,6 @@ import {
   limit,
   getDocs,
   onSnapshot,
-  DocumentReference,
-  CollectionReference,
   QueryConstraint,
   DocumentData,
   Unsubscribe,

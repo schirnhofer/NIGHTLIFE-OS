@@ -41,7 +41,7 @@ export function calculateTrustScore(user: Partial<ClubUser>): number {
   }
 
   // Staff-Verifizierung
-  if (user.verifiedBy) {
+  if (user.staffVerified) {
     score += 30;
   }
 

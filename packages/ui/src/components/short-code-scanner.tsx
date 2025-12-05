@@ -30,7 +30,7 @@ export interface ShortCodeScannerProps {
 /**
  * ShortCodeScanner für Check-Ins
  */
-export function ShortCodeScanner({ clubId, onCheckIn, className }: ShortCodeScannerProps) {
+export function ShortCodeScanner({ onCheckIn, className }: ShortCodeScannerProps) {
   const scannerRef = useRef<Html5Qrcode | null>(null);
   const wordInputRef = useRef<HTMLInputElement>(null);
   const numberInputRef = useRef<HTMLInputElement>(null);
@@ -71,13 +71,14 @@ export function ShortCodeScanner({ clubId, onCheckIn, className }: ShortCodeScan
         };
 
         await scanner.start(
+          // Browser-spezifische MediaTrackConstraints
           { 
             facingMode: 'environment',
             advanced: [
               { focusMode: 'continuous' },
               { zoom: 1.0 }
             ]
-          },
+          } as any,
           config,
           async (decodedText) => {
             // Parse und verarbeite Shortcode
@@ -147,8 +148,8 @@ export function ShortCodeScanner({ clubId, onCheckIn, className }: ShortCodeScan
       });
       const track = stream.getVideoTracks()[0];
       
-      // @ts-ignore
-      await track.applyConstraints({
+      // Browser-spezifische MediaTrackConstraints (torch)
+      await (track as any).applyConstraints({
         advanced: [{ torch: !isTorchOn }]
       });
       
