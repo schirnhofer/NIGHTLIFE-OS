@@ -24,4 +24,3 @@ out
 *.log
 
 # pnpm
-pnpm-lock.yaml
