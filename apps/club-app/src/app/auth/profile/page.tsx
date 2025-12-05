@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Card, CardHeader, CardTitle, CardContent, Loader, Input } from '@nightlife-os/ui';
 import { useAuth, usePlatformUserData, useI18n, updateUserProfile, findUserByFriendCode } from '@nightlife-os/core';
-import { User as UserIcon, Mail, Code, LogOut, Loader2, Edit, Save, X, Search } from 'lucide-react';
+import { User as UserIcon, Mail, Code, LogOut, Loader2, Edit, Save, X, Search, QrCode } from 'lucide-react';
 import { PlatformUser } from '@nightlife-os/shared-types';
+import QRCodeLib from 'qrcode';
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -25,12 +26,42 @@ export default function ProfilePage() {
   const [searchResult, setSearchResult] = useState<PlatformUser | null>(null);
   const [searching, setSearching] = useState(false);
   const [searchError, setSearchError] = useState('');
+  
+  // QR-Code für Shortcode
+  const qrCanvasRef = useRef<HTMLCanvasElement>(null);
+  const [qrCodeGenerated, setQrCodeGenerated] = useState(false);
 
   // Redirect wenn nicht angemeldet
   if (!authLoading && !isAuthenticated) {
     router.push('/auth/login');
     return null;
   }
+
+  // Generiere QR-Code wenn shortCode verfügbar ist
+  useEffect(() => {
+    if (platformUser?.shortCode && qrCanvasRef.current && !qrCodeGenerated) {
+      QRCodeLib.toCanvas(
+        qrCanvasRef.current,
+        platformUser.shortCode,
+        {
+          width: 200,
+          margin: 2,
+          color: {
+            dark: '#06B6D4', // cyan-500
+            light: '#0F172A', // slate-900
+          },
+          errorCorrectionLevel: 'H',
+        },
+        (error) => {
+          if (error) {
+            console.error('QR Code generation error:', error);
+          } else {
+            setQrCodeGenerated(true);
+          }
+        }
+      );
+    }
+  }, [platformUser?.shortCode, qrCodeGenerated]);
 
   const handleGenerateFriendCode = async () => {
     setGeneratingCode(true);
@@ -255,6 +286,46 @@ export default function ProfilePage() {
                     t('profile.generateFriendCode')
                   )}
                 </Button>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Shortcode Card (Phase 9) */}
+        <Card className="mb-6">
+          <CardHeader>
+            <div className="flex items-center gap-3">
+              <QrCode className="h-6 w-6 text-cyan-400" />
+              <CardTitle>Dein Shortcode</CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent>
+            {platformUser?.shortCode ? (
+              <div className="space-y-4">
+                {/* Shortcode Display */}
+                <div className="p-6 bg-slate-800 rounded-lg border border-slate-700">
+                  <p className="text-4xl font-bold text-center text-cyan-400 tracking-wide">
+                    {platformUser.shortCode}
+                  </p>
+                </div>
+                
+                {/* QR-Code */}
+                <div className="flex justify-center">
+                  <div className="p-4 bg-white rounded-lg">
+                    <canvas ref={qrCanvasRef} />
+                  </div>
+                </div>
+                
+                <p className="text-sm text-slate-400 text-center">
+                  Verwende diesen Shortcode oder QR-Code für Check-Ins
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <p className="text-slate-400 text-center">
+                  Du hast noch keinen Shortcode. 
+                  Dieser wird bei der Registrierung automatisch erstellt.
+                </p>
               </div>
             )}
           </CardContent>

@@ -39,7 +39,10 @@
     "generateFriendCode": "Code generieren",
     "myProfile": "Mein Profil",
     "editProfile": "Profil bearbeiten",
-    "noFriendCode": "Noch kein Freunde-Code generiert"
+    "noFriendCode": "Noch kein Freunde-Code generiert",
+    "shortCode": "Shortcode",
+    "noShortCode": "Noch kein Shortcode vorhanden",
+    "yourShortCode": "Dein Shortcode"
   },
   "status": {
     "inClub": "IM CLUB 🎵",
@@ -272,5 +275,37 @@
   "friendSuccess": {
     "requestSent": "Anfrage gesendet!",
     "accepted": "Freund hinzugefügt!"
+  },
+  "shortcode": {
+    "title": "Shortcode Scanner",
+    "yourShortcode": "Dein Shortcode",
+    "scanQR": "QR-Code scannen",
+    "manualEntry": "Oder manuelle Eingabe",
+    "wordPlaceholder": "WORT",
+    "numberPlaceholder": "1234",
+    "startCheckIn": "Check-In starten",
+    "scanning": "Scanne QR-Code...",
+    "checkingCode": "Prüfe Shortcode...",
+    "checkInSuccess": "Check-In erfolgreich!",
+    "checkInFailed": "Check-In fehlgeschlagen",
+    "notFound": "Kein User mit diesem Shortcode gefunden",
+    "alreadyCheckedIn": "User ist bereits eingecheckt",
+    "error": "Fehler beim Check-In",
+    "cameraError": "Kamera-Zugriff fehlgeschlagen. Bitte nutze die manuelle Eingabe.",
+    "selectShortcode": "Wähle deinen Shortcode",
+    "selectFromOptions": "Wähle einen Shortcode aus den 5 Vorschlägen. Dieser Code wird deine eindeutige ID für Check-Ins.",
+    "loadNewSuggestions": "Neue Vorschläge laden",
+    "back": "Zurück",
+    "completeRegistration": "Registrierung abschließen",
+    "creatingAccount": "Erstelle Account...",
+    "shortcodeTaken": "Dieser Shortcode wurde gerade vergeben. Bitte wähle einen neuen.",
+    "noShortcodeSelected": "Bitte wähle einen Shortcode aus.",
+    "hints": "Hinweise:",
+    "hint1": "Der QR-Scanner benötigt Kamera-Zugriff",
+    "hint2": "Bei schlechten Lichtverhältnissen nutze die Taschenlampe",
+    "hint3": "Format: WORT 1234 (z.B. \"BOOM 1234\")",
+    "hint4": "Nach 4 Buchstaben springt der Fokus automatisch zur Zahlen-Eingabe",
+    "hint5": "Nach 4 Ziffern wird der Check-In automatisch durchgeführt",
+    "useForCheckIns": "Verwende diesen Shortcode oder QR-Code für Check-Ins"
   }
 }

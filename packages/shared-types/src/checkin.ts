@@ -1,9 +1,12 @@
 /**
  * Check-In/Check-Out-Typen für Nightlife OS
+ * Extended in Phase 9 for Shortcode Check-In
  * 
  * Collections:
  * - clubs/{clubId}/checkins/{checkInId}
  */
+
+import { UserProfile } from './user';
 
 /**
  * Check-In-Record
@@ -22,3 +25,14 @@ export interface CheckInRecord {
  * Check-In-Status für UI
  */
 export type CheckInStatus = 'checked_in' | 'checked_out' | 'loading';
+
+/**
+ * Check-In-Result für Shortcode-basierte Check-Ins (Phase 9)
+ */
+export interface CheckInResult {
+  success: boolean;
+  userProfile?: UserProfile;
+  checkInId?: string;
+  reason?: 'NOT_FOUND' | 'ALREADY_CHECKED_IN' | 'ERROR';
+  message?: string;
+}

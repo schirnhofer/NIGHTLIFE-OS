@@ -16,6 +16,9 @@ export * from './user-profile';
 // Check-In Management
 export * from './check-in';
 
+// Shortcode System (Phase 9)
+export * from './shortcode';
+
 // Hooks
 export * from './hooks/use-auth';
 export * from './hooks/use-user-data';
@@ -39,6 +42,7 @@ export * from './utils/validation';
 export * from './utils/date-time';
 export * from './utils/qr';
 export * from './utils/storage';
+export * from './utils/wordList'; // Phase 9: Shortcode word list
 
 // Constants
 export * from './constants/roles';

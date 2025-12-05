@@ -3,6 +3,7 @@
  * Extended in Phase 2 for Friend System
  * Extended in Phase 7 for Roles, Language & Multi-Club
  * Extended in Phase 8 for Push Notifications (FCM)
+ * Extended in Phase 9 for Shortcode System
  */
 
 /**
@@ -20,6 +21,7 @@ export interface PlatformUser {
   displayName?: string;
   photoURL?: string;
   friendCode?: string;              // 7-stelliger alphanumerischer Code
+  shortCode?: string;               // Phase 9: Shortcode im Format "WORT 1234"
   createdAt: number;
   lastSeenAt?: number;
   isPlatformAdmin?: boolean;        // Legacy: für Super-Admin
@@ -65,4 +67,5 @@ export interface UserProfile {
   displayName?: string;
   photoURL?: string;
   friendCode?: string;
+  shortCode?: string;               // Phase 9: Shortcode im Format "WORT 1234"
 }

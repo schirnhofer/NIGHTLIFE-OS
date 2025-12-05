@@ -39,7 +39,10 @@
     "generateFriendCode": "Generate Code",
     "myProfile": "My Profile",
     "editProfile": "Edit Profile",
-    "noFriendCode": "No friend code generated yet"
+    "noFriendCode": "No friend code generated yet",
+    "shortCode": "Shortcode",
+    "noShortCode": "No shortcode available yet",
+    "yourShortCode": "Your Shortcode"
   },
   "status": {
     "inClub": "IN CLUB 🎵",
@@ -272,5 +275,37 @@
   "friendSuccess": {
     "requestSent": "Request sent!",
     "accepted": "Friend added!"
+  },
+  "shortcode": {
+    "title": "Shortcode Scanner",
+    "yourShortcode": "Your Shortcode",
+    "scanQR": "Scan QR Code",
+    "manualEntry": "Or manual entry",
+    "wordPlaceholder": "WORD",
+    "numberPlaceholder": "1234",
+    "startCheckIn": "Start Check-In",
+    "scanning": "Scanning QR code...",
+    "checkingCode": "Checking shortcode...",
+    "checkInSuccess": "Check-In successful!",
+    "checkInFailed": "Check-In failed",
+    "notFound": "No user with this shortcode found",
+    "alreadyCheckedIn": "User is already checked in",
+    "error": "Error during check-in",
+    "cameraError": "Camera access failed. Please use manual entry.",
+    "selectShortcode": "Select your shortcode",
+    "selectFromOptions": "Choose a shortcode from the 5 suggestions. This code will be your unique ID for check-ins.",
+    "loadNewSuggestions": "Load new suggestions",
+    "back": "Back",
+    "completeRegistration": "Complete registration",
+    "creatingAccount": "Creating account...",
+    "shortcodeTaken": "This shortcode was just taken. Please select a new one.",
+    "noShortcodeSelected": "Please select a shortcode.",
+    "hints": "Hints:",
+    "hint1": "The QR scanner requires camera access",
+    "hint2": "In low light conditions, use the flashlight",
+    "hint3": "Format: WORD 1234 (e.g. \"BOOM 1234\")",
+    "hint4": "After 4 letters, focus automatically jumps to the number field",
+    "hint5": "After 4 digits, check-in is automatically performed",
+    "useForCheckIns": "Use this shortcode or QR code for check-ins"
   }
 }
