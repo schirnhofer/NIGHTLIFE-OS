@@ -1,4 +1,6 @@
 /**
+ * Copyright (c) 2024 Bernhard Schirnhofer. All Rights Reserved.
+ * 
  * @nightlife-os/core
  * 
  * Zentrale Logik, Firebase-Integration, Hooks, Utils für Nightlife OS

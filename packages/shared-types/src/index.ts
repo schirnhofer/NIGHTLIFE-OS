@@ -1,4 +1,6 @@
 /**
+ * Copyright (c) 2024 Bernhard Schirnhofer. All Rights Reserved.
+ * 
  * @nightlife-os/shared-types
  * 
  * Zentrale TypeScript-Typen für Nightlife OS

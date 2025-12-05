@@ -2,6 +2,13 @@
 
 **Multi-Mandanten-SaaS-Plattform für Club-Management**
 
+---
+
+**Copyright © 2024 Bernhard Schirnhofer. All Rights Reserved.**
+
+This is proprietary software. Unauthorized copying, distribution, or use of this software is strictly prohibited.  
+See [LICENSE](./LICENSE) for details.
+
 ## Überblick
 
 Nightlife OS ist eine umfassende Plattform für die Verwaltung von Nachtclubs mit:
@@ -330,7 +337,20 @@ Jede Next.js-App kann unabhängig deployed werden:
 
 ## Lizenz
 
-Proprietary - © 2025 Der Wohlstands-Code
+**Proprietary License - All Rights Reserved**
+
+Copyright © 2024 Bernhard Schirnhofer. All Rights Reserved.
+
+This software and its source code are proprietary and confidential. 
+
+**You may NOT:**
+- Use, copy, modify, or distribute this software without explicit written permission
+- Use this software for commercial purposes without explicit written permission
+- Reverse engineer, decompile, or disassemble this software
+
+For licensing inquiries, please contact Bernhard Schirnhofer.
+
+See the [LICENSE](./LICENSE) file for the complete license agreement.
 
 ## Kontakt
 

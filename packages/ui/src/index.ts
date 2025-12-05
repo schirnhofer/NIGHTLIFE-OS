@@ -1,4 +1,6 @@
 /**
+ * Copyright (c) 2024 Bernhard Schirnhofer. All Rights Reserved.
+ * 
  * @nightlife-os/ui
  * 
  * Wiederverwendbare UI-Komponenten, i18n, Theme für Nightlife OS
